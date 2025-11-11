@@ -1,326 +1,336 @@
+/* Import Roboto Flex and Roboto Mono (for code/prices) */
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,300;8..144,400;8..144,500;8..144,700&family=Roboto+Mono:wght@400;500&display=swap');
+
+/* Define our Material 3 color palette as CSS variables.
+  This is a dark theme based on your original colors.
+*/
+:root {
+    /* M3 Color Roles (Dark Theme) */
+    --md-sys-color-primary: #fbb61f;
+    --md-sys-color-on-primary: #110000;
+    --md-sys-color-primary-container: #5b0000;
+    --md-sys-color-on-primary-container: #ffddb5;
+    
+    --md-sys-color-secondary: #4bd600;
+    --md-sys-color-on-secondary: #110000;
+
+    --md-sys-color-tertiary: #c10000;
+    --md-sys-color-on-tertiary: #ffffff;
+
+    --md-sys-color-background: #110000;
+    --md-sys-color-on-background: #ffffff;
+    
+    --md-sys-color-surface: #1c1b1f; /* A very dark gray, slightly off-black */
+    --md-sys-color-on-surface: #ffffff;
+    --md-sys-color-on-surface-variant: #c9c5d0; /* For less important text */
+    
+    --md-sys-color-outline: #918f9a;
+}
+
 * {
     margin: 0;
     padding: 0;
-    font-family: "ChunkFive";
-    color:white;
+    box-sizing: border-box; /* Better for layout */
     text-decoration: none;
-}
-
-body {
-    background: #110000;
-}
-@font-face {
-    font-family: 'ChunkFive';
-    src: url('Fonts/ChunkFive-Regular.otf') format('opentype');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: "Bodoni";
-    src: url('Fonts/BauerBodoniRegular.otf') format('opentype');
-    font-weight: normal;
-    font-style: normal;
 }
 
 html {
-    font-size: 12px; /* Default size */
+    /* Set the base font size for rem units */
+    font-size: 16px; 
+}
+
+body {
+    font-family: 'Roboto Flex', sans-serif;
+    background: var(--md-sys-color-background);
+    color: var(--md-sys-color-on-background);
 }
 
 #header {
-    display:flex;
+    display: flex;
     justify-content: space-between;
-    padding:10px;
-    width:95%;
-    background-color: #110000;
-    position: relative;
-    left: 50%;
-    transform:translateX(-50%);
+    align-items: center;
+    padding: 1rem 2.5%; /* Use rem units */
+    width: 95%;
+    margin: 0 auto;
 }
 
 #logo {
-    display:flex;
-    flex-direction:row;
+    display: flex;
+    flex-direction: row;
     align-items: center;
-    font-size:1rem;
+    font-size: 1.25rem;
+    font-weight: 500;
 }
 
 #logo img {
-    height:2.5rem;
-    width:auto;
-    margin-left:.5rem;
+    height: 2.5rem;
+    width: auto;
+    margin-right: 0.75rem; /* Use margin-right instead of left */
 }
 
 #links {
-    background-color: #110000;
     display: flex;
-    justify-content: space-evenly;
     align-items: center;
-    flex-direction: row;
-    row-gap: 10vw;
-    font-size: 1rem;
+    gap: 0.5rem; /* Adds space between links */
 }
 
 .navLink {
-    text-decoration: none;
-    padding: 10px;
+    color: var(--md-sys-color-on-background);
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 99px; /* Pill shape */
+    transition: background-color 0.2s ease-out;
 }
 
 .navLink:hover {
-    color: #db9d18;
-    transition: color 0.3s ease;
+    background-color: rgba(255, 255, 255, 0.1); /* Subtle hover */
 }
 
 .active {
-    color: #fbb61f;
+    background-color: var(--md-sys-color-primary-container);
+    color: var(--md-sys-color-on-primary-container);
 }
 
 #customProject {
-    background-image: url('Images/customProject.png');
-    height: 60vh;
-    width:90dvw;
+    background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('Images/customProject.png'); /* Darker overlay for text contrast */
+    width: 90vw;
     position: relative;
-    margin: 0 auto; 
-    border-radius: 50px;
+    margin: 2rem auto 4rem auto;
+    border-radius: 28px; /* M3 "Extra Large" shape */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-attachment: fixed;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 100px;
-    height: 60vh;
-    margin-bottom: 100px;
-}
-
-#customProject p, #customProjectButtonText {
-    text-align: center;
+    padding: 4rem 2rem;
+    min-height: 50vh;
 }
 
 #customProjectText {
-    padding:5px;
-    font-size: 7rem;
-}
-
-#customProjectButtonText {
-    font-size: 1.5rem;
+    /* M3 "Display Large" style */
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 4rem;
     text-align: center;
-    text-decoration: none;
-    color: white;
+    color: #FFF;
+    margin-bottom: 2rem;
 }
 
+/* This styles the <button> tag */
 #customProject button {
-    background-color: transparent;
-    border: 5px solid white;
-    padding: 5px 50px;
+    /* M3 "Filled Button" style */
+    background-color: var(--md-sys-color-primary);
+    color: var(--md-sys-color-on-primary);
+    border: none;
+    border-radius: 99px; /* Pill shape */
+    padding: 1rem 2.5rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+/* This styles the <a> tag inside the button */
+#customProjectButtonText {
+    /* M3 "Label Large" style */
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--md-sys-color-on-primary);
 }
 
 #customProject button:hover {
-    color:black;
-    background-color: white;
-    transition: background-color .2s ease-in;
-}
-
-#customProject button:hover > #customProjectButtonText {
-    color: #110000;
-    transition:color .2s ease-in
+    background-color: #ffca4a; /* Lighter primary for hover */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
 }
 
 .divider {
-    width:fit-content;
-    margin:auto;
+    width: 90%;
+    margin: 0 auto 2rem auto;
+    text-align: center;
 }
 
 .dividerText {
-    margin: auto;
-    color:#fbb61f;
+    /* M3 "Headline Medium" style */
+    font-size: 1.75rem;
+    font-weight: 500;
+    color: var(--md-sys-color-primary);
+    margin-bottom: 0.5rem;
 }
 
 .dividerLine {
-    width:65%;
-    height:2px;
-    margin:5px auto 50px auto;
-    background-color:white;
+    width: 100px;
+    height: 1px;
+    margin: 0 auto;
+    background-color: var(--md-sys-color-outline);
 }
 
 .store {
-    display:grid;
-    grid-template-columns: auto auto auto;
-    gap: 1px 1px;
-    align-content: right;
+    display: grid;
+    /* This will automatically wrap columns on smaller screens */
+    grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+    gap: 2rem; /* More space */
     justify-content: center;
-    width:100%;
-    margin-bottom:50px;
+    width: 90%; /* Give it some breathing room */
+    margin: 0 auto 4rem auto;
 }
 
 .item {
-    display:flex;
-    width:17.5rem;
-    overflow: hidden;
+    /* M3 "Filled Card" style */
+    background-color: var(--md-sys-color-surface);
+    border-radius: 12px; /* M3 "Medium" shape */
+    overflow: hidden; /* Keeps image corners rounded */
+    display: flex;
     flex-direction: column;
-    align-items: left;
-    justify-content: left;
-    padding:20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    transition: box-shadow 0.2s ease;
 }
 
+.item:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
 
 .imgContainer {
-    background-color:#5b0000;
-    padding:5px;
+    /* Remove old styles */
     width: 100%;
-    border-radius:12px;
-    height:fit-content;
+    height: 14rem; /* Fixed height for consistency */
+    background-color: #333; /* Placeholder color */
 }
+
 .item img {
-    width:100%;
-    height: auto;
+    width: 100%;
+    height: 100%; /* Fill the container */
     object-fit: cover;
     transition: transform 0.3s ease;
 }
 
-.item img:hover {
-    transform: scale(1.1);
+.item:hover img {
+    transform: scale(1.05);
 }
 
 .description {
-    display:flex;
-    justify-content:center;
-    flex-direction:column;
-    align-items: left;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Makes cards in a row the same height */
 }
 
 .itemName {
-    color:white;
-    font-family: "Bodoni";
-    font-size:1.5rem;
-    margin-top: 10px;
+    /* M3 "Title Large" style */
+    font-family: 'Roboto Flex', sans-serif;
+    font-size: 1.375rem;
+    font-weight: 500;
+    color: var(--md-sys-color-on-surface);
+    line-height: 1.75rem;
 }
 
 .itemName:hover {
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 .itemCost {
-    color:#4bd600;
-    font-family: "Bodoni";
-    font-size:1rem;
-    margin:10px 0px;
+    /* M3 "Title Medium" style */
+    font-family: 'Roboto Mono', monospace;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--md-sys-color-secondary);
+    margin: 0.5rem 0 1rem 0; /* Space it out */
 }
 
 .moreDetails {
-    width:fit-content;
-    height: fit-content;
-    background-color: #4bd600;
-    color:black;
-    font-size:.75rem;
-    padding:10px 30px;
-    border-radius: 6px;
-    border:none;
+    /* M3 "Outlined Button" style */
+    background-color: transparent;
+    color: var(--md-sys-color-secondary);
+    font-size: 0.9rem;
+    font-weight: 700;
+    padding: 0.6rem 1.5rem;
+    border-radius: 99px; /* Pill shape */
+    border: 1px solid var(--md-sys-color-secondary);
+    text-align: center;
+    margin-top: auto; /* Pushes button to the bottom */
+    transition: background-color 0.2s ease;
 }
 
 .moreDetails:hover {
-    background-color: #5af507;
+    background-color: rgba(75, 214, 0, 0.1); /* Secondary color hover */
     cursor: pointer;
 }
 
 #allProducts {
+    /* M3 "Filled Tonal Button" style */
     display: block;
-    margin: 0 auto 50px auto;
-    padding: 15px 40px;
-    background: #c10000;
-    font-size: 2rem;
-    font-weight: bold;
-    color: white;
+    margin: 0 auto 4rem auto;
+    padding: 1rem 2.5rem;
+    background: var(--md-sys-color-tertiary);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--md-sys-color-on-tertiary);
     border: none;
-    border-radius: 10px;
+    border-radius: 99px;
     width: fit-content;
     text-align: center;
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
     cursor: pointer;
+    transition: all 0.2s ease;
 }
 
 #allProducts:hover {
-    transform: scale(1.05);
-    box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    background: #d42a2a; /* Slightly lighter red */
 }
 
 #footer {
-    width:fit-content;
-    margin:auto;
-    border-top:2px solid gray;
-    background-color:#110000;
-    display:flex;
-    flex-direction:row;
+    width: 100%;
+    margin: auto;
+    border-top: 1px solid var(--md-sys-color-outline);
+    background-color: var(--md-sys-color-surface);
+    display: flex;
+    flex-direction: column; /* Stack on small screens */
     align-items: center;
-    justify-content: space-between;
-    height:auto;
-    font-size:.75rem;
-    gap:100px;
-    padding:50px 200px;
-
+    justify-content: center;
+    text-align: center;
+    gap: 2rem;
+    padding: 3rem 2rem;
 }
 
 #footerLogo {
+    /* ... same as your #logo styles ... */
     display: flex;
-    justify-content: center;
-    align-items: center;
     flex-direction: row;
-    font-size: 1.75rem;
+    align-items: center;
+    font-size: 1.25rem;
+    font-weight: 500;
 }
 
 #footerLogo img {
-    height:3.5rem;
+    height: 2.5rem;
+    width: auto;
+    margin-right: 0.75rem;
 }
 
-@media (min-width: 600px) {
-    html {
-        font-size: 16px; /* Slightly larger on bigger screens */
-    }
+#info {
+    font-size: 0.9rem;
+    color: var(--md-sys-color-on-surface-variant);
+    line-height: 1.4rem;
 }
 
-@media (min-width: 1024px) {
-    html {
-        font-size: 16.5px; /* Larger screens */
-    }
+#info a {
+    color: var(--md-sys-color-primary);
+    text-decoration: underline;
+}
 
-    #links {
-        font-size:1.5rem;
-        padding: 0 20px;
-    }
-
-    #logo {
-        display:flex;
-        flex-direction:row;
-        align-items: center;
-        font-size:1.5rem;
+/* Finally, update your media queries to be simpler */
+@media (min-width: 768px) {
+    #footer {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 3rem 5%;
+        text-align: left;
     }
     
-    #logo img {
-        height:3rem;
-        width:auto;
-        margin:0 .5rem;
-    }
-
-    #customProject {
-        width:70dvw;
-        height:40vh;
-    }
-
     #customProjectText {
-        font-size: 6rem;
-    }
-
-    .dividerText {
-        font-size:3rem;
-    }
-
-
-}
-
-@media (min-width: 1600px) {
-    html {
-        font-size: 22px; /* Even bigger for large desktops */
+        font-size: 5.5rem; /* A bit larger on tablets/desktops */
+        line-height: 6rem;
     }
 }
