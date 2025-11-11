@@ -4,114 +4,531 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="contact.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anta:wght@400&family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Google Material Symbols for icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/png" href="Images/rossRams.png">
-    <title>Rossrams Engineering Club</title>
+    <title>Engineering Club - Contact</title>
     <style>
-        /* Style for the alert message */
-        #alertMessage {
-            display: none;
-            /* Initially hidden */
-            background-color: #4CAF50;
-            /* Green background */
-            color: white;
-            /* White text */
-            padding: 15px;
-            /* Some padding */
-            margin-bottom: 20px;
-            /* Space below the alert */
-            text-align: center;
-            /* Center text */
+        /* Contact page specific styles */
+        .contact-container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 1.5rem;
         }
 
-        /* Style for loading spinner */
+        .contact-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .contact-header h1 {
+            font-family: var(--font-heading, 'Anta');
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            color: var(--md-sys-color-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-header p {
+            color: var(--md-sys-color-on-surface-variant);
+            font-size: 1.125rem;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        @media (max-width: 768px) {
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        /* Contact Info Section */
+        .contact-info-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-info-card {
+            background: var(--md-sys-color-surface);
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: var(--md-sys-elevation-1);
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            transition: box-shadow 0.2s;
+        }
+
+        .contact-info-card:hover {
+            box-shadow: var(--md-sys-elevation-2);
+        }
+
+        .contact-info-icon {
+            color: var(--md-sys-color-primary);
+            font-size: 1.75rem;
+            flex-shrink: 0;
+            margin-top: 0.25rem;
+        }
+
+        .contact-info-content h3 {
+            color: var(--md-sys-color-primary);
+            margin: 0 0 0.5rem 0;
+            font-family: var(--font-heading, 'Anta');
+        }
+
+        .contact-info-content p {
+            color: var(--md-sys-color-on-surface-variant);
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .contact-info-content a {
+            color: var(--md-sys-color-primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .contact-info-content a:hover {
+            text-decoration: underline;
+        }
+
+        /* Form Section */
+        .contact-form-section {
+            background: var(--md-sys-color-surface);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--md-sys-elevation-1);
+        }
+
+        .contact-form-section h2 {
+            color: var(--md-sys-color-primary);
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            font-family: var(--font-heading, 'Anta');
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            color: var(--md-sys-color-on-surface);
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 0.75rem;
+            border: 1px solid var(--md-sys-color-outline);
+            border-radius: 8px;
+            font-family: var(--font-body, 'Rubik');
+            font-size: 1rem;
+            background: var(--md-sys-color-surface-variant);
+            color: var(--md-sys-color-on-surface);
+            transition: border-color 0.2s, background 0.2s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--md-sys-color-primary);
+            background: var(--md-sys-color-surface);
+            box-shadow: 0 0 0 3px rgba(107, 15, 43, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .form-actions button {
+            flex: 1;
+        }
+
+        /* Alert Message */
+        .alert {
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            display: none;
+            font-weight: 500;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        .alert.success {
+            background: var(--md-sys-color-on-primary-container);
+            color: var(--md-sys-color-on-primary-container);
+            border-left: 4px solid #4CAF50;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .alert.error {
+            background: var(--md-sys-color-error-container);
+            color: var(--md-sys-color-on-error-container);
+            border-left: 4px solid var(--md-sys-color-error);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Loading Spinner */
         #loadingSpinner {
             display: none;
-            /* Initially hidden */
-            margin: 20px auto;
-            /* Center the spinner */
-            width: 50px;
-            /* Width of the spinner */
-            height: 50px;
-            /* Height of the spinner */
-            border: 5px solid #f3f3f3;
-            /* Light grey background */
-            border-top: 5px solid #3498db;
-            /* Blue color for the spinner */
+            margin: 0 auto 1.5rem;
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--md-sys-color-outline);
+            border-top: 3px solid var(--md-sys-color-primary);
             border-radius: 50%;
-            /* Make it round */
             animation: spin 1s linear infinite;
-            /* Spin animation */
         }
 
-        /* Animation keyframes */
         @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
 
-            100% {
-                transform: rotate(360deg);
-            }
+        /* Office Hours Section */
+        .office-hours {
+            background: var(--md-sys-color-surface);
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: var(--md-sys-elevation-1);
+            margin-top: 2rem;
+        }
+
+        .office-hours h3 {
+            color: var(--md-sys-color-primary);
+            margin-top: 0;
+            font-family: var(--font-heading, 'Anta');
+        }
+
+        .hours-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .hours-list li {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--md-sys-color-outline-variant);
+            color: var(--md-sys-color-on-surface-variant);
+        }
+
+        .hours-list li:last-child {
+            border-bottom: none;
+        }
+
+        .hours-list strong {
+            color: var(--md-sys-color-on-surface);
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            background: var(--md-sys-color-surface);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--md-sys-elevation-1);
+            margin-top: 3rem;
+        }
+
+        .faq-section h2 {
+            color: var(--md-sys-color-primary);
+            margin-top: 0;
+            font-family: var(--font-heading, 'Anta');
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .faq-item {
+            margin-bottom: 1rem;
+        }
+
+        .faq-question {
+            background: var(--md-sys-color-surface-variant);
+            padding: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500;
+            color: var(--md-sys-color-on-surface);
+            transition: background 0.2s;
+            user-select: none;
+        }
+
+        .faq-question:hover {
+            background: var(--md-sys-color-outline-variant);
+        }
+
+        .faq-question.active {
+            background: var(--md-sys-color-primary);
+            color: var(--md-sys-color-on-primary);
+        }
+
+        .faq-icon {
+            font-size: 1.25rem;
+            transition: transform 0.3s;
+        }
+
+        .faq-question.active .faq-icon {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            padding: 0 1rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            color: var(--md-sys-color-on-surface-variant);
+        }
+
+        .faq-answer.active {
+            max-height: 500px;
+            padding: 1rem;
         }
     </style>
 </head>
 
 <body>
-    <div id="header">
-        <div id="logo">
-            <img src="Images/rossRams.png" alt="Ross Rams Logo">
-            <p id="logoText">Engineering Club</p>
+    <header class="header">
+        <div class="logo">
+            <img src="Images/rossRams.png" alt="Logo">
+            <span>Engineering Club</span>
         </div>
-        <div id="links">
-            <a class="navLink" href="index.html">Home</a>
-            <a class="navLink" href="store.html">Store</a>
-            <a class="active navLink" href="contact.html">Contact</a>
+        <nav class="navigation">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="store.html" class="nav-link">Store</a>
+            <a href="contact.html" class="nav-link active">Contact</a>
+            <button id="theme-toggle" title="Toggle theme" aria-label="Toggle color theme" aria-pressed="false">
+                <span id="theme-toggle-icon" class="material-symbols-outlined" aria-hidden="true">dark_mode</span>
+            </button>
+        </nav>
+    </header>
+
+    <main class="contact-container">
+        <!-- Page Header -->
+        <div class="contact-header">
+            <h1>Get in Touch</h1>
+            <p>Have questions about our products or services? We'd love to hear from you!</p>
         </div>
-    </div>
 
-    <div id="contact">
-        <h1>CONTACT US</h1>
-        <div id="alertMessage">Hey! It worked! Check your email for a confirmation.</div>
-        <div id="loadingSpinner"></div> <!-- Loading Spinner -->
-        <form id="contactForm" method="post">
-            <label for="name">Name</label>
-            <input type="text" id="name" name="name" placeholder="Your Name" required>
-
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" placeholder="Your Email" required>
-
-            <label for="subject">Subject</label>
-            <input type="text" id="subject" name="subject" placeholder="Subject" required>
-
-            <label for="message">Message</label>
-            <textarea id="message" name="message" placeholder="Your Message" rows="4" required></textarea>
-
-            <button type="submit">Submit</button>
-        </form>
-    </div>
-
-    <div id="footer">
-        <div id="footerLogo">
-            <img src="Images/rossRams.png" alt="Ross Rams Logo">
-            <p id="logoText">Engineering Club</p>
+        <!-- Alert Messages -->
+        <div id="successAlert" class="alert success">
+            <span class="material-symbols-outlined">check_circle</span>
+            <span>Thank you! Your message has been sent. We'll be in touch soon.</span>
         </div>
-        <p id="info"><a href="https://www.rossrams.com">Ross Local School District</a>
-            <br>3371 Hamilton-Cleves Road OH 45013
-            <br>(513) 863-1253
-        </p>
-    </div>
+        <div id="errorAlert" class="alert error">
+            <span class="material-symbols-outlined">error</span>
+            <span id="errorMessage">There was an error sending your message. Please try again.</span>
+        </div>
 
+        <!-- Contact Content Grid -->
+        <div class="contact-content">
+            <!-- Left Column: Contact Info -->
+            <div class="contact-info-section">
+                <!-- Email Card -->
+                <div class="contact-info-card">
+                    <span class="material-symbols-outlined contact-info-icon">mail</span>
+                    <div class="contact-info-content">
+                        <h3>Email</h3>
+                        <p><a href="mailto:engineering@rossrams.com">engineering@rossrams.com</a></p>
+                        <p style="font-size: 0.875rem; margin-top: 0.5rem;">Response time: 24-48 hours</p>
+                    </div>
+                </div>
+
+                <!-- Phone Card -->
+                <div class="contact-info-card">
+                    <span class="material-symbols-outlined contact-info-icon">phone</span>
+                    <div class="contact-info-content">
+                        <h3>Phone</h3>
+                        <p><a href="tel:+15138631253">(513) 863-1253</a></p>
+                        <p style="font-size: 0.875rem; margin-top: 0.5rem;">Monday-Friday, 8 AM - 4 PM EST</p>
+                    </div>
+                </div>
+
+                <!-- Location Card -->
+                <div class="contact-info-card">
+                    <span class="material-symbols-outlined contact-info-icon">location_on</span>
+                    <div class="contact-info-content">
+                        <h3>Location</h3>
+                        <p>
+                            Ross Local School District<br>
+                            3371 Hamilton-Cleves Road<br>
+                            Hamilton, OH 45013
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Office Hours -->
+                <div class="office-hours">
+                    <h3>Office Hours</h3>
+                    <ul class="hours-list">
+                        <li>
+                            <strong>Monday - Friday:</strong>
+                            <span>8:00 AM - 4:00 PM</span>
+                        </li>
+                        <li>
+                            <strong>Saturday:</strong>
+                            <span>By Appointment</span>
+                        </li>
+                        <li>
+                            <strong>Sunday:</strong>
+                            <span>Closed</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Right Column: Contact Form -->
+            <div class="contact-form-section">
+                <h2>Send us a Message</h2>
+                <div id="loadingSpinner"></div>
+                <form id="contactForm" method="post">
+                    <div class="form-group">
+                        <label for="name">Name *</label>
+                        <input type="text" id="name" name="name" placeholder="Your full name" required aria-required="true">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" name="email" placeholder="your@email.com" required aria-required="true">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject">Subject *</label>
+                        <input type="text" id="subject" name="subject" placeholder="What is this about?" required aria-required="true">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Message *</label>
+                        <textarea id="message" name="message" placeholder="Tell us more about your inquiry..." required aria-required="true"></textarea>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="m3-button filled">Send Message</button>
+                        <button type="reset" class="m3-button outlined">Clear</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- FAQ Section -->
+        <div class="faq-section">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How long does it take to complete an order?</span>
+                        <span class="material-symbols-outlined faq-icon">expand_more</span>
+                    </div>
+                    <div class="faq-answer">
+                        Most orders are completed within 1-2 weeks depending on the complexity of the project. Custom orders may take longer. We'll provide you with an estimated timeline when you place your order.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Can I customize products?</span>
+                        <span class="material-symbols-outlined faq-icon">expand_more</span>
+                    </div>
+                    <div class="faq-answer">
+                        Absolutely! Many of our products can be customized. You can upload your design or provide specifications for LED signs, 3D prints, and engraved items. Contact us for custom requests.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What payment methods do you accept?</span>
+                        <span class="material-symbols-outlined faq-icon">expand_more</span>
+                    </div>
+                    <div class="faq-answer">
+                        We accept payment on pickup. You can pay via cash or card when you collect your order. For large or custom projects, we can discuss payment arrangements.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Do you offer bulk discounts?</span>
+                        <span class="material-symbols-outlined faq-icon">expand_more</span>
+                    </div>
+                    <div class="faq-answer">
+                        Yes! We offer discounts for bulk orders. If you're interested in ordering multiple items, please contact us directly to discuss pricing and availability.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Can I request a refund?</span>
+                        <span class="material-symbols-outlined faq-icon">expand_more</span>
+                    </div>
+                    <div class="faq-answer">
+                        Refunds are available within 7 days of purchase if the product is unopened and in its original condition. For custom orders, please contact us to discuss your specific situation.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer style="text-align: center; padding: 2rem; border-top: 1px solid var(--md-sys-color-outline); margin-top: 4rem;">
+        <p>&copy; 2025 Engineering Club. All rights reserved.</p>
+    </footer>
+
+    <script src="components.js"></script>
+    <script src="theme.js"></script>
     <script>
         const scriptURL = 'https://script.google.com/macros/s/AKfycbzFoKr8LP43f1MpoTCZucPqrQNWkOK2lWXHZbKe1eFokq39ZOI-bMAz7YYgBD0d1iKJ/exec';
 
+        // Handle form submission
         document.getElementById('contactForm').addEventListener('submit', e => {
             e.preventDefault();
             const formData = new FormData(e.target);
-            formData.append("type", "contact")
+            formData.append("type", "contact");
             const loadingSpinner = document.getElementById('loadingSpinner');
+            const successAlert = document.getElementById('successAlert');
+            const errorAlert = document.getElementById('errorAlert');
 
-            // Show the loading spinner
+            // Hide any existing alerts
+            successAlert.style.display = 'none';
+            errorAlert.style.display = 'none';
+
+            // Show loading spinner
             loadingSpinner.style.display = 'block';
 
             fetch(scriptURL, {
@@ -120,25 +537,48 @@
             })
                 .then(response => response.json())
                 .then(data => {
-                    // Hide the loading spinner
                     loadingSpinner.style.display = 'none';
 
                     if (data.status === "success") {
-                        // Clear the form fields
                         e.target.reset();
-                        window.scrollTo(0, 0);
-                        // Show the alert message
-                        const alertMessage = document.getElementById('alertMessage');
-                        alertMessage.style.display = 'block';
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                        successAlert.style.display = 'flex';
+                        
+                        // Auto-hide alert after 5 seconds
+                        setTimeout(() => {
+                            successAlert.style.display = 'none';
+                        }, 5000);
                     } else {
-                        console.error('Error:', data.message);
+                        errorAlert.style.display = 'flex';
+                        document.getElementById('errorMessage').textContent = data.message || 'There was an error sending your message. Please try again.';
                     }
                 })
                 .catch(error => {
-                    // Hide the loading spinner
                     loadingSpinner.style.display = 'none';
+                    errorAlert.style.display = 'flex';
                     console.error('Error:', error);
                 });
+        });
+
+        // FAQ Accordion functionality
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.parentElement;
+                const answer = item.querySelector('.faq-answer');
+                const isActive = question.classList.contains('active');
+
+                // Close all other FAQs
+                document.querySelectorAll('.faq-item').forEach(faqItem => {
+                    faqItem.querySelector('.faq-question').classList.remove('active');
+                    faqItem.querySelector('.faq-answer').classList.remove('active');
+                });
+
+                // Toggle current FAQ
+                if (!isActive) {
+                    question.classList.add('active');
+                    answer.classList.add('active');
+                }
+            });
         });
     </script>
 </body>

@@ -4,133 +4,653 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="store.css">
-    <link rel="icon" type="image/png" href="Images/rossRams.png">
+    <title>Engineering Club - Store</title>
 
-    <title>Rossrams Engineering Club</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anta:wght@400&family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Google Material Symbols -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Store-specific styles */
+        .store-container {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .filter-sidebar {
+            width: 250px;
+            flex-shrink: 0;
+        }
+
+        .filter-section {
+            background: var(--md-sys-color-surface);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .filter-section h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin: 0 0 1rem 0;
+            color: var(--md-sys-color-on-surface);
+        }
+
+        .filter-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+            cursor: pointer;
+        }
+
+        .filter-option input[type="checkbox"] {
+            width: 1.25rem;
+            height: 1.25rem;
+            cursor: pointer;
+            accent-color: var(--md-sys-color-primary);
+        }
+
+        .filter-option label {
+            margin-left: 0.75rem;
+            cursor: pointer;
+            color: var(--md-sys-color-on-surface);
+        }
+
+        .products-section {
+            flex: 1;
+        }
+
+        .store-header {
+            margin-bottom: 2rem;
+        }
+
+        .store-header h1 {
+            font-size: 2.5rem;
+            margin: 0 0 0.5rem 0;
+            color: var(--md-sys-color-on-background);
+        }
+
+        .store-header p {
+            font-size: 1.1rem;
+            color: var(--md-sys-color-on-surface-variant);
+            margin: 0;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .product-card {
+            background: var(--md-sys-color-surface);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            transform: translateY(-4px);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background: var(--md-sys-color-on-surface-variant);
+        }
+
+        .product-info {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin: 0 0 0.5rem 0;
+            color: var(--md-sys-color-on-surface);
+            font-family: var(--font-heading);
+        }
+
+        .product-category {
+            font-size: 0.85rem;
+            color: var(--md-sys-color-primary);
+            font-weight: 500;
+            margin-bottom: 0.75rem;
+        }
+
+        .product-description {
+            font-size: 0.9rem;
+            color: var(--md-sys-color-on-surface-variant);
+            margin-bottom: 1rem;
+            line-height: 1.4;
+            flex: 1;
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--md-sys-color-primary);
+        }
+
+        .product-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            border: none;
+            background: var(--md-sys-color-primary);
+            color: var(--md-sys-color-on-primary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            font-size: 1.2rem;
+        }
+
+        .btn-icon:hover {
+            background: var(--md-sys-color-secondary);
+        }
+
+        .btn-icon .material-symbols-outlined {
+            font-size: 1.25rem;
+            font-weight: 400;
+            display: inline-flex;
+            line-height: 1;
+        }
+
+        .no-products {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: var(--md-sys-color-surface);
+            border-radius: 12px;
+            color: var(--md-sys-color-on-surface-variant);
+        }
+
+        .sort-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: var(--md-sys-color-surface);
+            border-radius: 8px;
+        }
+
+        .sort-select {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--md-sys-color-outline);
+            border-radius: 8px;
+            background: var(--md-sys-color-background);
+            color: var(--md-sys-color-on-background);
+            cursor: pointer;
+            font-family: var(--font-body);
+        }
+
+        /* Material-style select wrapper */
+        .material-select {
+            position: relative;
+            display: inline-block;
+        }
+
+        .material-select select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            padding-right: 2.5rem;
+            background: transparent;
+        }
+
+        .material-select .material-symbols-outlined {
+            position: absolute;
+            right: 0.6rem;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+            color: var(--md-sys-color-on-background);
+        }
+
+        /* Material-style checkbox */
+        input.material-checkbox {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 1.25rem;
+            height: 1.25rem;
+            border-radius: 4px;
+            border: 2px solid var(--md-sys-color-outline);
+            background: transparent;
+            display: inline-block;
+            vertical-align: middle;
+            position: relative;
+            cursor: pointer;
+            transition: background 0.15s ease, border-color 0.15s ease;
+        }
+
+        input.material-checkbox:checked {
+            background: var(--md-sys-color-primary);
+            border-color: var(--md-sys-color-primary);
+        }
+
+        input.material-checkbox:checked::after {
+            content: '';
+            position: absolute;
+            left: 4px;
+            top: 0px;
+            width: 6px;
+            height: 10px;
+            border: solid var(--md-sys-color-on-primary);
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+
+        /* Make label text align a touch better */
+        .filter-option label {
+            margin-left: 0.75rem;
+            cursor: pointer;
+            color: var(--md-sys-color-on-surface);
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .product-count {
+            color: var(--md-sys-color-on-surface-variant);
+            font-weight: 500;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .store-container {
+                flex-direction: column;
+            }
+
+            .filter-sidebar {
+                width: 100%;
+                display: flex;
+                gap: 1rem;
+                overflow-x: auto;
+            }
+
+            .filter-section {
+                min-width: 200px;
+                margin-bottom: 0;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+
+        @media (max-width: 640px) {
+            .store-header h1 {
+                font-size: 1.75rem;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .sort-controls {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <div id="header">
-        <div id="logo">
-            <img src="Images/rossRams.png" alt="Ross Rams Logo">
-            <p id="logoText">Engineering Club</p>
-        </div>
-        <div id="links">
-            <a class="navLink" href="index.html">Home</a>
-            <a class="active navLink" href="store.html">Store</a>
-            <a class="navLink" href="contact.html">Contact</a>
-        </div>
-    </div>
-    <div id="storeContainer">
-        <div id="storeHeader">
 
-            <div class="dropdown">
-                <button onclick="showDropdown()" class="dropButton">Everything <i class="arrow down"></i></button>
-                <div class="dropdownContent">
-                    <a href="#" onclick="sortItems('everything')">Everything</a>
-                    <a href="#" onclick="sortItems('prints')">3d Prints</a>
-                    <a href="#" onclick="sortItems('leds')">Led Signs</a>
-                    <a href="#" onclick="sortItems('ornaments')">Ornaments</a>
-                    <a href="#" onclick="sortItems('other')">Other</a>
+    <header class="header">
+        <div class="logo">
+            <img src="Images/rossRams.png" alt="Logo">
+            <span>Engineering Club</span>
+        </div>
+        <nav class="navigation">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="store.html" class="nav-link active">Store</a>
+            <a href="contact.html" class="nav-link">Contact</a>
+            <button id="theme-toggle" title="Toggle theme" aria-label="Toggle color theme" aria-pressed="false">
+                <span id="theme-toggle-icon" class="material-symbols-outlined" aria-hidden="true">dark_mode</span>
+            </button>
+        </nav>
+    </header>
+
+    <main class="content">
+        <div class="store-container">
+            <!-- Sidebar Filters -->
+            <aside class="filter-sidebar">
+                <div class="filter-section">
+                    <h3>Categories</h3>
+                    <div class="filter-option">
+                        <input type="checkbox" class="material-checkbox" id="filter-all" value="all" checked onchange="toggleAllCategories(event)">
+                        <label for="filter-all">All Products</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="checkbox" class="material-checkbox" id="filter-custom" value="custom" onchange="filterProducts()">
+                        <label for="filter-custom">Custom Orders</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="checkbox" class="material-checkbox" id="filter-3d" value="3d" onchange="filterProducts()">
+                        <label for="filter-3d">3D Prints</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="checkbox" class="material-checkbox" id="filter-fidget" value="fidget" onchange="filterProducts()">
+                        <label for="filter-fidget">Fidget Toys</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="checkbox" class="material-checkbox" id="filter-home" value="home" onchange="filterProducts()">
+                        <label for="filter-home">Home Decor</label>
+                    </div>
                 </div>
-            </div>
-        </div>
 
-        <div class="store">
-            <div class="leds item">
-                <a class="imgContainer" href="product/led.html?item=4"><img src="Images/product/LedSign.png"></a>
-                <em>
-                    <b class="description">
-                        <a class="itemName" href="product/led.html?item=4">Custom LED Sign</a>
-                        <p class="itemCost">$20.00</p>
-                    </b>
-                </em>
-                <a class="moreDetails" href="product/led.html?item=4">View Details</a>
-            </div>
-            <div class="other item">
-                <a class="imgContainer" href="product/choppingboard.html?item=3"><img src="Images/product/Cuttingboard.png"></a>
-                <em>
-                    <b class="description">
-                        <a class="itemName" href="product/choppingboard.html?item=3">Custom Chopping Board</a>
-                        <p class="itemCost">$30.00</p>
-                    </b>
-                </em>
-                <a class="moreDetails" href="product/choppingboard.html?item=3">View Details</a>
-            </div>
-            <div class="prints item">
-                <a class="imgContainer" href="product/octopus.html?item=1&color=blue"><img src="Images/product/octopus.png"></a>
-                <em>
-                    <b class="description">
-                        <a class="itemName" href="product/octopus.html?item=1&color=blue">3d printed octopus</a>
-                        <p class="itemCost">$5.00</p>
-                    </b>
-                </em>
-                <a class="moreDetails" href="product/octopus.html?item=1&color=blue">View Details</a>
-            </div>
-            <div class="ornaments item">
-                <a class="imgContainer" href="product/christmasTree.html?item=6"><img src="Images/product/Christmastree.png"></a>
-                <em>
-                    <b class="description">
-                        <a class="itemName" href="product/christmasTree.html?item=6">Christmas Tree Ornament</a>
-                        <p class="itemCost">$5.00</p>
-                    </b>
-                </em>
-                <a class="moreDetails" href="product/christmasTree.html?item=6">View Details</a>
-            </div>
-            <div class="ornaments item">
-                <a class="imgContainer" href="product/snowflake.html?item=7"><img src="Images/product/snowflakeOrnament.png"></a>
-                <em>
-                    <b class="description">
-                        <a class="itemName" href="product/snowflake.html?item=7">Snowflake Ornament</a>
-                        <p class="itemCost">$5.00</p>
-                    </b>
-                </em>
-                <a class="moreDetails" href="product/snowflake.html?item=7">View Details</a>
-            </div>
-            <div class="ornaments item">
-                <a class="imgContainer" href="product/customOrnament.html?item=8"><img src="Images/product/plainOrnament.png"></a>
-                <em>
-                    <b class="description">
-                        <a class="itemName" href="product/customOrnament.html?item=8">Custom Ornament</a>
-                        <p class="itemCost">$5.00</p>
-                    </b>
-                </em>
-                <a class="moreDetails" href="product/customOrnament.html?item=8">View Details</a>
-            </div>
-            <div class="prints item">
-                <a class="imgContainer" href="product/custom3dPrint.html?color1=blue"><img src="Images/product/custom3dprint.png"></a>
-                <em>
-                    <b class="description">
-                        <a class="itemName" href="product/custom3dPrint.html?color1=blue">Custom 3d Print</a>
-                        <p class="itemCost">$10.00</p>
-                    </b>
-                </em>
-                <a class="moreDetails" href="product/custom3dPrint.html?color1=blue">View Details</a>
-            </div>
-            <div class="prints item">
-                <a class="imgContainer" href="product/fidgetBall.html?item=2&color1=blue&color2=blue"><img src="Images/product/spiralBall.png"></a>
-                <em>
-                    <b class="description">
-                        <a class="itemName" href="product/fidgetBall.html?item=2&color1=blue&color2=blue">Fidget Balls</a>
-                        <p class="itemCost">$2.00</p>
-                    </b>
-                </em>
-                <a class="moreDetails" href="product/fidgetBall.html?item=2&color1=blue&color2=blue">View Details</a>
-            </div>
-        </div>
-        <div id="footer">
-            <div id="footerLogo">
-                <img src="Images/rossRams.png" alt="Ross Rams Logo">
-                <p id="logoText">Engineering Club</p>
-            </div>
-            <p id="info"><a href="https://www.rossrams.com">Ross Local School Dirstrict</a>
-                <br>3371 Hamilton-Cleves Road OH 45013
-                <br>(513) 863-1253
-            </p>
-        </div>
+                <div class="filter-section">
+                    <h3>Price Range</h3>
+                    <div class="filter-option">
+                        <input type="checkbox" class="material-checkbox" id="filter-under5" value="under5" onchange="filterProducts()">
+                        <label for="filter-under5">Under $5</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="checkbox" class="material-checkbox" id="filter-5to10" value="5to10" onchange="filterProducts()">
+                        <label for="filter-5to10">$5 - $10</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="checkbox" class="material-checkbox" id="filter-10to20" value="10to20" onchange="filterProducts()">
+                        <label for="filter-10to20">$10 - $20</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="checkbox" class="material-checkbox" id="filter-over20" value="over20" onchange="filterProducts()">
+                        <label for="filter-over20">Over $20</label>
+                    </div>
+                </div>
+            </aside>
 
+            <!-- Products Section -->
+            <section class="products-section">
+                <div class="store-header">
+                    <h1>Our Products</h1>
+                    <p>Browse our collection of custom-designed engineering projects and creative solutions</p>
+                </div>
+
+                <div class="sort-controls">
+                    <div class="product-count">
+                        <span id="product-count">12</span> products
+                    </div>
+                    <div class="material-select">
+                        <select class="sort-select" onchange="sortProducts(this.value)">
+                            <option value="name">Sort by Name</option>
+                            <option value="price-low">Price: Low to High</option>
+                            <option value="price-high">Price: High to Low</option>
+                        </select>
+                        <span class="material-symbols-outlined">expand_more</span>
+                    </div>
+                </div>
+
+                <div class="products-grid" id="productsGrid">
+                    <!-- Products will be inserted here by JavaScript -->
+                </div>
+
+                <div id="no-products-message" class="no-products" style="display: none;">
+                    <p>No products match your filters. Try adjusting your selection.</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer style="text-align: center; padding: 2rem; border-top: 1px solid var(--md-sys-color-outline); margin-top: 4rem;">
+        <p>&copy; 2025 Engineering Club. All rights reserved.</p>
+    </footer>
+
+    <script src="components.js"></script>
+    <script src="theme.js"></script>
+    <script>
+        // Product data
+        const allProducts = [
+            {
+                id: 1,
+                name: 'Custom LED Sign',
+                category: 'custom',
+                price: 20.00,
+                image: 'Images/product/LedSign.png',
+                description: 'Personalize your space with a unique, laser-engraved LED sign.'
+            },
+            {
+                id: 2,
+                name: '3D Printed Octopus',
+                category: '3d',
+                price: 5.00,
+                image: 'Images/product/octopus.png',
+                description: 'A cute and colorful 3D-printed fidget octopus in your choice of colors.'
+            },
+            {
+                id: 3,
+                name: 'Custom Chopping Board',
+                category: 'home',
+                price: 30.00,
+                image: 'Images/product/Cuttingboard.png',
+                description: 'Handcrafted laser-engraved chopping board with your custom design.'
+            },
+            {
+                id: 4,
+                name: 'Fidget Ball',
+                category: 'fidget',
+                price: 2.00,
+                image: 'Images/product/spiralBall.png',
+                description: 'Stress-relief spiral fidget ball available in multiple color combinations.'
+            },
+            {
+                id: 5,
+                name: 'Christmas Tree Ornament',
+                category: 'home',
+                price: 5.00,
+                image: 'Images/product/Christmastree.png',
+                description: 'Festive 3D-printed ornament perfect for holiday decorations.'
+            },
+            {
+                id: 6,
+                name: 'Custom 3D Print',
+                category: '3d',
+                price: 10.00,
+                image: 'Images/product/custom3dprint.png',
+                description: 'Bring your ideas to life with custom 3D printing services.'
+            },
+            {
+                id: 7,
+                name: 'Precision Caliper',
+                category: 'custom',
+                price: 15.00,
+                image: 'Images/product/LedSign.png',
+                description: 'High-precision digital caliper for engineering measurements.'
+            },
+            {
+                id: 8,
+                name: 'Fidget Cube',
+                category: 'fidget',
+                price: 8.00,
+                image: 'Images/product/spiralBall.png',
+                description: 'Multi-function fidget cube with various tactile features.'
+            },
+            {
+                id: 9,
+                name: 'Wood Engraved Plaque',
+                category: 'home',
+                price: 25.00,
+                image: 'Images/product/Cuttingboard.png',
+                description: 'Beautiful wood plaque with custom laser engraving.'
+            },
+            {
+                id: 10,
+                name: 'LED Strip Kit',
+                category: 'custom',
+                price: 18.00,
+                image: 'Images/product/LedSign.png',
+                description: 'Programmable LED strip kit for creative lighting projects.'
+            },
+            {
+                id: 11,
+                name: 'Stress Relief Ball',
+                category: 'fidget',
+                price: 3.00,
+                image: 'Images/product/spiralBall.png',
+                description: 'Soft, squishy ball perfect for desk stress relief.'
+            },
+            {
+                id: 12,
+                name: 'Custom Phone Stand',
+                category: 'custom',
+                price: 12.00,
+                image: 'Images/product/custom3dprint.png',
+                description: '3D-printed custom phone stand that fits any device.'
+            }
+        ];
+
+        let filteredProducts = [...allProducts];
+        let sortOrder = 'name';
+
+        function renderProducts() {
+            const grid = document.getElementById('productsGrid');
+            const noProducts = document.getElementById('no-products-message');
+            const count = document.getElementById('product-count');
+
+            if (filteredProducts.length === 0) {
+                grid.style.display = 'none';
+                noProducts.style.display = 'block';
+                count.textContent = '0';
+                return;
+            }
+
+            grid.style.display = 'grid';
+            noProducts.style.display = 'none';
+            count.textContent = filteredProducts.length;
+
+            grid.innerHTML = filteredProducts.map(product => {
+                // Map product IDs to their page URLs
+                const productPageMap = {
+                    1: 'product/octopus.html',
+                    2: 'product/fidgetBall.html',
+                    3: 'product/choppingboard.html',
+                    4: 'product/customOrnament.html',
+                    5: 'product/christmasTree.html',
+                    6: 'product/christmasTree.html',
+                    7: 'product/snowflake.html',
+                    8: 'product/custom3dPrint.html',
+                    9: 'product/choppingboard.html',
+                    10: 'product/led.html',
+                    11: 'product/fidgetBall.html',
+                    12: 'product/custom3dPrint.html'
+                };
+                const pageUrl = productPageMap[product.id] || '#';
+                return `
+                <div class="product-card">
+                    <img src="${product.image}" alt="${product.name}" class="product-image">
+                    <div class="product-info">
+                        <div class="product-category">${product.category.toUpperCase()}</div>
+                        <h3 class="product-title">${product.name}</h3>
+                        <p class="product-description">${product.description}</p>
+                        <div class="product-footer">
+                            <div class="product-price">$${product.price.toFixed(2)}</div>
+                            <div class="product-actions">
+                                <button class="btn-icon" title="Add to cart"><span class="material-symbols-outlined">shopping_cart</span></button>
+                                <a href="${pageUrl}" class="btn-icon" title="View details"><span class="material-symbols-outlined">visibility</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `}).join('');
+        }
+
+        function filterProducts() {
+            const categoryFilters = {
+                all: document.getElementById('filter-all').checked,
+                custom: document.getElementById('filter-custom').checked,
+                '3d': document.getElementById('filter-3d').checked,
+                fidget: document.getElementById('filter-fidget').checked,
+                home: document.getElementById('filter-home').checked
+            };
+
+            const priceFilters = {
+                under5: document.getElementById('filter-under5').checked,
+                '5to10': document.getElementById('filter-5to10').checked,
+                '10to20': document.getElementById('filter-10to20').checked,
+                over20: document.getElementById('filter-over20').checked
+            };
+
+            // If "All Products" is checked, show all; otherwise filter by selected categories
+            const selectedCategories = Object.keys(categoryFilters).filter(key => key !== 'all' && categoryFilters[key]);
+            const pricesChecked = Object.values(priceFilters).some(v => v);
+
+            filteredProducts = allProducts.filter(product => {
+                const categoryMatch = !categoryFilters['all'] ? selectedCategories.includes(product.category) : true;
+                
+                let priceMatch = true;
+                if (pricesChecked) {
+                    priceMatch = false;
+                    if (priceFilters.under5 && product.price < 5) priceMatch = true;
+                    if (priceFilters['5to10'] && product.price >= 5 && product.price < 10) priceMatch = true;
+                    if (priceFilters['10to20'] && product.price >= 10 && product.price < 20) priceMatch = true;
+                    if (priceFilters.over20 && product.price >= 20) priceMatch = true;
+                }
+
+                return categoryMatch && priceMatch;
+            });
+
+            sortProducts(sortOrder);
+            renderProducts();
+        }
+
+        function toggleAllCategories(e) {
+            const checked = e.target.checked;
+            // Toggle other category checkboxes
+            ['filter-custom','filter-3d','filter-fidget','filter-home'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.checked = checked;
+            });
+            filterProducts();
+        }
+
+        function sortProducts(order) {
+            sortOrder = order;
+            
+            if (order === 'name') {
+                filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
+            } else if (order === 'price-low') {
+                filteredProducts.sort((a, b) => a.price - b.price);
+            } else if (order === 'price-high') {
+                filteredProducts.sort((a, b) => b.price - a.price);
+            }
+
+            renderProducts();
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProducts();
+        });
+    </script>
 </body>
-<script src="sort.js"></script>
 
 </html>

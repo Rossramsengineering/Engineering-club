@@ -1,107 +1,121 @@
+*** Begin Patch
+*** Update File: c:\Users\argar\Engineering-club\product\custom3dPrint.html
+@@
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../item.css">
+    <title>Custom 3D Print — Engineering Club</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anta:wght@400&family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="../style.css">
     <link rel="icon" type="image/png" href="../Images/rossRams.png">
-    <title>Rossrams Engineering Club</title>
 </head>
 
 <body>
-    <div id="header">
-        <div id="logo">
-            <img src="../Images/rossRams.png" alt="Ross Rams Logo">
-            <p id="logoText">Engineering Club</p>
+
+    <header class="header">
+        <div class="logo">
+            <img src="../Images/rossRams.png" alt="Logo">
+            <span>Engineering Club</span>
         </div>
-        <div id="links">
-            <a class="navLink" href="../index.html">Home</a>
-            <a class="navLink" href="../store.html">Store</a>
-            <a class="navLink" href="../contact.html">Contact</a>
-        </div>
-    </div>
-    <div id="content">
-        <div id="thumbnail">
-            <img src="../Images/product/custom3dprint.png" alt="3D Printed Octopus">
-        </div>
-        <div id="productDetails">
-            <p id="navigation">Home / 3D Prints / Custom 3D Print</p>
-            <h1 id="name">Custom 3D Print</h1>
-            <p id="cost">$10.00</p>
-            <div id="customization">
-                <p id="customizationTitle">Customizations</p>
-                <form style="margin: 10px 0; /* Space above and below the options */" form id="productForm">
-                    <h3>Custom Design: </h3>
-                    <input type="file" id="designUpload" accept="image/*" required />
-                </form>
-                <p>Color 1:</p>
-                <div id="options">
-                    <button onclick="color1(`blue`)"  class="pick blue colorOption"></button>
-                    <button onclick="color1(`red`)"  class="red colorOption"></button>
-                    <button onclick="color1(`yellow`)"  class="yellow colorOption"></button>
-                    <button onclick="color1(`green`)"  class="green colorOption"></button>
-                    <button onclick="color1(`black`)"  class="black colorOption"></button>
-                    <button onclick="color1(`white`)"  class="white colorOption"></button>
+        <nav class="navigation">
+            <a href="../index.html" class="nav-link">Home</a>
+            <a href="../store.html" class="nav-link">Store</a>
+            <a href="../contact.html" class="nav-link">Contact</a>
+            <button id="theme-toggle" title="Toggle theme" aria-label="Toggle color theme" aria-pressed="false">
+                <span id="theme-toggle-icon" class="material-symbols-outlined" aria-hidden="true">dark_mode</span>
+            </button>
+        </nav>
+    </header>
+
+    <main class="content">
+        <section class="product-detail" style="display:flex;gap:2rem;align-items:flex-start;">
+            <div class="product-media" style="flex:0 0 420px;">
+                <div class="product-image-card" style="background:var(--md-sys-color-surface);padding:1rem;border-radius:12px;box-shadow:var(--md-sys-elevation-1);">
+                    <img src="../Images/product/custom3dprint.png" alt="Custom 3D Print" style="width:100%;height:auto;border-radius:8px;object-fit:cover;">
                 </div>
             </div>
-            <p id="description">Bring your ideas to life with a custom 3D print! Whether it’s a unique design, prototype, or personalized object, we can print it to your exact specifications. Upload your design or provide details, and we’ll turn it into a high-quality 3D printed item. Perfect for gifts, projects, or one-of-a-kind creations!</p>
-            <button onclick="goToCheckout()" id="orderButton">Place Order</a>
-        </div>
-    </div>
-    <div id="footer">
-        <div id="footerLogo">
-            <img src="../Images/rossRams.png" alt="Ross Rams Logo">
-            <p id="logoText">Engineering Club</p>
-        </div>
-        <p id="info"><a href="https://www.rossrams.com">Ross Local School District</a>
-            <br>3371 Hamilton-Cleves Road OH 45013
-            <br>(513) 863-1253
-        </p>
-    </div>
-</body>
-<script>
-    function color1(color) {
-        
-        const button = document.getElementsByClassName(color)[0];
-        const oldButton = document.getElementsByClassName("pick")[0];
-        
-        // Update button styles
-        oldButton.classList.remove("pick");
-        button.classList.add("pick");
 
-        // Update or add the 'color' parameter in the URL
-        const urlParams = new URLSearchParams(window.location.search);
-        urlParams.set('color1', color); // Set or update the 'color' parameter
+            <div class="product-meta" style="flex:1;">
+                <p class="m3-body-small" style="color:var(--md-sys-color-on-surface-variant);margin-bottom:0.5rem;">Home / 3D Prints / Custom 3D Print</p>
+                <h1 class="m3-display-large">Custom 3D Print</h1>
+                <div style="display:flex;align-items:center;gap:1rem;margin:0.5rem 0 1.5rem 0;">
+                    <div class="product-price m3-title-large" style="color:var(--md-sys-color-primary);font-weight:700;">$10.00</div>
+                    <div style="margin-left:auto;">
+                        <button class="m3-button filled" onclick="goToCheckout()">Order Now</button>
+                    </div>
+                </div>
 
-        // Update the browser's URL without reloading the page
-        const newUrl = `${window.location.pathname}?${urlParams.toString()}`;
-        window.history.replaceState(null, '', newUrl);
-    }
+                <div class="product-description m3-body-large" style="margin-bottom:1.25rem;color:var(--md-sys-color-on-surface-variant);">
+                    Bring your ideas to life with a custom 3D print! Whether it’s a unique design, prototype, or personalized object, we can print it to your exact specifications.
+                </div>
 
-    function goToCheckout() {
-        const fileInput = document.getElementById('designUpload');
-        const file = fileInput.files[0];
-        
-        if (file) {
-            // Convert to data URL to store in sessionStorage (optional step)
-            const reader = new FileReader();
-            reader.onload = function (event) {
-                sessionStorage.setItem('designImage', event.target.result);
-                let baseUrl = "../order.html?item=8";
-    
-    // Get current URL parameters and append them to the new URL
-    const currentParams = new URLSearchParams(window.location.search);
-    if (currentParams.toString()) {
-        baseUrl += "&" + currentParams.toString();
-    }
-    window.location.href = baseUrl;
-            };
-            reader.readAsDataURL(file);
-        } else {
-            alert('Please upload a design image.');
+                <div class="product-customization" style="background:var(--md-sys-color-surface);padding:1rem;border-radius:12px;">
+                    <h3 class="m3-title-large">Upload Your Design</h3>
+                    <form id="productForm">
+                        <input id="designUpload" type="file" accept="image/*" required style="margin-top:0.75rem;">
+                    </form>
+                    <p style="margin-top:0.75rem;">Color</p>
+                    <div id="options" style="display:flex;gap:0.5rem;">
+                        <button onclick="color1('blue')" class="pick blue colorOption" aria-label="Blue"></button>
+                        <button onclick="color1('red')" class="red colorOption" aria-label="Red"></button>
+                        <button onclick="color1('yellow')" class="yellow colorOption" aria-label="Yellow"></button>
+                        <button onclick="color1('green')" class="green colorOption" aria-label="Green"></button>
+                        <button onclick="color1('black')" class="black colorOption" aria-label="Black"></button>
+                        <button onclick="color1('white')" class="white colorOption" aria-label="White"></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p class="m3-body-small">© 2025 Engineering Club. All rights reserved.</p>
+    </footer>
+
+    <script src="../components.js"></script>
+    <script src="../theme.js"></script>
+    <script>
+        function color1(color) {
+            const button = document.getElementsByClassName(color)[0];
+            const oldButton = document.getElementsByClassName('pick')[0];
+            if (oldButton) oldButton.classList.remove('pick');
+            if (button) button.classList.add('pick');
+
+            const urlParams = new URLSearchParams(window.location.search);
+            urlParams.set('color1', color);
+            const newUrl = `${window.location.pathname}?${urlParams.toString()}`;
+            window.history.replaceState(null, '', newUrl);
         }
-    }
-</script>
+
+        function goToCheckout() {
+            const fileInput = document.getElementById('designUpload');
+            const file = fileInput.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (event) {
+                    sessionStorage.setItem('designImage', event.target.result);
+                    let baseUrl = "../order.html?item=8";
+                    const currentParams = new URLSearchParams(window.location.search);
+                    if (currentParams.toString()) {
+                        baseUrl += "&" + currentParams.toString();
+                    }
+                    window.location.href = baseUrl;
+                };
+                reader.readAsDataURL(file);
+            } else {
+                alert('Please upload a design image.');
+            }
+        }
+    </script>
+</body>
 
 </html>
+*** End Patch

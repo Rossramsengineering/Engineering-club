@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Members — Engineering Club</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anta:wght@400&family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="Images/rossRams.png">
+    <style>
+        .members-container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 1.5rem;
+        }
+
+        .members-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .members-header h1 {
+            font-family: var(--font-heading, 'Anta');
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            color: var(--md-sys-color-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .members-header p {
+            color: var(--md-sys-color-on-surface-variant);
+            font-size: 1.125rem;
+        }
+
+        .members-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .member-card {
+            background: var(--md-sys-color-surface);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--md-sys-elevation-1);
+            transition: box-shadow 0.2s, transform 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .member-card:hover {
+            box-shadow: var(--md-sys-elevation-3);
+            transform: translateY(-4px);
+        }
+
+        .member-avatar {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #6B0F2B 0%, #D4A574 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+            font-family: var(--font-heading, 'Anta');
+        }
+
+        .member-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .member-name {
+            color: var(--md-sys-color-primary);
+            font-family: var(--font-heading, 'Anta');
+            font-size: 1.25rem;
+            margin: 0 0 0.25rem 0;
+        }
+
+        .member-role {
+            color: var(--md-sys-color-on-surface-variant);
+            font-weight: 500;
+            font-size: 0.875rem;
+            margin: 0 0 0.75rem 0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .member-bio {
+            color: var(--md-sys-color-on-surface-variant);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin: 0;
+            flex-grow: 1;
+        }
+
+        .member-footer {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--md-sys-color-outline-variant);
+        }
+
+        .role-badge {
+            display: inline-block;
+            background: var(--md-sys-color-primary-container);
+            color: var(--md-sys-color-on-primary-container);
+            padding: 0.25rem 0.75rem;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .team-section {
+            background: var(--md-sys-color-surface);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--md-sys-elevation-1);
+            margin-bottom: 3rem;
+        }
+
+        .team-section h2 {
+            color: var(--md-sys-color-primary);
+            font-family: var(--font-heading, 'Anta');
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+        }
+
+        .team-description {
+            color: var(--md-sys-color-on-surface-variant);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .stat-card {
+            background: var(--md-sys-color-surface-variant);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .stat-number {
+            color: var(--md-sys-color-primary);
+            font-size: 2rem;
+            font-weight: 700;
+            font-family: var(--font-heading, 'Anta');
+        }
+
+        .stat-label {
+            color: var(--md-sys-color-on-surface-variant);
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div class="logo">
+            <img src="Images/rossRams.png" alt="Logo">
+            <span>Engineering Club</span>
+        </div>
+        <nav class="navigation">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="store.html" class="nav-link">Store</a>
+            <a href="members.html" class="nav-link active">Members</a>
+            <a href="activities.html" class="nav-link">Activities</a>
+            <a href="tsa.html" class="nav-link">TSA</a>
+            <a href="contact.html" class="nav-link">Contact</a>
+            <button id="theme-toggle" title="Toggle theme" aria-label="Toggle color theme" aria-pressed="false">
+                <span id="theme-toggle-icon" class="material-symbols-outlined" aria-hidden="true">dark_mode</span>
+            </button>
+        </nav>
+    </header>
+
+    <main class="members-container">
+        <!-- Page Header -->
+        <div class="members-header">
+            <h1>Our Members</h1>
+            <p>Meet the talented engineers behind the Engineering Club</p>
+        </div>
+
+        <!-- Team Overview Section -->
+        <div class="team-section">
+            <h2>Team Overview</h2>
+            <p class="team-description">
+                The Engineering Club is made up of dedicated students from across the school who are passionate about design, innovation, and problem-solving. Our team works collaboratively on projects ranging from 3D printing and custom designs to TSA competitions and community engagement through our products.
+            </p>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">25+</div>
+                    <div class="stat-label">Active Members</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">5</div>
+                    <div class="stat-label">Leadership Roles</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">15+</div>
+                    <div class="stat-label">Projects</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">Teams</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Leadership Team -->
+        <div class="team-section" style="margin-bottom: 2rem;">
+            <h2>Leadership Team</h2>
+            <div class="members-grid">
+                <div class="member-card">
+                    <div class="member-avatar">👨‍💼</div>
+                    <div class="member-content">
+                        <h3 class="member-name">John Smith</h3>
+                        <p class="member-role">Club President</p>
+                        <p class="member-bio">Senior mechanical engineering enthusiast leading the club's strategic direction and TSA team.</p>
+                        <div class="member-footer">
+                            <span class="role-badge">Leadership</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="member-card">
+                    <div class="member-avatar">👩‍💻</div>
+                    <div class="member-content">
+                        <h3 class="member-name">Sarah Johnson</h3>
+                        <p class="member-role">Vice President</p>
+                        <p class="member-bio">3D design expert coordinating product development and overseeing custom projects.</p>
+                        <div class="member-footer">
+                            <span class="role-badge">Leadership</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="member-card">
+                    <div class="member-avatar">🔧</div>
+                    <div class="member-content">
+                        <h3 class="member-name">Mike Chen</h3>
+                        <p class="member-role">Technical Lead</p>
+                        <p class="member-bio">Equipment specialist managing 3D printers, laser engravers, and fabrication tools.</p>
+                        <div class="member-footer">
+                            <span class="role-badge">Leadership</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="member-card">
+                    <div class="member-avatar">📊</div>
+                    <div class="member-content">
+                        <h3 class="member-name">Emma Davis</h3>
+                        <p class="member-role">Store Manager</p>
+                        <p class="member-bio">Operations lead managing orders, inventory, and customer communications.</p>
+                        <div class="member-footer">
+                            <span class="role-badge">Leadership</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="member-card">
+                    <div class="member-avatar">🎨</div>
+                    <div class="member-content">
+                        <h3 class="member-name">Alex Rodriguez</h3>
+                        <p class="member-role">Design Lead</p>
+                        <p class="member-bio">Creative director handling custom design requests and product concepts.</p>
+                        <div class="member-footer">
+                            <span class="role-badge">Leadership</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Active Members -->
+        <div class="team-section">
+            <h2>Active Members</h2>
+            <div class="members-grid">
+                <div class="member-card">
+                    <div class="member-avatar">JM</div>
+                    <div class="member-content">
+                        <h3 class="member-name">James Martinez</h3>
+                        <p class="member-role">3D Design Specialist</p>
+                        <p class="member-bio">Focused on creating detailed 3D models and troubleshooting print quality.</p>
+                    </div>
+                </div>
+
+                <div class="member-card">
+                    <div class="member-avatar">LW</div>
+                    <div class="member-content">
+                        <h3 class="member-name">Lisa Wong</h3>
+                        <p class="member-role">Laser Specialist</p>
+                        <p class="member-bio">Expert in laser engraving and cutting designs on wood and acrylic.</p>
+                    </div>
+                </div>
+
+                <div class="member-card">
+                    <div class="member-avatar">CT</div>
+                    <div class="member-content">
+                        <h3 class="member-name">Carlos Torres</h3>
+                        <p class="member-role">Project Developer</p>
+                        <p class="member-bio">Leads development of club products and manages project timelines.</p>
+                    </div>
+                </div>
+
+                <div class="member-card">
+                    <div class="member-avatar">NK</div>
+                    <div class="member-content">
+                        <h3 class="member-name">Nina Kim</h3>
+                        <p class="member-role">Marketing & Social</p>
+                        <p class="member-bio">Handles marketing initiatives and social media presence for the club.</p>
+                    </div>
+                </div>
+
+                <div class="member-card">
+                    <div class="member-avatar">DP</div>
+                    <div class="member-content">
+                        <h3 class="member-name">David Patel</h3>
+                        <p class="member-role">TSA Competitor</p>
+                        <p class="member-bio">Dedicated member contributing to multiple TSA competition categories.</p>
+                    </div>
+                </div>
+
+                <div class="member-card">
+                    <div class="member-avatar">SL</div>
+                    <div class="member-content">
+                        <h3 class="member-name">Sophie Lee</h3>
+                        <p class="member-role">Web Developer</p>
+                        <p class="member-bio">Maintains club website and manages digital infrastructure.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer style="text-align: center; padding: 2rem; border-top: 1px solid var(--md-sys-color-outline); margin-top: 4rem;">
+        <p>&copy; 2025 Engineering Club. All rights reserved.</p>
+    </footer>
+
+    <script src="components.js"></script>
+    <script src="theme.js"></script>
+</body>
+
+</html>

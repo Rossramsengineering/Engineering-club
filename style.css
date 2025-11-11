@@ -1,336 +1,926 @@
-/* Import Roboto Flex and Roboto Mono (for code/prices) */
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,300;8..144,400;8..144,500;8..144,700&family=Roboto+Mono:wght@400;500&display=swap');
+/* 1. Import Fonts */
+/* Fonts are loaded in HTML head via link tag: Anta (headings) & Rubik (body) */
 
-/* Define our Material 3 color palette as CSS variables.
-  This is a dark theme based on your original colors.
-*/
+/* 2. COLOR THEMES
+ * PASTE YOUR CSS VARIABLES FROM THE MATERIAL THEME BUILDER HERE
+ * Below is just a default purple example.
+ */
 :root {
-    /* M3 Color Roles (Dark Theme) */
-    --md-sys-color-primary: #fbb61f;
-    --md-sys-color-on-primary: #110000;
-    --md-sys-color-primary-container: #5b0000;
-    --md-sys-color-on-primary-container: #ffddb5;
-    
-    --md-sys-color-secondary: #4bd600;
-    --md-sys-color-on-secondary: #110000;
-
-    --md-sys-color-tertiary: #c10000;
-    --md-sys-color-on-tertiary: #ffffff;
-
-    --md-sys-color-background: #110000;
-    --md-sys-color-on-background: #ffffff;
-    
-    --md-sys-color-surface: #1c1b1f; /* A very dark gray, slightly off-black */
-    --md-sys-color-on-surface: #ffffff;
-    --md-sys-color-on-surface-variant: #c9c5d0; /* For less important text */
-    
-    --md-sys-color-outline: #918f9a;
+  /* M3 Light Theme - Maroon & Gold */
+  --md-sys-color-primary: #6B0F2B;
+  --md-sys-color-on-primary: #FFFFFF;
+  --md-sys-color-primary-container: #FFD8E4;
+  --md-sys-color-on-primary-container: #2B0010;
+  --md-sys-color-secondary: #D4A574;
+  --md-sys-color-on-secondary: #FFFFFF;
+  --md-sys-color-secondary-container: #FFE4C7;
+  --md-sys-color-on-secondary-container: #4A2C1A;
+  --md-sys-color-background: #FFFBFF;
+  --md-sys-color-on-background: #1C1B1F;
+  --md-sys-color-surface: #F3EDF7;
+  --md-sys-color-on-surface: #1C1B1F;
+  --md-sys-color-on-surface-variant: #49454E;
+  --md-sys-color-outline: #79747E;
+  
+  /* Hover/Ripple States */
+  --md-sys-color-hover-subtle: rgba(0, 0, 0, 0.05);
+  --md-sys-color-hover-medium: rgba(0, 0, 0, 0.1);
+  
+  /* Font Families - Google Fonts (available in both light and dark modes) */
+  --font-heading: 'Anta', sans-serif;
+  --font-body: 'Rubik', sans-serif;
 }
 
+body.dark-mode {
+  /* M3 Dark Theme - Maroon & Gold */
+  --md-sys-color-primary: #FFB3D9;
+  --md-sys-color-on-primary: #3B0010;
+  --md-sys-color-primary-container: #52081C;
+  --md-sys-color-on-primary-container: #FFD8E4;
+  --md-sys-color-secondary: #E7BC91;
+  --md-sys-color-on-secondary: #31200C;
+  --md-sys-color-secondary-container: #5C4033;
+  --md-sys-color-on-secondary-container: #FFE4C7;
+  --md-sys-color-background: #1C1B1F;
+  --md-sys-color-on-background: #E6E1E5;
+  --md-sys-color-surface: #201f24;
+  --md-sys-color-on-surface: #E6E1E5;
+  --md-sys-color-on-surface-variant: #CAC4D0;
+  --md-sys-color-outline: #938F99;
+
+  /* Hover/Ripple States */
+  --md-sys-color-hover-subtle: rgba(0, 0, 0, 0.05);
+  --md-sys-color-hover-medium: rgba(0, 0, 0, 0.1);
+}
+
+/* Global Font Settings */
+* {
+  font-family: var(--font-body) !important;
+  font-weight: 400;
+}
+
+h1, h2, h3, h4, h5, h6, .hero-title {
+  font-family: var(--font-heading) !important;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+/* 3. TYPOGRAPHY SCALE
+ * These are the M3 Expressive type styles
+ */
+.m3-display-large {
+    font-size: 3.5rem; /* 57px */
+    font-weight: 700;
+    line-height: 4rem;
+}
+.m3-title-large {
+    font-size: 1.375rem; /* 22px */
+    font-weight: 500;
+    line-height: 1.75rem;
+}
+.m3-body-large {
+    font-size: 1rem; /* 16px */
+    font-weight: 400;
+    line-height: 1.5rem;
+}
+.m3-body-medium {
+    font-size: 0.875rem; /* 14px */
+    font-weight: 400;
+    line-height: 1.25rem;
+}
+.m3-body-small {
+    font-size: 0.75rem; /* 12px */
+    font-weight: 400;
+    line-height: 1rem;
+}
+.m3-button-label {
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+
+/* 4. GLOBAL & LAYOUT STYLES */
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box; /* Better for layout */
-    text-decoration: none;
-}
-
-html {
-    /* Set the base font size for rem units */
-    font-size: 16px; 
+    box-sizing: border-box;
 }
 
 body {
-    font-family: 'Roboto Flex', sans-serif;
-    background: var(--md-sys-color-background);
+    font-family: var(--font-body);
+    background-color: var(--md-sys-color-background);
     color: var(--md-sys-color-on-background);
+    transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-#header {
+.header, .footer, .content {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1.5rem 0;
+}
+
+.header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 2.5%; /* Use rem units */
-    width: 95%;
-    margin: 0 auto;
+    border-bottom: 1px solid var(--md-sys-color-outline);
+    padding: 1rem 1.5rem;
 }
 
-#logo {
+.logo {
     display: flex;
-    flex-direction: row;
     align-items: center;
+    gap: 0.75rem;
     font-size: 1.25rem;
     font-weight: 500;
 }
 
-#logo img {
+.logo img {
     height: 2.5rem;
-    width: auto;
-    margin-right: 0.75rem; /* Use margin-right instead of left */
 }
 
-#links {
+.page-title {
+    font-family: var(--font-heading);
+    color: var(--md-sys-color-primary);
+    font-size: 1.5rem;
+    font-weight: 400;
+}
+
+.navigation {
     display: flex;
     align-items: center;
-    gap: 0.5rem; /* Adds space between links */
+    gap: 1rem;
 }
 
-.navLink {
+.nav-link {
     color: var(--md-sys-color-on-background);
-    font-size: 1rem;
-    font-weight: 500;
     padding: 0.5rem 1rem;
-    border-radius: 99px; /* Pill shape */
-    transition: background-color 0.2s ease-out;
+    border-radius: 99px;
+    transition: background-color 0.2s ease;
+    font-weight: 500;
+    text-decoration: none;
 }
-
-.navLink:hover {
-    background-color: rgba(255, 255, 255, 0.1); /* Subtle hover */
-}
-
-.active {
+.nav-link:hover { background-color: var(--md-sys-color-hover-subtle); }
+.nav-link.active {
     background-color: var(--md-sys-color-primary-container);
     color: var(--md-sys-color-on-primary-container);
 }
 
-#customProject {
-    background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('Images/customProject.png'); /* Darker overlay for text contrast */
-    width: 90vw;
-    position: relative;
-    margin: 2rem auto 4rem auto;
-    border-radius: 28px; /* M3 "Extra Large" shape */
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+/* Focus and keyboard usability enhancements */
+.using-keyboard :focus {
+    outline: 3px solid rgba(107,15,43,0.15);
+    outline-offset: 2px;
+}
+
+/* For browsers that support :focus-visible */
+:focus-visible {
+    outline: 3px solid rgba(107,15,43,0.18);
+    outline-offset: 2px;
+}
+
+/* Style for skip link */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 12px;
+    background: var(--md-sys-color-primary);
+    color: var(--md-sys-color-on-primary);
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    z-index: 9999;
+    transition: top 0.15s;
+    text-decoration: none;
+}
+.skip-link:focus {
+    top: 12px;
+}
+
+.footer {
+    margin-top: 3rem;
+    border-top: 1px solid var(--md-sys-color-outline);
+    color: var(--md-sys-color-on-surface-variant);
+    text-align: center;
+}
+
+.content {
+    min-height: 60vh;
+}
+
+/* 5. COMPONENT STYLES */
+
+/* Theme Toggle */
+#theme-toggle {
+    background: transparent;
+    border: 1px solid var(--md-sys-color-outline);
+    color: var(--md-sys-color-on-background);
+    width: 2.5rem; height: 2.5rem;
+    border-radius: 50%;
+    font-size: 1.25rem;
+    cursor: pointer;
+    margin-left: 0.5rem;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 4rem 2rem;
-    min-height: 50vh;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+    padding: 0;
+}
+#theme-toggle:hover { background-color: var(--md-sys-color-hover-subtle); }
+
+.material-symbols-outlined {
+    font-family: 'Material Symbols Outlined' !important;
+    font-size: 24px;
+    font-weight: 400;
+    font-style: normal;
+    display: inline-block;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
 }
 
-#customProjectText {
-    /* M3 "Display Large" style */
-    font-size: 3.5rem;
+/* Buttons */
+.button-row { margin: 2rem 0; display: flex; gap: 1rem; }
+.m3-button {
+    font-family: var(--font-body);
+    padding: 0.6rem 1.5rem;
+    border-radius: 99px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    /* Apply button text style */
+    font-size: 0.9rem;
     font-weight: 700;
-    line-height: 4rem;
-    text-align: center;
-    color: #FFF;
-    margin-bottom: 2rem;
 }
-
-/* This styles the <button> tag */
-#customProject button {
-    /* M3 "Filled Button" style */
+.m3-button.filled {
     background-color: var(--md-sys-color-primary);
     color: var(--md-sys-color-on-primary);
-    border: none;
-    border-radius: 99px; /* Pill shape */
-    padding: 1rem 2.5rem;
-    cursor: pointer;
-    transition: background-color 0.2s ease, box-shadow 0.2s ease;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
-
-/* This styles the <a> tag inside the button */
-#customProjectButtonText {
-    /* M3 "Label Large" style */
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: var(--md-sys-color-on-primary);
-}
-
-#customProject button:hover {
-    background-color: #ffca4a; /* Lighter primary for hover */
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-}
-
-.divider {
-    width: 90%;
-    margin: 0 auto 2rem auto;
-    text-align: center;
-}
-
-.dividerText {
-    /* M3 "Headline Medium" style */
-    font-size: 1.75rem;
-    font-weight: 500;
+.m3-button.filled:hover { box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+.m3-button.outlined {
+    background-color: transparent;
     color: var(--md-sys-color-primary);
-    margin-bottom: 0.5rem;
+    border: 1px solid var(--md-sys-color-outline);
 }
-
-.dividerLine {
-    width: 100px;
-    height: 1px;
-    margin: 0 auto;
-    background-color: var(--md-sys-color-outline);
+.m3-button.outlined:hover { background-color: var(--md-sys-color-hover-subtle); }
+.m3-button.text {
+    background-color: transparent;
+    color: var(--md-sys-color-primary);
 }
+.m3-button.text:hover { background-color: var(--md-sys-color-hover-subtle); }
 
-.store {
-    display: grid;
-    /* This will automatically wrap columns on smaller screens */
-    grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
-    gap: 2rem; /* More space */
-    justify-content: center;
-    width: 90%; /* Give it some breathing room */
-    margin: 0 auto 4rem auto;
-}
-
-.item {
-    /* M3 "Filled Card" style */
+/* Card */
+.card {
     background-color: var(--md-sys-color-surface);
-    border-radius: 12px; /* M3 "Medium" shape */
-    overflow: hidden; /* Keeps image corners rounded */
+    border-radius: 12px; /* M3 Medium Shape */
+    overflow: hidden;
+    max-width: 400px;
+    margin-top: 2rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    transition: background-color 0.2s ease;
+}
+.card-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+}
+.card-content {
+    padding: 1.25rem;
+}
+.card-content h2 { margin-bottom: 0.5rem; }
+.card-content p { color: var(--md-sys-color-on-surface-variant); }
+.card-actions {
+    padding-top: 1rem;
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* Product Grid & Cards */
+.products-section {
+    margin: 3rem 0;
+}
+.products-section h2 {
+    margin-bottom: 2rem;
+    color: var(--md-sys-color-primary);
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    width: 100%;
+}
+
+.product-card {
+    background-color: var(--md-sys-color-surface);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
-    transition: box-shadow 0.2s ease;
+    height: 100%;
+}
+.product-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
 }
 
-.item:hover {
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-}
-
-.imgContainer {
-    /* Remove old styles */
+.card-image-container {
     width: 100%;
-    height: 14rem; /* Fixed height for consistency */
-    background-color: #333; /* Placeholder color */
+    height: 200px;
+    overflow: hidden;
+    background-color: var(--md-sys-color-outline);
 }
-
-.item img {
+.card-image-container .card-image {
     width: 100%;
-    height: 100%; /* Fill the container */
+    height: 100%;
     object-fit: cover;
-    transition: transform 0.3s ease;
+    display: block;
+    transition: transform 0.2s ease;
 }
-
-.item:hover img {
+.product-card:hover .card-image {
     transform: scale(1.05);
 }
 
-.description {
+.product-card .card-content {
     padding: 1.25rem;
     display: flex;
     flex-direction: column;
-    flex-grow: 1; /* Makes cards in a row the same height */
+    flex-grow: 1;
+}
+.product-card h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.125rem;
+}
+.product-card p {
+    color: var(--md-sys-color-on-surface-variant);
+    flex-grow: 1;
 }
 
-.itemName {
-    /* M3 "Title Large" style */
-    font-family: 'Roboto Flex', sans-serif;
+.card-price {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--md-sys-color-primary);
+    margin: 1rem 0;
+}
+
+.product-card .card-actions {
+    padding-top: 1rem;
+    display: flex;
+    justify-content: center;
+}
+
+/* Hero Banner Section */
+.hero-banner {
+    background: linear-gradient(135deg, var(--md-sys-color-primary) 0%, var(--md-sys-color-secondary) 100%);
+    color: white;
+    padding: 6rem 2rem;
+    border-radius: 12px;
+    text-align: center;
+    margin-bottom: 3rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.hero-content {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.hero-title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    line-height: 1.1;
+}
+
+.hero-subtitle {
+    font-size: 1.25rem;
+    font-weight: 300;
+    margin-bottom: 2rem;
+    opacity: 0.95;
+}
+
+.hero-banner .m3-button.filled {
+    background-color: var(--md-sys-color-secondary);
+    color: black;
+}
+
+.hero-banner .m3-button.filled:hover {
+    background-color: #E7BC91;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+/* Product Carousel Section */
+.carousel-section {
+    margin: 3rem 0;
+}
+
+.carousel-section h2 {
+    margin-bottom: 1.5rem;
+    color: var(--md-sys-color-primary);
+}
+
+.carousel-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    position: relative;
+}
+
+.carousel-wrapper {
+    flex: 1;
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.3s ease;
+}
+
+.carousel-item {
+    min-width: 100%;
+    display: flex;
+    gap: 1rem;
+}
+
+.carousel-item-content {
+    flex: 1;
+    background-color: var(--md-sys-color-surface);
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.carousel-item-image {
+    width: 40%;
+    min-width: 200px;
+    height: 250px;
+    object-fit: cover;
+}
+
+.carousel-item-info {
+    flex: 1;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.carousel-item-info h3 {
     font-size: 1.375rem;
     font-weight: 500;
-    color: var(--md-sys-color-on-surface);
-    line-height: 1.75rem;
+    margin-bottom: 0.5rem;
 }
 
-.itemName:hover {
-    text-decoration: none;
+.carousel-item-info p {
+    color: var(--md-sys-color-on-surface-variant);
+    margin-bottom: 1rem;
+    flex-grow: 1;
 }
 
-.itemCost {
-    /* M3 "Title Medium" style */
-    font-family: 'Roboto Mono', monospace;
-    font-size: 1.1rem;
-    font-weight: 500;
-    color: var(--md-sys-color-secondary);
-    margin: 0.5rem 0 1rem 0; /* Space it out */
-}
-
-.moreDetails {
-    /* M3 "Outlined Button" style */
-    background-color: transparent;
-    color: var(--md-sys-color-secondary);
-    font-size: 0.9rem;
+.carousel-item-price {
+    font-size: 1.5rem;
     font-weight: 700;
-    padding: 0.6rem 1.5rem;
-    border-radius: 99px; /* Pill shape */
-    border: 1px solid var(--md-sys-color-secondary);
-    text-align: center;
-    margin-top: auto; /* Pushes button to the bottom */
+    color: var(--md-sys-color-primary);
+    margin-bottom: 1rem;
+}
+
+.carousel-btn {
+    background: var(--md-sys-color-primary);
+    color: white;
+    border: none;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel-btn:hover {
+    background-color: var(--md-sys-color-secondary);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.carousel-dot {
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 50%;
+    background-color: var(--md-sys-color-outline);
+    cursor: pointer;
     transition: background-color 0.2s ease;
 }
 
-.moreDetails:hover {
-    background-color: rgba(75, 214, 0, 0.1); /* Secondary color hover */
-    cursor: pointer;
+.carousel-dot.active {
+    background-color: var(--md-sys-color-primary);
 }
 
-#allProducts {
-    /* M3 "Filled Tonal Button" style */
-    display: block;
-    margin: 0 auto 4rem auto;
-    padding: 1rem 2.5rem;
-    background: var(--md-sys-color-tertiary);
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: var(--md-sys-color-on-tertiary);
-    border: none;
-    border-radius: 99px;
-    width: fit-content;
-    text-align: center;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-    cursor: pointer;
-    transition: all 0.2s ease;
+/* Carousel Item Styling */
+.carousel-item {
+    min-width: 100%;
+    padding: 1.5rem;
 }
 
-#allProducts:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    background: #d42a2a; /* Slightly lighter red */
-}
-
-#footer {
-    width: 100%;
-    margin: auto;
-    border-top: 1px solid var(--md-sys-color-outline);
-    background-color: var(--md-sys-color-surface);
+.carousel-item-content {
+    background: var(--md-sys-color-surface);
+    border-radius: 12px;
     display: flex;
-    flex-direction: column; /* Stack on small screens */
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    height: 280px;
+}
+
+.carousel-item-image {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    flex-shrink: 0;
+}
+
+.carousel-item-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
+    height: 100%;
+}
+
+.carousel-item-info h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--md-sys-color-on-surface);
+}
+
+.carousel-item-info p {
+    margin: 0 0 1rem 0;
+    color: var(--md-sys-color-on-surface-variant);
+    line-height: 1.5;
+}
+
+.carousel-item-price {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--md-sys-color-primary);
+    margin-bottom: 1rem;
+}
+
+/* Navigation Drawer Styles */
+.menu-button {
+    background: none;
+    border: none;
+    color: var(--md-sys-color-on-surface);
+    cursor: pointer;
+    padding: 0.5rem;
+    display: none;
     align-items: center;
     justify-content: center;
-    text-align: center;
-    gap: 2rem;
-    padding: 3rem 2rem;
+    font-size: 1.5rem;
 }
 
-#footerLogo {
-    /* ... same as your #logo styles ... */
+.menu-button:hover {
+    background-color: var(--md-sys-color-hover-subtle);
+    border-radius: 50%;
+}
+
+.menu-button .material-symbols-outlined {
+    font-size: 1.5rem;
+}
+
+/* Drawer Overlay */
+.nav-drawer {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 80%;
+    max-width: 320px;
+    height: 100vh;
+    background: var(--md-sys-color-surface);
+    box-shadow: var(--md-sys-elevation-3);
+    z-index: 999;
+    transition: left 0.3s ease;
+    overflow-y: auto;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+}
+
+.nav-drawer.open {
+    left: 0;
+}
+
+.drawer-header {
+    padding: 1rem;
+    border-bottom: 1px solid var(--md-sys-color-outline-variant);
+    display: flex;
+    justify-content: flex-end;
+}
+
+.drawer-close {
+    background: none;
+    border: none;
+    color: var(--md-sys-color-on-surface);
+    cursor: pointer;
+    padding: 0.5rem;
+    display: flex;
     align-items: center;
-    font-size: 1.25rem;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+.drawer-close:hover {
+    background-color: var(--md-sys-color-hover-subtle);
+    border-radius: 50%;
+}
+
+.drawer-content {
+    padding: 1rem 0;
+    flex: 1;
+}
+
+.drawer-nav {
+    display: flex;
+    flex-direction: column;
+}
+
+.drawer-nav-link {
+    padding: 1rem 1.5rem;
+    color: var(--md-sys-color-on-surface);
+    text-decoration: none;
+    border-left: 4px solid transparent;
+    transition: all 0.2s ease;
     font-weight: 500;
 }
 
-#footerLogo img {
-    height: 2.5rem;
-    width: auto;
-    margin-right: 0.75rem;
-}
-
-#info {
-    font-size: 0.9rem;
-    color: var(--md-sys-color-on-surface-variant);
-    line-height: 1.4rem;
-}
-
-#info a {
+.drawer-nav-link:hover {
+    background-color: var(--md-sys-color-hover-subtle);
     color: var(--md-sys-color-primary);
-    text-decoration: underline;
 }
 
-/* Finally, update your media queries to be simpler */
-@media (min-width: 768px) {
-    #footer {
-        flex-direction: row;
-        justify-content: space-between;
-        padding: 3rem 5%;
-        text-align: left;
+.drawer-nav-link.active {
+    border-left-color: var(--md-sys-color-primary);
+    color: var(--md-sys-color-primary);
+    background-color: var(--md-sys-color-primary-container);
+}
+
+/* Drawer Backdrop */
+.drawer-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0);
+    z-index: 998;
+    transition: background-color 0.3s ease;
+    pointer-events: none;
+    display: none;
+}
+
+.drawer-backdrop.open {
+    background-color: rgba(0, 0, 0, 0.5);
+    pointer-events: auto;
+    display: block;
+}
+
+/* Mobile Responsive Drawer */
+@media (max-width: 768px) {
+    .menu-button {
+        display: flex;
+    }
+
+    /* Hide horizontal nav on mobile, show drawer instead */
+    .navigation .nav-link {
+        display: none;
+    }
+
+    .navigation #theme-toggle {
+        display: inline-flex;
+    }
+}
+
+/* Ensure drawer doesn't overlap theme toggle on desktop */
+@media (min-width: 769px) {
+    .menu-button {
+        display: none;
+    }
+
+    .nav-drawer {
+        display: none;
+    }
+
+    .drawer-backdrop {
+        display: none !important;
     }
     
-    #customProjectText {
-        font-size: 5.5rem; /* A bit larger on tablets/desktops */
-        line-height: 6rem;
+    /* Hide theme toggle from header on desktop (it's in the rail) */
+    .navigation #theme-toggle {
+        display: none;
+    }
+}
+
+/* Navigation Rail Styles - Always Visible */
+.nav-rail {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 80px;
+    height: 100vh;
+    background: var(--md-sys-color-surface);
+    border-right: 1px solid var(--md-sys-color-outline-variant);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 0;
+    z-index: 100;
+    overflow-y: auto;
+    box-shadow: var(--md-sys-elevation-1);
+    transition: width 0.3s ease;
+}
+
+.nav-rail.expanded {
+    width: 280px;
+}
+
+.rail-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    gap: 1rem;
+}
+
+.rail-top {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    gap: 1rem;
+}
+
+.rail-logo {
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, var(--md-sys-color-primary) 0%, var(--md-sys-color-secondary) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.rail-logo img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+}
+
+.rail-expand-btn {
+    width: 56px;
+    height: 56px;
+    margin: 0 auto;
+    border-radius: 16px;
+    background: none;
+    border: none;
+    color: var(--md-sys-color-on-surface-variant);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.rail-expand-btn:hover {
+    background-color: var(--md-sys-color-hover-subtle);
+    color: var(--md-sys-color-primary);
+}
+
+.rail-expand-btn .material-symbols-outlined {
+    font-size: 1.5rem;
+}
+
+.rail-destinations {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    flex: 1;
+    width: 100%;
+}
+
+.rail-destination {
+    width: 56px;
+    height: 56px;
+    margin: 0 auto;
+    border-radius: 16px;
+    background: none;
+    border: none;
+    color: var(--md-sys-color-on-surface-variant);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    position: relative;
+    min-width: 56px;
+}
+
+.rail-destination:hover {
+    background-color: var(--md-sys-color-hover-subtle);
+    color: var(--md-sys-color-primary);
+}
+
+.rail-destination.active {
+    background-color: var(--md-sys-color-primary-container);
+    color: var(--md-sys-color-on-primary-container);
+}
+
+.rail-destination .material-symbols-outlined {
+    font-size: 1.5rem;
+}
+
+.rail-destination-label {
+    display: none;
+    margin-left: 1rem;
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.nav-rail.expanded .rail-destination {
+    width: 100%;
+    padding: 0 1rem;
+    justify-content: flex-start;
+    gap: 1rem;
+}
+
+.nav-rail.expanded .rail-destination-label {
+    display: inline;
+}
+
+.rail-divider {
+    width: 40px;
+    height: 1px;
+    background: var(--md-sys-color-outline-variant);
+    margin: 0.75rem 0;
+}
+
+.nav-rail.expanded .rail-divider {
+    width: 80%;
+}
+
+.rail-theme-toggle {
+    width: 56px;
+    height: 56px;
+    margin: 0 auto;
+    border-radius: 16px;
+    background: none;
+    border: none;
+    color: var(--md-sys-color-on-surface-variant);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.rail-theme-toggle:hover {
+    background-color: var(--md-sys-color-hover-subtle);
+    color: var(--md-sys-color-primary);
+}
+
+.rail-theme-toggle .material-symbols-outlined {
+    font-size: 1.5rem;
+}
+
+/* Adjust body layout with rail */
+body {
+    padding-left: 80px;
+}
+
+/* Rail on mobile/tablet - hidden */
+@media (max-width: 1024px) {
+    .nav-rail {
+        display: none;
+    }
+
+    body {
+        padding-left: 0;
     }
 }

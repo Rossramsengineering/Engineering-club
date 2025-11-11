@@ -1,0 +1,526 @@
+/* Material 3 Expressive - Centralized Theme for Engineering Club
+   - SINGLE source of truth for header, logo, links, buttons, and card styles
+   - Color tokens and component styles all defined here
+   - Page-specific CSS should only override what's unique to that page
+*/
+
+/* ============================================================================
+   COLOR TOKENS (Material 3 defaults - update for your club branding)
+   ============================================================================ */
+:root {
+  --md-sys-color-primary: #6750A4;
+  --md-sys-color-on-primary: #FFFFFF;
+  --md-sys-color-primary-container: #EADDFF;
+  --md-sys-color-on-primary-container: #21005D;
+
+  --md-sys-color-secondary: #625B71;
+  --md-sys-color-on-secondary: #FFFFFF;
+  --md-sys-color-secondary-container: #E8DEF8;
+  --md-sys-color-on-secondary-container: #1D192B;
+
+  --md-sys-color-tertiary: #7D5260;
+  --md-sys-color-on-tertiary: #FFFFFF;
+
+  --md-sys-color-surface: #FFFBFE;
+  --md-sys-color-on-surface: #1C1B1F;
+  --md-sys-color-background: #FFFBFE;
+
+  --md-sys-color-error: #B3261E;
+  --md-sys-color-on-error: #FFFFFF;
+
+  --md-sys-elevation-1: 0 1px 2px rgba(28,27,31,0.06), 0 1px 3px rgba(28,27,31,0.08);
+  --md-sys-elevation-2: 0 2px 4px rgba(28,27,31,0.06), 0 4px 8px rgba(28,27,31,0.08);
+
+  --md-sys-shape-corner-small: 8px;
+  --md-sys-shape-corner-medium: 12px;
+  --md-sys-shape-corner-large: 16px;
+
+  /* Typography */
+  --md-typography-font-family: 'Rubik', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  --font-heading: 'Anta', sans-serif;
+  --font-body: 'Rubik', sans-serif;
+  --md-type-headline-size: 1.5rem;
+  --md-type-title-size: 1.125rem;
+  --md-type-body-size: 0.95rem;
+
+  /* Accent colors for the store/app (maroon action buttons, gold hover state) */
+  --app-color-action: #8B1538;
+  --app-color-action-hover: #A01B47;
+  --app-color-hover-gold: #db9d18;
+  --app-color-active-gold: #fbb61f;
+  --app-color-header-dark: #110000;
+}
+
+/* ============================================================================
+   BASE RESET & BODY
+   ============================================================================ */
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  font-family: var(--md-typography-font-family);
+  background: var(--md-sys-color-background);
+  color: var(--md-sys-color-on-surface);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.4;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* ============================================================================
+   HEADER / APP BAR (centered, dark background, matches store design)
+   ============================================================================ */
+#header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  width: 95%;
+  background-color: var(--app-color-header-dark);
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 50px;
+  gap: 16px;
+  box-shadow: var(--md-sys-elevation-1);
+  color: var(--md-sys-color-on-primary);
+}
+
+/* LOGO container */
+#logo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 1rem;
+  gap: 10px;
+}
+
+#logo img {
+  height: 2.5rem;
+  width: auto;
+  margin-left: 0.5rem;
+}
+
+#logoText {
+  margin: 0;
+  font-weight: 600;
+  font-size: 1rem;
+  color: inherit;
+}
+
+/* LINKS container */
+#links {
+  background-color: var(--app-color-header-dark);
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: row;
+  gap: 4px;
+  font-size: 1rem;
+}
+
+/* Navigation links - styled as filled M3 buttons */
+.navLink {
+  text-decoration: none;
+  padding: 8px 16px;
+  color: black;
+  background-color: var(--app-color-action);
+  border-radius: 99px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  display: inline-block;
+}
+
+.navLink:hover {
+  background-color: var(--app-color-action-hover);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.navLink.active {
+  background-color: #5af507;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Theme toggle button (dark/light mode) */
+#theme-toggle {
+  background: transparent;
+  border: none;
+  color: inherit;
+  font-size: 1.05rem;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 8px;
+  transition: background-color 0.15s ease;
+}
+
+#theme-toggle:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.material-symbols-outlined {
+  font-size: 24px;
+  vertical-align: middle;
+}
+
+/* ============================================================================
+   FOOTER
+   ============================================================================ */
+#footer {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  padding: 18px 20px;
+  background: transparent;
+  color: var(--md-sys-color-on-surface);
+  border-top: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+#footerLogo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+#footerLogo img {
+  height: 3.5rem;
+  width: auto;
+}
+
+/* ============================================================================
+   BUTTONS (centralized from all pages)
+   ============================================================================ */
+
+/* Generic M3 button class */
+.md-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.md-button--filled {
+  background-color: var(--app-color-action);
+  color: black;
+  font-size: 0.75rem;
+  padding: 10px 30px;
+  border-radius: 6px;
+  box-shadow: var(--md-sys-elevation-1);
+}
+
+.md-button--filled:hover {
+  background-color: var(--app-color-action-hover);
+  cursor: pointer;
+}
+
+.md-button--tonal {
+  background: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+}
+
+.md-button a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* "View Details" / More Details button (maroon action button from store) */
+.moreDetails {
+  width: fit-content;
+  height: fit-content;
+  background-color: var(--app-color-action);
+  color: black;
+  font-size: 0.75rem;
+  padding: 10px 30px;
+  border-radius: 99px;
+  border: none;
+  text-decoration: none;
+  display: inline-block;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.moreDetails:hover {
+  background-color: var(--app-color-action-hover);
+  cursor: pointer;
+}
+
+/* Custom project button (filled with brand maroon) */
+#customProject button {
+  background-color: var(--app-color-action);
+  color: black;
+  border: none;
+  border-radius: 99px;
+  padding: 10px 30px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  font-weight: 600;
+}
+
+#customProject button:hover {
+  background-color: var(--app-color-action-hover);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+#customProjectButtonText {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: inherit;
+}
+
+/* Contact / Order form buttons */
+#contact button,
+#orderButton {
+  background-color: var(--app-color-action);
+  color: black;
+  border: none;
+  border-radius: 99px;
+  padding: 10px 30px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+#contact button:hover,
+#orderButton:hover {
+  background-color: var(--app-color-action-hover);
+  cursor: pointer;
+}
+
+/* Store dropdown button */
+.dropButton {
+  padding: 20px;
+  color: #aaaaaa;
+  background-color: var(--app-color-header-dark);
+  border: none;
+  overflow-x: hidden;
+  align-content: center;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  border-radius: 99px;
+}
+
+.dropButton:hover {
+  cursor: pointer;
+  color: var(--app-color-hover-gold);
+}
+
+.dropButton i {
+  font-size: 2rem;
+  margin-left: 7.5px;
+}
+
+/* Dropdown content (store filter) */
+.dropdownContent {
+  display: none;
+  position: absolute;
+  background-color: var(--app-color-header-dark);
+  flex-direction: column;
+  z-index: 100;
+  box-shadow: 1px 1px 1px 1px rgba(255, 255, 255, 1);
+}
+
+.dropdownContent a {
+  padding: 20px;
+  color: var(--md-sys-color-on-primary);
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.dropdownContent a:hover {
+  background-color: #4d0000;
+}
+
+/* "All Products" link button */
+#allProducts {
+  display: block;
+  margin: 0 auto 4rem auto;
+  padding: 1rem 2.5rem;
+  background: var(--md-sys-color-tertiary);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--md-sys-color-on-tertiary);
+  border: none;
+  border-radius: 99px;
+  width: fit-content;
+  text-align: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: box-shadow 0.2s ease, background-color 0.2s ease;
+  text-decoration: none;
+}
+
+#allProducts:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  background: #d42a2a;
+}
+
+/* ============================================================================
+   CARDS & PRODUCTS (store items, general cards)
+   ============================================================================ */
+
+/* Store grid container */
+.store {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  padding: 20px;
+  justify-content: center;
+}
+
+/* Product item card */
+.store .item {
+  background: var(--md-sys-color-surface);
+  border-radius: 12px;
+  padding: 12px;
+  width: 240px;
+  box-shadow: var(--md-sys-elevation-2);
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.2s ease;
+}
+
+.store .item:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.imgContainer {
+  background-color: #5b0000;
+  padding: 5px;
+  width: 90%;
+  border-radius: 12px;
+  height: fit-content;
+}
+
+.imgContainer img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.imgContainer img:hover {
+  transform: scale(1.1);
+}
+
+.description {
+  padding-top: 10px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.itemName {
+  color: var(--md-sys-color-on-surface);
+  font-weight: 700;
+  text-decoration: none;
+  transition: text-decoration 0.2s ease;
+}
+
+.itemName:hover {
+  text-decoration: underline;
+}
+
+.itemCost {
+  margin: 6px 0;
+  color: #4bd600;
+  font-weight: 700;
+}
+
+/* ============================================================================
+   DIVIDERS & SECTIONS
+   ============================================================================ */
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 18px 20px;
+}
+
+.dividerText {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--md-sys-color-primary);
+}
+
+.dividerLine {
+  flex: 1;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.06);
+}
+
+/* ============================================================================
+   CUSTOM PROJECT SECTION
+   ============================================================================ */
+
+#customProject {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('Images/customProject.png');
+  width: 90vw;
+  position: relative;
+  margin: 2rem auto 4rem auto;
+  border-radius: 28px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  min-height: 50vh;
+}
+
+#customProjectText {
+  font-size: 3.5rem;
+  font-weight: 700;
+  line-height: 4rem;
+  text-align: center;
+  color: #FFF;
+  margin-bottom: 2rem;
+}
+
+/* ============================================================================
+   RESPONSIVE DESIGN
+   ============================================================================ */
+
+@media (max-width: 800px) {
+  .store { justify-content: center; }
+  #links { display: none; }
+  #header { padding: 12px; }
+  #customProject { min-height: auto; padding: 2rem 1rem; }
+  #customProjectText { font-size: 2.5rem; line-height: 3rem; }
+}
+
+@media (min-width: 1024px) {
+  #links { font-size: 1.5rem; padding: 0 20px; }
+  #logo { font-size: 1.5rem; }
+  #logo img { height: 3rem; margin: 0 0.5rem; }
+}
+
+@media (min-width: 1600px) {
+  html { font-size: 22px; }
+}
+
+/* ============================================================================
+   UTILITIES
+   ============================================================================ */
+
+.visible {
+  display: flex;
+}
+
+button, a.button-like {
+  cursor: pointer;
+}

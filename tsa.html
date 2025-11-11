@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TSA Competition — Engineering Club</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anta:wght@400&family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="Images/rossRams.png">
+    <style>
+        .tsa-container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 1.5rem;
+        }
+
+        .tsa-header {
+            background: linear-gradient(135deg, var(--md-sys-color-primary) 0%, var(--md-sys-color-secondary) 100%);
+            color: var(--md-sys-color-on-primary);
+            padding: 3rem 2rem;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .tsa-header h1 {
+            font-family: var(--font-heading, 'Anta');
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin: 0 0 0.5rem 0;
+        }
+
+        .tsa-header p {
+            font-size: 1.125rem;
+            margin: 0;
+            opacity: 0.9;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            background: var(--md-sys-color-surface);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--md-sys-elevation-1);
+            text-align: center;
+            border: 2px solid var(--md-sys-color-outline-variant);
+        }
+
+        .stat-number {
+            font-family: var(--font-heading, 'Anta');
+            font-size: 2.5rem;
+            color: var(--md-sys-color-primary);
+            margin: 0;
+        }
+
+        .stat-label {
+            color: var(--md-sys-color-on-surface-variant);
+            font-size: 0.9rem;
+            margin: 0.5rem 0 0 0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .section-title {
+            color: var(--md-sys-color-primary);
+            font-family: var(--font-heading, 'Anta');
+            font-size: 1.75rem;
+            margin: 2.5rem 0 1.5rem 0;
+            border-bottom: 3px solid var(--md-sys-color-primary);
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .category-card {
+            background: var(--md-sys-color-surface);
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: var(--md-sys-elevation-1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .category-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--md-sys-elevation-3);
+        }
+
+        .category-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .category-name {
+            color: var(--md-sys-color-primary);
+            font-weight: 600;
+            margin: 0 0 0.5rem 0;
+        }
+
+        .category-description {
+            color: var(--md-sys-color-on-surface-variant);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .achievements-list {
+            list-style: none;
+            padding: 0;
+            margin: 1.5rem 0;
+        }
+
+        .achievement-item {
+            background: var(--md-sys-color-surface);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--md-sys-color-primary);
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .achievement-medal {
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+
+        .achievement-content h3 {
+            color: var(--md-sys-color-on-surface);
+            margin: 0 0 0.25rem 0;
+        }
+
+        .achievement-content p {
+            color: var(--md-sys-color-on-surface-variant);
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        .achievement-year {
+            color: var(--md-sys-color-primary);
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .team-member-card {
+            background: var(--md-sys-color-surface);
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: var(--md-sys-elevation-1);
+            text-align: center;
+            transition: transform 0.2s;
+        }
+
+        .team-member-card:hover {
+            transform: scale(1.02);
+        }
+
+        .member-avatar {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1rem;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--md-sys-color-primary) 0%, var(--md-sys-color-secondary) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .member-name {
+            color: var(--md-sys-color-on-surface);
+            font-weight: 600;
+            margin: 0.5rem 0;
+        }
+
+        .member-role {
+            color: var(--md-sys-color-primary);
+            font-size: 0.85rem;
+            margin: 0;
+        }
+
+        .cta-section {
+            background: var(--md-sys-color-primary-container);
+            color: var(--md-sys-color-on-primary-container);
+            padding: 2.5rem;
+            border-radius: 12px;
+            text-align: center;
+            margin: 3rem 0;
+        }
+
+        .cta-section h2 {
+            margin-top: 0;
+        }
+
+        .cta-button {
+            background: var(--md-sys-color-primary);
+            color: white;
+            border: none;
+            padding: 0.875rem 2rem;
+            border-radius: 24px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: box-shadow 0.2s;
+        }
+
+        .cta-button:hover {
+            box-shadow: var(--md-sys-elevation-3);
+        }
+
+        .timeline-event {
+            display: flex;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+            padding: 1.5rem;
+            background: var(--md-sys-color-surface);
+            border-radius: 8px;
+            border-left: 4px solid var(--md-sys-color-primary);
+        }
+
+        .timeline-date {
+            background: var(--md-sys-color-primary-container);
+            color: var(--md-sys-color-on-primary-container);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            height: fit-content;
+        }
+
+        .timeline-content h3 {
+            color: var(--md-sys-color-on-surface);
+            margin: 0 0 0.5rem 0;
+        }
+
+        .timeline-content p {
+            color: var(--md-sys-color-on-surface-variant);
+            margin: 0;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div class="logo">
+            <img src="Images/rossRams.png" alt="Logo">
+            <span>Engineering Club</span>
+        </div>
+        <nav class="navigation">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="store.html" class="nav-link">Store</a>
+            <a href="members.html" class="nav-link">Members</a>
+            <a href="activities.html" class="nav-link">Activities</a>
+            <a href="tsa.html" class="nav-link active">TSA</a>
+            <a href="contact.html" class="nav-link">Contact</a>
+            <button id="theme-toggle" title="Toggle theme" aria-label="Toggle color theme" aria-pressed="false">
+                <span id="theme-toggle-icon" class="material-symbols-outlined" aria-hidden="true">dark_mode</span>
+            </button>
+        </nav>
+    </header>
+
+    <main class="tsa-container">
+        <!-- Header Section -->
+        <div class="tsa-header">
+            <h1>TSA Competition</h1>
+            <p>Showcasing our team's excellence in technology and engineering</p>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <p class="stat-number">8</p>
+                <p class="stat-label">Team Members</p>
+            </div>
+            <div class="stat-card">
+                <p class="stat-number">4</p>
+                <p class="stat-label">Events</p>
+            </div>
+            <div class="stat-card">
+                <p class="stat-number">12</p>
+                <p class="stat-label">Awards</p>
+            </div>
+            <div class="stat-card">
+                <p class="stat-number">3rd</p>
+                <p class="stat-label">State 2024</p>
+            </div>
+        </div>
+
+        <!-- About TSA Section -->
+        <section>
+            <h2 class="section-title">About TSA</h2>
+            <p style="color: var(--md-sys-color-on-surface); line-height: 1.8;">
+                The Technology Student Association (TSA) is a national organization dedicated to promoting science, technology, engineering, and mathematics (STEM) education. Our club participates in TSA competitions where members compete in various technology and engineering events at regional and state levels. Our team combines creativity, problem-solving, and technical expertise to develop innovative solutions and showcase our skills.
+            </p>
+        </section>
+
+        <!-- Competition Events -->
+        <section>
+            <h2 class="section-title">Competition Events</h2>
+            <div class="categories-grid">
+                <div class="category-card">
+                    <div class="category-icon">🤖</div>
+                    <h3 class="category-name">Robotics & Automation</h3>
+                    <p class="category-description">Design and build robots to solve real-world challenges.</p>
+                </div>
+
+                <div class="category-card">
+                    <div class="category-icon">💻</div>
+                    <h3 class="category-name">Digital Technology</h3>
+                    <p class="category-description">Develop software, apps, and digital solutions.</p>
+                </div>
+
+                <div class="category-card">
+                    <div class="category-icon">🏗️</div>
+                    <h3 class="category-name">Structural Design</h3>
+                    <p class="category-description">Create and test structural designs under specific constraints.</p>
+                </div>
+
+                <div class="category-card">
+                    <div class="category-icon">🔧</div>
+                    <h3 class="category-name">Techniquestion</h3>
+                    <p class="category-description">Compete in technology and engineering knowledge tests.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Past Achievements -->
+        <section>
+            <h2 class="section-title">Past Achievements</h2>
+            <ul class="achievements-list">
+                <li class="achievement-item">
+                    <span class="achievement-medal">🥉</span>
+                    <div class="achievement-content">
+                        <h3>State Competition - 3rd Place Overall</h3>
+                        <p><span class="achievement-year">2024</span> — Strong showing across multiple events with medals in Robotics and Digital Technology.</p>
+                    </div>
+                </li>
+
+                <li class="achievement-item">
+                    <span class="achievement-medal">🏅</span>
+                    <div class="achievement-content">
+                        <h3>Regional Robotics Event - 1st Place</h3>
+                        <p><span class="achievement-year">2024</span> — Our autonomous robot outperformed 15 other teams with a perfect obstacle course run.</p>
+                    </div>
+                </li>
+
+                <li class="achievement-item">
+                    <span class="achievement-medal">🏆</span>
+                    <div class="achievement-content">
+                        <h3>Digital Innovation Award</h3>
+                        <p><span class="achievement-year">2023</span> — Recognized for innovative mobile app development and user-centered design.</p>
+                    </div>
+                </li>
+
+                <li class="achievement-item">
+                    <span class="achievement-medal">🥇</span>
+                    <div class="achievement-content">
+                        <h3>Structural Design Challenge - 1st Place</h3>
+                        <p><span class="achievement-year">2023</span> — Built the strongest bridge design within weight and cost constraints at state level.</p>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <!-- 2024-2025 Competition Schedule -->
+        <section>
+            <h2 class="section-title">2024-2025 Schedule</h2>
+            <div class="timeline-event">
+                <div class="timeline-date">Dec 2024</div>
+                <div class="timeline-content">
+                    <h3>Regional Qualifiers</h3>
+                    <p>First round of competition to qualify for state championship.</p>
+                </div>
+            </div>
+
+            <div class="timeline-event">
+                <div class="timeline-date">Jan 2025</div>
+                <div class="timeline-content">
+                    <h3>State Championship</h3>
+                    <p>Compete against the best teams from across the state.</p>
+                </div>
+            </div>
+
+            <div class="timeline-event">
+                <div class="timeline-date">Feb 2025</div>
+                <div class="timeline-content">
+                    <h3>National Preparation</h3>
+                    <p>If qualified, prepare for the national tournament.</p>
+                </div>
+            </div>
+
+            <div class="timeline-event">
+                <div class="timeline-date">Apr 2025</div>
+                <div class="timeline-content">
+                    <h3>National Championship</h3>
+                    <p>Compete on the national stage with top teams from across the country.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Meet the Team -->
+        <section>
+            <h2 class="section-title">Meet Our Team</h2>
+            <div class="team-grid">
+                <div class="team-member-card">
+                    <div class="member-avatar">AJ</div>
+                    <p class="member-name">Alex Johnson</p>
+                    <p class="member-role">Team Captain</p>
+                </div>
+
+                <div class="team-member-card">
+                    <div class="member-avatar">MC</div>
+                    <p class="member-name">Maria Chen</p>
+                    <p class="member-role">Lead Programmer</p>
+                </div>
+
+                <div class="team-member-card">
+                    <div class="member-avatar">JK</div>
+                    <p class="member-name">James Kim</p>
+                    <p class="member-role">Robotics Lead</p>
+                </div>
+
+                <div class="team-member-card">
+                    <div class="member-avatar">SL</div>
+                    <p class="member-name">Sofia Lopez</p>
+                    <p class="member-role">Design Specialist</p>
+                </div>
+
+                <div class="team-member-card">
+                    <div class="member-avatar">RP</div>
+                    <p class="member-name">Ryan Park</p>
+                    <p class="member-role">Structural Engineer</p>
+                </div>
+
+                <div class="team-member-card">
+                    <div class="member-avatar">EW</div>
+                    <p class="member-name">Emma Wilson</p>
+                    <p class="member-role">Project Manager</p>
+                </div>
+
+                <div class="team-member-card">
+                    <div class="member-avatar">DM</div>
+                    <p class="member-name">Daniel Martinez</p>
+                    <p class="member-role">Test & QA</p>
+                </div>
+
+                <div class="team-member-card">
+                    <div class="member-avatar">CH</div>
+                    <p class="member-name">Chloe Harris</p>
+                    <p class="member-role">Documentation</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <div class="cta-section">
+            <h2>Want to Join Our TSA Team?</h2>
+            <p>We're always looking for talented and motivated members to join us in future competitions. Whether you're interested in programming, robotics, design, or any STEM field, there's a place for you on our team!</p>
+            <a href="contact.html" style="display: inline-block; text-decoration: none;">
+                <button class="cta-button">Contact Us to Learn More</button>
+            </a>
+        </div>
+    </main>
+
+    <footer style="text-align: center; padding: 2rem; border-top: 1px solid var(--md-sys-color-outline); margin-top: 4rem;">
+        <p>&copy; 2025 Engineering Club. All rights reserved.</p>
+    </footer>
+
+    <script src="components.js"></script>
+    <script src="theme.js"></script>
+</body>
+
+</html>
