@@ -8,148 +8,130 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Anta:wght@400&family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Google Material Symbols -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link href="https://fonts.googleapis.com/css2?family=Anta:wght@400&family=Rubik:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-
-    <header class="header">
-        <div class="logo">
-            <img src="Images/rossRams.png" alt="Logo">
-            <span>Engineering Club</span>
-        </div>
-        <nav class="navigation">
-            <a href="index.html" class="nav-link active">Home</a>
-            <a href="store.html" class="nav-link">Store</a>
-            <a href="contact.html" class="nav-link">Contact</a>
-            <button id="theme-toggle" title="Toggle theme" aria-label="Toggle color theme" aria-pressed="false">
-                <span id="theme-toggle-icon" class="material-symbols-outlined" aria-hidden="true">dark_mode</span>
-            </button>
-        </nav>
-    </header>
-
     <main class="content">
-        <!-- Hero Banner Section -->
         <section class="hero-banner">
             <div class="hero-content">
-                <h1 class="hero-title">Engineering Club</h1>
+                <img src="Images/EngineeringClubFull-White.png" alt="Engineering Club" class="hero-logo">
                 <p class="hero-subtitle">Custom designs. Exceptional quality. Brought to life.</p>
-                <button class="m3-button filled">Explore Products</button>
+                <a href="#all-products" class="m3-button filled">Explore Products</a>
             </div>
         </section>
 
-        <!-- Product Carousel Section -->
         <section class="carousel-section">
-            <h2 class="m3-title-large">Featured Products</h2>
             <div class="carousel-container">
-                <button class="carousel-btn prev" onclick="prevSlide()">❮</button>
+                <button class="carousel-btn prev" onclick="prevSlide()" aria-label="Previous slide">
+                    <span class="material-symbols-outlined" aria-hidden="true">chevron_left</span>
+                </button>
                 <div class="carousel-wrapper">
                     <div class="carousel-track" id="carouselTrack">
-                        <!-- Carousel items will be inserted here by JS -->
                     </div>
                 </div>
-                <button class="carousel-btn next" onclick="nextSlide()">❯</button>
+                <button class="carousel-btn next" onclick="nextSlide()" aria-label="Next slide">
+                    <span class="material-symbols-outlined" aria-hidden="true">chevron_right</span>
+                </button>
             </div>
             <div class="carousel-dots" id="carouselDots"></div>
         </section>
 
-        <h2 class="m3-title-large" style="margin-top: 3rem;">All Products</h2>
-            <div class="product-grid">
-                <!-- Product Card 1 -->
-                <div class="product-card">
-                    <div class="card-image-container">
-                        <img src="Images/product/LedSign.png" alt="Custom LED Sign" class="card-image">
-                    </div>
-                    <div class="card-content">
-                        <h3 class="m3-title-large">Custom LED Sign</h3>
-                        <p class="m3-body-medium">Personalize your space with a unique, laser-engraved LED sign.</p>
-                        <div class="card-price">$20.00</div>
-                        <div class="card-actions">
-                            <a href="product/led.html" class="m3-button filled">View Details</a>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- Product Card 2 -->
-                <div class="product-card">
-                    <div class="card-image-container">
-                        <img src="Images/product/octopus.png" alt="3D Printed Octopus" class="card-image">
-                    </div>
-                    <div class="card-content">
-                        <h3 class="m3-title-large">3D Printed Octopus</h3>
-                        <p class="m3-body-medium">A cute and colorful 3D-printed fidget octopus in your choice of colors.</p>
-                        <div class="card-price">$5.00</div>
-                        <div class="card-actions">
-                            <a href="product/octopus.html" class="m3-button filled">View Details</a>
-                        </div>
-                    </div>
+        <h2 id="all-products" class="m3-title-large" style="margin-top: 3rem;">All Products</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="card-image-container">
+                    <img src="Images/product/LedSign.png" alt="Custom LED Sign" class="card-image">
                 </div>
-
-                <!-- Product Card 3 -->
-                <div class="product-card">
-                    <div class="card-image-container">
-                        <img src="Images/product/Cuttingboard.png" alt="Custom Chopping Board" class="card-image">
-                    </div>
-                    <div class="card-content">
-                        <h3 class="m3-title-large">Custom Chopping Board</h3>
-                        <p class="m3-body-medium">Handcrafted laser-engraved chopping board with your custom design.</p>
-                        <div class="card-price">$30.00</div>
-                        <div class="card-actions">
-                            <a href="product/choppingboard.html" class="m3-button filled">View Details</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product Card 4 -->
-                <div class="product-card">
-                    <div class="card-image-container">
-                        <img src="Images/product/spiralBall.png" alt="Fidget Ball" class="card-image">
-                    </div>
-                    <div class="card-content">
-                        <h3 class="m3-title-large">Fidget Ball</h3>
-                        <p class="m3-body-medium">Stress-relief spiral fidget ball available in multiple color combinations.</p>
-                        <div class="card-price">$2.00</div>
-                        <div class="card-actions">
-                            <a href="product/fidgetBall.html" class="m3-button filled">View Details</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product Card 5 -->
-                <div class="product-card">
-                    <div class="card-image-container">
-                        <img src="Images/product/Christmastree.png" alt="Christmas Tree Ornament" class="card-image">
-                    </div>
-                    <div class="card-content">
-                        <h3 class="m3-title-large">Christmas Tree Ornament</h3>
-                        <p class="m3-body-medium">Festive 3D-printed ornament perfect for holiday decorations.</p>
-                        <div class="card-price">$5.00</div>
-                        <div class="card-actions">
-                            <a href="product/christmasTree.html" class="m3-button filled">View Details</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product Card 6 -->
-                <div class="product-card">
-                    <div class="card-image-container">
-                        <img src="Images/product/custom3dprint.png" alt="Custom 3D Print" class="card-image">
-                    </div>
-                    <div class="card-content">
-                        <h3 class="m3-title-large">Custom 3D Print</h3>
-                        <p class="m3-body-medium">Bring your ideas to life with custom 3D printing services.</p>
-                        <div class="card-price">$10.00</div>
-                        <div class="card-actions">
-                            <a href="product/custom3dPrint.html" class="m3-button filled">View Details</a>
-                        </div>
+                <div class="card-content">
+                    <h3 class="m3-title-large">Custom LED Sign</h3>
+                    <p class="m3-body-medium">Personalize your space with a unique, laser-engraved LED sign.</p>
+                    <div class="card-price">$20.00</div>
+                    <div class="card-actions">
+                        <a href="product/led.html" class="m3-button filled">View Details</a>
                     </div>
                 </div>
             </div>
+
+            <div class="product-card">
+                <div class="card-image-container">
+                    <img src="Images/product/octopus.png" alt="3D Printed Octopus" class="card-image">
+                </div>
+                <div class="card-content">
+                    <h3 class="m3-title-large">3D Printed Octopus</h3>
+                    <p class="m3-body-medium">A cute and colorful 3D-printed fidget octopus in your choice of colors.
+                    </p>
+                    <div class="card-price">$5.00</div>
+                    <div class="card-actions">
+                        <a href="product/octopus.html" class="m3-button filled">View Details</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="card-image-container">
+                    <img src="Images/product/Cuttingboard.png" alt="Custom Chopping Board" class="card-image">
+                </div>
+                <div class="card-content">
+                    <h3 class="m3-title-large">Custom Chopping Board</h3>
+                    <p class="m3-body-medium">Handcrafted laser-engraved chopping board with your custom design.</p>
+                    <div class="card-price">$30.00</div>
+                    <div class="card-actions">
+                        <a href="product/choppingboard.html" class="m3-button filled">View Details</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="card-image-container">
+                    <img src="Images/product/spiralBall.png" alt="Fidget Ball" class="card-image">
+                </div>
+                <div class="card-content">
+                    <h3 class="m3-title-large">Fidget Ball</h3>
+                    <p class="m3-body-medium">Stress-relief spiral fidget ball available in multiple color combinations.
+                    </p>
+                    <div class="card-price">$2.00</div>
+                    <div class="card-actions">
+                        <a href="product/fidgetBall.html" class="m3-button filled">View Details</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="card-image-container">
+                    <img src="Images/product/Christmastree.png" alt="Christmas Tree Ornament" class="card-image">
+                </div>
+                <div class="card-content">
+                    <h3 class="m3-title-large">Christmas Tree Ornament</h3>
+                    <p class="m3-body-medium">Festive 3D-printed ornament perfect for holiday decorations.</p>
+                    <div class="card-price">$5.00</div>
+                    <div class="card-actions">
+                        <a href="product/christmasTree.html" class="m3-button filled">View Details</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="card-image-container">
+                    <img src="Images/product/custom3dprint.png" alt="Custom 3D Print" class="card-image">
+                </div>
+                <div class="card-content">
+                    <h3 class="m3-title-large">Custom 3D Print</h3>
+                    <p class="m3-body-medium">Bring your ideas to life with custom 3D printing services.</p>
+                    <div class="card-price">$10.00</div>
+                    <div class="card-actions">
+                        <a href="product/custom3dPrint.html" class="m3-button filled">View Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
         </section>
     </main>
 
@@ -159,114 +141,8 @@
 
     <script src="components.js"></script>
     <script src="theme.js"></script>
-    <script>
-        // Carousel data
-        const carouselProducts = [
-            {
-                image: 'Images/product/LedSign.png',
-                title: 'Custom LED Sign',
-                description: 'Personalize your space with a unique, laser-engraved LED sign.',
-                price: '$20.00'
-            },
-            {
-                image: 'Images/product/octopus.png',
-                title: '3D Printed Octopus',
-                description: 'A cute and colorful 3D-printed fidget octopus in your choice of colors.',
-                price: '$5.00'
-            },
-            {
-                image: 'Images/product/Cuttingboard.png',
-                title: 'Custom Chopping Board',
-                description: 'Handcrafted laser-engraved chopping board with your custom design.',
-                price: '$30.00'
-            },
-            {
-                image: 'Images/product/spiralBall.png',
-                title: 'Fidget Ball',
-                description: 'Stress-relief spiral fidget ball available in multiple color combinations.',
-                price: '$2.00'
-            },
-            {
-                image: 'Images/product/Christmastree.png',
-                title: 'Christmas Tree Ornament',
-                description: 'Festive 3D-printed ornament perfect for holiday decorations.',
-                price: '$5.00'
-            },
-            {
-                image: 'Images/product/custom3dprint.png',
-                title: 'Custom 3D Print',
-                description: 'Bring your ideas to life with custom 3D printing services.',
-                price: '$10.00'
-            }
-        ];
-
-        let currentSlide = 0;
-
-        // Initialize carousel
-        function initCarousel() {
-            const track = document.getElementById('carouselTrack');
-            const dotsContainer = document.getElementById('carouselDots');
-
-            carouselProducts.forEach((product, index) => {
-                // Create carousel item
-                const item = document.createElement('div');
-                item.className = 'carousel-item';
-                item.innerHTML = `
-                    <div class="carousel-item-content">
-                        <img src="${product.image}" alt="${product.title}" class="carousel-item-image">
-                        <div class="carousel-item-info">
-                            <div>
-                                <h3>${product.title}</h3>
-                                <p class="m3-body-medium">${product.description}</p>
-                            </div>
-                            <div>
-                                <div class="carousel-item-price">${product.price}</div>
-                                <button class="m3-button filled">View Details</button>
-                            </div>
-                        </div>
-                    </div>
-                `;
-                track.appendChild(item);
-
-                // Create dot
-                const dot = document.createElement('div');
-                dot.className = `carousel-dot ${index === 0 ? 'active' : ''}`;
-                dot.onclick = () => goToSlide(index);
-                dotsContainer.appendChild(dot);
-            });
-        }
-
-        function updateCarousel() {
-            const track = document.getElementById('carouselTrack');
-            const dots = document.querySelectorAll('.carousel-dot');
-
-            track.style.transform = `translateX(-${currentSlide * 100}%)`;
-
-            dots.forEach((dot, index) => {
-                dot.classList.toggle('active', index === currentSlide);
-            });
-        }
-
-        function nextSlide() {
-            currentSlide = (currentSlide + 1) % carouselProducts.length;
-            updateCarousel();
-        }
-
-        function prevSlide() {
-            currentSlide = (currentSlide - 1 + carouselProducts.length) % carouselProducts.length;
-            updateCarousel();
-        }
-
-        function goToSlide(index) {
-            currentSlide = index;
-            updateCarousel();
-        }
-
-        // Auto-rotate carousel every 5 seconds
-        setInterval(nextSlide, 5000);
-
-        // Initialize on page load
-        document.addEventListener('DOMContentLoaded', initCarousel);
-    </script>
+    <script src="carousel.js"></script>
+    
 </body>
+
 </html>

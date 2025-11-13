@@ -24,11 +24,11 @@
         // Hide navigation links and only show page title + logo
         const logoSpan = header.querySelector('.logo span');
         const nav = header.querySelector('.navigation');
-        
+
         // Hide old nav links
         const navLinks = header.querySelectorAll('.nav-link');
         navLinks.forEach(link => link.style.display = 'none');
-        
+
         // Hide hamburger menu on desktop (only show on mobile)
         const menuBtn = header.querySelector('#menu-button');
         if (menuBtn) menuBtn.style.display = 'none';
@@ -37,7 +37,7 @@
         if (!header.querySelector('.page-title')) {
             const pageTitle = document.createElement('div');
             pageTitle.className = 'page-title';
-            
+
             // Map page filenames to display names
             const pageNames = {
                 'index.html': 'Home',
@@ -48,7 +48,7 @@
                 'contact.html': 'Contact',
                 'order.html': 'Order',
             };
-            
+
             // Add product pages
             const productPages = ['led.html', 'octopus.html', 'choppingboard.html', 'fidgetBall.html', 'custom3dPrint.html', 'customOrnament.html', 'christmasTree.html', 'snowflake.html'];
             productPages.forEach(page => {
@@ -58,7 +58,7 @@
             const path = window.location.pathname.split('/').pop() || 'index.html';
             const pageName = pageNames[path] || 'Engineering Club';
             pageTitle.textContent = pageName;
-            
+
             // Insert after logo
             header.insertBefore(pageTitle, logoSpan.nextSibling);
         }
@@ -130,27 +130,27 @@
         rail.setAttribute('role', 'navigation');
         rail.setAttribute('aria-label', 'Navigation rail');
 
-        // Get logo from header
-        const header = document.querySelector('header.header');
-        const logo = header ? header.querySelector('.logo img') : null;
-        
         // Build rail content
         let railContent = '<div class="rail-container">';
-        
+
         // Top section with logo
         railContent += '<div class="rail-top">';
+
         railContent += '<div class="rail-logo">';
-        if (logo) {
-            railContent += `<img src="${logo.src}" alt="Logo">`;
-        }
+        // Add both logos for swappable UI
+        // !! IMPORTANT: Update these src paths to your logo files !!
+        railContent += '<img src="Images/EngineeringClub-White.png" alt="Logo" class="rail-logo-regular">';
+        railContent += '<img src="Images/EngineeringClubFull-White.png" alt="Engineering Club" class="rail-logo-full">';
         railContent += '</div>';
-        
+
         // Expand button
         railContent += '<button class="rail-expand-btn" id="rail-expand-btn" aria-label="Expand navigation" title="Expand navigation">';
         railContent += '<span class="material-symbols-outlined">menu</span>';
-        railContent += '</button>';
+        railContent += '<span class="rail-destination-label">Menu</span>'; // railContent += '</button>';
         railContent += '</div>';
-        
+
+        railContent += '<div class="rail-divider"></div>';
+
         // Destinations
         railContent += '<div class="rail-destinations">';
 
@@ -173,10 +173,10 @@
 
         railContent += '</div>';
         railContent += '<div class="rail-divider"></div>';
-        railContent += '<button class="rail-theme-toggle" id="rail-theme-toggle" title="Toggle theme" aria-label="Toggle color theme">';
+        railContent += '<button class="rail-theme-toggle" id="theme-toggle" title="Toggle theme" aria-label="Toggle color theme">';
         railContent += '<span class="material-symbols-outlined">dark_mode</span>';
-        railContent += '</button>';
-        
+        railContent += '<span class="rail-destination-label">Theme</span>'; // railContent += '</button>';
+
         railContent += '</div>';
         rail.innerHTML = railContent;
 
@@ -190,10 +190,18 @@
                 const isExpanded = rail.classList.contains('expanded');
                 expandBtn.setAttribute('aria-label', isExpanded ? 'Collapse navigation' : 'Expand navigation');
                 expandBtn.title = isExpanded ? 'Collapse navigation' : 'Expand navigation';
+
+                // NEW (4/4): Update both icon and text label
                 const icon = expandBtn.querySelector('.material-symbols-outlined');
+                const label = expandBtn.querySelector('.rail-destination-label');
                 if (icon) {
                     icon.textContent = isExpanded ? 'menu_open' : 'menu';
                 }
+                if (label) {
+                    label.textContent = isExpanded ? 'Collapse' : 'Menu';
+                }
+                // End NEW
+
                 // Save expanded state to localStorage
                 localStorage.setItem('rail-expanded', isExpanded);
             });
@@ -205,16 +213,10 @@
                 expandBtn.setAttribute('aria-label', 'Collapse navigation');
                 expandBtn.title = 'Collapse navigation';
                 expandBtn.querySelector('.material-symbols-outlined').textContent = 'menu_open';
-            }
-        }
 
-        // Rail theme toggle button
-        const railThemeToggle = document.getElementById('rail-theme-toggle');
-        if (railThemeToggle) {
-            railThemeToggle.addEventListener('click', () => {
-                const headerToggle = document.getElementById('theme-toggle');
-                if (headerToggle) headerToggle.click();
-            });
+                // NEW: Also update label on load
+                expandBtn.querySelector('.rail-destination-label').textContent = 'Collapse';
+            }
         }
 
         // Update rail active state

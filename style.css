@@ -6,93 +6,110 @@
  * Below is just a default purple example.
  */
 :root {
-  /* M3 Light Theme - Maroon & Gold */
-  --md-sys-color-primary: #6B0F2B;
-  --md-sys-color-on-primary: #FFFFFF;
-  --md-sys-color-primary-container: #FFD8E4;
-  --md-sys-color-on-primary-container: #2B0010;
-  --md-sys-color-secondary: #D4A574;
-  --md-sys-color-on-secondary: #FFFFFF;
-  --md-sys-color-secondary-container: #FFE4C7;
-  --md-sys-color-on-secondary-container: #4A2C1A;
-  --md-sys-color-background: #FFFBFF;
-  --md-sys-color-on-background: #1C1B1F;
-  --md-sys-color-surface: #F3EDF7;
-  --md-sys-color-on-surface: #1C1B1F;
-  --md-sys-color-on-surface-variant: #49454E;
-  --md-sys-color-outline: #79747E;
-  
-  /* Hover/Ripple States */
-  --md-sys-color-hover-subtle: rgba(0, 0, 0, 0.05);
-  --md-sys-color-hover-medium: rgba(0, 0, 0, 0.1);
-  
-  /* Font Families - Google Fonts (available in both light and dark modes) */
-  --font-heading: 'Anta', sans-serif;
-  --font-body: 'Rubik', sans-serif;
+    /* M3 Light Theme - Maroon & Gold */
+    --md-sys-color-primary: #3B0010;
+    --md-sys-color-on-primary: #FFFFFF;
+    --md-sys-color-primary-container: #3B0010;
+    --md-sys-color-on-primary-container: #ffffff;
+    --md-sys-color-secondary: #D4A574;
+    --md-sys-color-on-secondary: #FFFFFF;
+    --md-sys-color-secondary-container: #FFE4C7;
+    --md-sys-color-on-secondary-container: #4A2C1A;
+    --md-sys-color-background: #FFFBFF;
+    --md-sys-color-on-background: #1C1B1F;
+    --md-sys-color-surface: #F3EDF7;
+    --md-sys-color-on-surface: #1C1B1F;
+    --md-sys-color-on-surface-variant: #49454E;
+    --md-sys-color-outline: #79747E;
+    --md-sys-color-outline-variant: #CAC4D0;
+
+    /* Hover/Ripple States */
+    --md-sys-color-hover-subtle: rgba(0, 0, 0, 0.05);
+    --md-sys-color-hover-medium: rgba(0, 0, 0, 0.1);
+
+    /* Font Families - Google Fonts (available in both light and dark modes) */
+    --font-heading: 'Anta', sans-serif;
+    --font-body: 'Rubik', sans-serif;
 }
 
 body.dark-mode {
-  /* M3 Dark Theme - Maroon & Gold */
-  --md-sys-color-primary: #FFB3D9;
-  --md-sys-color-on-primary: #3B0010;
-  --md-sys-color-primary-container: #52081C;
-  --md-sys-color-on-primary-container: #FFD8E4;
-  --md-sys-color-secondary: #E7BC91;
-  --md-sys-color-on-secondary: #31200C;
-  --md-sys-color-secondary-container: #5C4033;
-  --md-sys-color-on-secondary-container: #FFE4C7;
-  --md-sys-color-background: #1C1B1F;
-  --md-sys-color-on-background: #E6E1E5;
-  --md-sys-color-surface: #201f24;
-  --md-sys-color-on-surface: #E6E1E5;
-  --md-sys-color-on-surface-variant: #CAC4D0;
-  --md-sys-color-outline: #938F99;
+    /* M3 Dark Theme - Maroon & Gold */
+    --md-sys-color-primary: #69001c;
+    --md-sys-color-on-primary: #ffffff;
+    --md-sys-color-primary-container: #69001c;
+    --md-sys-color-on-primary-container: #ffffff;
+    --md-sys-color-secondary: #E7BC91;
+    --md-sys-color-on-secondary: #31200C;
+    --md-sys-color-secondary-container: #5C4033;
+    --md-sys-color-on-secondary-container: #FFE4C7;
+    --md-sys-color-background: #1C1B1F;
+    --md-sys-color-on-background: #E6E1E5;
+    --md-sys-color-surface: #201f24;
+    --md-sys-color-on-surface: #E6E1E5;
+    --md-sys-color-on-surface-variant: #CAC4D0;
+    --md-sys-color-outline: #938F99;
+    --md-sys-color-outline-variant: #49454E;
 
-  /* Hover/Ripple States */
-  --md-sys-color-hover-subtle: rgba(0, 0, 0, 0.05);
-  --md-sys-color-hover-medium: rgba(0, 0, 0, 0.1);
+    /* Hover/Ripple States */
+    --md-sys-color-hover-subtle: rgba(0, 0, 0, 0.05);
+    --md-sys-color-hover-medium: rgba(0, 0, 0, 0.1);
 }
 
 /* Global Font Settings */
 * {
-  font-family: var(--font-body) !important;
-  font-weight: 400;
+    font-family: var(--font-body);
+    font-weight: 400;
 }
 
-h1, h2, h3, h4, h5, h6, .hero-title {
-  font-family: var(--font-heading) !important;
-  font-weight: 400;
-  letter-spacing: 0.02em;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.hero-title {
+    font-family: var(--font-heading);
+    letter-spacing: 0.02em;
 }
 
 /* 3. TYPOGRAPHY SCALE
  * These are the M3 Expressive type styles
  */
 .m3-display-large {
-    font-size: 3.5rem; /* 57px */
+    font-size: 3.5rem;
+    /* 57px */
     font-weight: 700;
     line-height: 4rem;
 }
+
 .m3-title-large {
-    font-size: 1.375rem; /* 22px */
+    font-size: 1.375rem;
+    /* 22px */
     font-weight: 500;
     line-height: 1.75rem;
 }
+
 .m3-body-large {
-    font-size: 1rem; /* 16px */
+    font-size: 1rem;
+    /* 16px */
     font-weight: 400;
     line-height: 1.5rem;
 }
+
 .m3-body-medium {
-    font-size: 0.875rem; /* 14px */
+    font-size: 0.875rem;
+    /* 14px */
     font-weight: 400;
     line-height: 1.25rem;
 }
+
 .m3-body-small {
-    font-size: 0.75rem; /* 12px */
+    font-size: 0.75rem;
+    /* 12px */
     font-weight: 400;
     line-height: 1rem;
 }
+
 .m3-button-label {
     font-size: 0.9rem;
     font-weight: 700;
@@ -113,7 +130,9 @@ body {
     transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-.header, .footer, .content {
+.header,
+.footer,
+.content {
     width: 90%;
     max-width: 1200px;
     margin: 0 auto;
@@ -161,7 +180,11 @@ body {
     font-weight: 500;
     text-decoration: none;
 }
-.nav-link:hover { background-color: var(--md-sys-color-hover-subtle); }
+
+.nav-link:hover {
+    background-color: var(--md-sys-color-hover-subtle);
+}
+
 .nav-link.active {
     background-color: var(--md-sys-color-primary-container);
     color: var(--md-sys-color-on-primary-container);
@@ -169,13 +192,13 @@ body {
 
 /* Focus and keyboard usability enhancements */
 .using-keyboard :focus {
-    outline: 3px solid rgba(107,15,43,0.15);
+    outline: 3px solid rgba(107, 15, 43, 0.15);
     outline-offset: 2px;
 }
 
 /* For browsers that support :focus-visible */
 :focus-visible {
-    outline: 3px solid rgba(107,15,43,0.18);
+    outline: 3px solid rgba(107, 15, 43, 0.18);
     outline-offset: 2px;
 }
 
@@ -192,6 +215,7 @@ body {
     transition: top 0.15s;
     text-decoration: none;
 }
+
 .skip-link:focus {
     top: 12px;
 }
@@ -209,36 +233,13 @@ body {
 
 /* 5. COMPONENT STYLES */
 
-/* Theme Toggle */
-#theme-toggle {
-    background: transparent;
-    border: 1px solid var(--md-sys-color-outline);
-    color: var(--md-sys-color-on-background);
-    width: 2.5rem; height: 2.5rem;
-    border-radius: 50%;
-    font-size: 1.25rem;
-    cursor: pointer;
-    margin-left: 0.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color 0.2s ease, border-color 0.2s ease;
-    padding: 0;
-}
-#theme-toggle:hover { background-color: var(--md-sys-color-hover-subtle); }
-
-.material-symbols-outlined {
-    font-family: 'Material Symbols Outlined' !important;
-    font-size: 24px;
-    font-weight: 400;
-    font-style: normal;
-    display: inline-block;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-}
-
 /* Buttons */
-.button-row { margin: 2rem 0; display: flex; gap: 1rem; }
+.button-row {
+    margin: 2rem 0;
+    display: flex;
+    gap: 1rem;
+}
+
 .m3-button {
     font-family: var(--font-body);
     padding: 0.6rem 1.5rem;
@@ -250,44 +251,66 @@ body {
     font-size: 0.9rem;
     font-weight: 700;
 }
+
 .m3-button.filled {
     background-color: var(--md-sys-color-primary);
     color: var(--md-sys-color-on-primary);
 }
-.m3-button.filled:hover { box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+
+.m3-button.filled:hover {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
 .m3-button.outlined {
     background-color: transparent;
     color: var(--md-sys-color-primary);
     border: 1px solid var(--md-sys-color-outline);
 }
-.m3-button.outlined:hover { background-color: var(--md-sys-color-hover-subtle); }
+
+.m3-button.outlined:hover {
+    background-color: var(--md-sys-color-hover-subtle);
+}
+
 .m3-button.text {
     background-color: transparent;
     color: var(--md-sys-color-primary);
 }
-.m3-button.text:hover { background-color: var(--md-sys-color-hover-subtle); }
+
+.m3-button.text:hover {
+    background-color: var(--md-sys-color-hover-subtle);
+}
 
 /* Card */
 .card {
     background-color: var(--md-sys-color-surface);
-    border-radius: 12px; /* M3 Medium Shape */
+    border-radius: 12px;
+    /* M3 Medium Shape */
     overflow: hidden;
     max-width: 400px;
     margin-top: 2rem;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     transition: background-color 0.2s ease;
 }
+
 .card-image {
     width: 100%;
     height: 200px;
     object-fit: cover;
     display: block;
 }
+
 .card-content {
     padding: 1.25rem;
 }
-.card-content h2 { margin-bottom: 0.5rem; }
-.card-content p { color: var(--md-sys-color-on-surface-variant); }
+
+.card-content h2 {
+    margin-bottom: 0.5rem;
+}
+
+.card-content p {
+    color: var(--md-sys-color-on-surface-variant);
+}
+
 .card-actions {
     padding-top: 1rem;
     display: flex;
@@ -298,6 +321,7 @@ body {
 .products-section {
     margin: 3rem 0;
 }
+
 .products-section h2 {
     margin-bottom: 2rem;
     color: var(--md-sys-color-primary);
@@ -320,6 +344,7 @@ body {
     flex-direction: column;
     height: 100%;
 }
+
 .product-card:hover {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     transform: translateY(-2px);
@@ -331,6 +356,7 @@ body {
     overflow: hidden;
     background-color: var(--md-sys-color-outline);
 }
+
 .card-image-container .card-image {
     width: 100%;
     height: 100%;
@@ -338,6 +364,7 @@ body {
     display: block;
     transition: transform 0.2s ease;
 }
+
 .product-card:hover .card-image {
     transform: scale(1.05);
 }
@@ -348,10 +375,12 @@ body {
     flex-direction: column;
     flex-grow: 1;
 }
+
 .product-card h3 {
     margin: 0 0 0.5rem 0;
     font-size: 1.125rem;
 }
+
 .product-card p {
     color: var(--md-sys-color-on-surface-variant);
     flex-grow: 1;
@@ -386,13 +415,18 @@ body {
     margin: 0 auto;
 }
 
-.hero-title {
-    font-size: 3rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-    line-height: 1.1;
+.hero-logo {
+    max-height: 150px;
+    margin-bottom: 1.5rem;
 }
 
+/* On smaller screens, you might want a smaller logo */
+@media (max-width: 600px) {
+    .hero-logo {
+        max-height: 100px;
+        margin-bottom: 1rem;
+    }
+}
 .hero-subtitle {
     font-size: 1.25rem;
     font-weight: 300;
@@ -714,26 +748,6 @@ body {
     }
 }
 
-/* Ensure drawer doesn't overlap theme toggle on desktop */
-@media (min-width: 769px) {
-    .menu-button {
-        display: none;
-    }
-
-    .nav-drawer {
-        display: none;
-    }
-
-    .drawer-backdrop {
-        display: none !important;
-    }
-    
-    /* Hide theme toggle from header on desktop (it's in the rail) */
-    .navigation #theme-toggle {
-        display: none;
-    }
-}
-
 /* Navigation Rail Styles - Always Visible */
 .nav-rail {
     position: fixed;
@@ -754,7 +768,7 @@ body {
 }
 
 .nav-rail.expanded {
-    width: 280px;
+    width: 265px;
 }
 
 .rail-container {
@@ -782,13 +796,6 @@ body {
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-}
-
-.rail-logo img {
-    width: 40px;
-    height: 40px;
-    object-fit: contain;
-    filter: brightness(0) invert(1);
 }
 
 .rail-expand-btn {
@@ -862,11 +869,18 @@ body {
     font-size: 0.95rem;
 }
 
-.nav-rail.expanded .rail-destination {
-    width: 100%;
+.nav-rail.expanded .rail-destination,
+.nav-rail.expanded .rail-expand-btn,
+.nav-rail.expanded .rail-theme-toggle {
+    width: calc(100% - 1.5rem);
+    /* This means 100% wide, minus 12px on each side */
+    margin: 0 auto;
+    /* This centers the pill */
     padding: 0 1rem;
     justify-content: flex-start;
     gap: 1rem;
+    border-radius: 99px;
+    height: 56px;
 }
 
 .nav-rail.expanded .rail-destination-label {
@@ -909,6 +923,53 @@ body {
     font-size: 1.5rem;
 }
 
+/* --- Start: Swappable Rail Logo CSS --- */
+
+/* By default, hide the full logo */
+.rail-logo .rail-logo-full {
+    display: none;
+}
+
+/* Style the small "regular" logo */
+.rail-logo .rail-logo-regular {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+    /* This makes it white */
+    display: block;
+}
+
+/* When the rail is expanded... */
+.nav-rail.expanded .rail-logo {
+    /* Make the container wider, just like the nav pills */
+    width: calc(100% - 1.5rem);
+    height: auto;
+    /* Let height adjust to the full logo */
+    padding: 0.5rem 0;
+    /* Add some vertical space */
+}
+
+/* ...hide the small logo */
+.nav-rail.expanded .rail-logo-regular {
+    display: none;
+}
+
+/* ...and show the full logo */
+.nav-rail.expanded .rail-logo-full {
+    display: block;
+    width: 100%;
+    /* Make it fill the container */
+    height: auto;
+    /* Maintain aspect ratio */
+    max-height: 56px;
+    /* Keep it from getting too tall */
+    object-fit: contain;
+    /* We don't filter this one, so it shows in full color */
+}
+
+/* --- End: Swappable Rail Logo CSS --- */
+
 /* Adjust body layout with rail */
 body {
     padding-left: 80px;
@@ -923,4 +984,11 @@ body {
     body {
         padding-left: 0;
     }
+}
+
+.carousel-dot {
+    border: none;
+    padding: 0;
+    font-family: inherit;
+    /* It will automatically pick up all the other .carousel-dot styles you wrote */
 }
