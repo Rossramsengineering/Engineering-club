@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - Engineering Club</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anta:wght@400&family=Rubik:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="logo">
+            <img src="Images/EngineeringClubFull.png" alt="Engineering Club Logo">
+            <div class="header-divider"></div>
+            <div class="page-title"></div> </div>
+        <nav class="navigation">
+            <a href="cart.html" class="m3-button outlined" id="cart-button">
+                <span class="material-symbols-outlined">shopping_cart</span>
+                Cart
+            </a>
+        </nav>
+    </header>
+
+    <main class="content cart-page-container">
+        <h1 class="m3-display-large">Your Shopping Cart</h1>
+
+        <div class="cart-layout">
+            
+            <div class="cart-items-column">
+                <div id="cart-items-container">
+                    </div>
+                
+                <div id="empty-cart-message" class="empty-cart-message" style="display: none;">
+                    <h3>Your cart is empty.</h3>
+                    <p>Looks like you haven't added any items yet.</p>
+                    <a href="store.html" class="m3-button filled">Browse Products</a>
+                </div>
+            </div>
+
+            <aside class="cart-summary" id="cart-summary-container">
+                <h2>Order Summary</h2>
+                
+                <div class="summary-row">
+                    <span>Subtotal</span>
+                    <span id="cart-subtotal">$0.00</span>
+                </div>
+                
+                <div class="summary-row">
+                    <span>Taxes (7%)</span>
+                    <span id="cart-tax">$0.00</span>
+                </div>
+
+                <div class="summary-divider"></div>
+                
+                <div class="summary-row summary-total">
+                    <strong>Total</strong>
+                    <strong id="cart-total">$0.00</strong>
+                </div>
+
+                <button class="m3-button filled" id="checkout-button">Proceed to Checkout</button>
+            </aside>
+
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p class="m3-body-small">© 2025 Your Name Here. All rights reserved.</p>
+    </footer>
+
+    <script src="components.js"></script>
+    <script src="theme.js"></script>
+    <script src="cart.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const itemsContainer = document.getElementById('cart-items-container');
+            const summaryContainer = document.getElementById('cart-summary-container');
+            const emptyMessage = document.getElementById('empty-cart-message');
+            const checkoutButton = document.getElementById('checkout-button');
+
+            // --- 1. Main Function to Display Cart ---
+            function displayCart() {
+                const cart = window.cartSystem.getCart();
+                
+                // Clear old content
+                itemsContainer.innerHTML = '';
+
+                if (cart.length === 0) {
+                    // Show empty message and hide summary
+                    emptyMessage.style.display = 'block';
+                    summaryContainer.style.display = 'none';
+                    return;
+                }
+
+                // Show items and summary
+                emptyMessage.style.display = 'none';
+                summaryContainer.style.display = 'block';
+
+                let subtotal = 0;
+
+                cart.forEach(item => {
+                    const itemTotal = item.price * item.quantity;
+                    subtotal += itemTotal;
+
+                    // Create the HTML for one cart item
+                    const itemHTML = `
+                        <div class="cart-item">
+                            <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+                            <div class="cart-item-details">
+                                <h3 class="cart-item-title">${item.name}</h3>
+                                <p class="cart-item-price">$${item.price.toFixed(2)}</p>
+                                <div class="cart-item-actions">
+                                    <label for="qty-${item.id}">Qty:</label>
+                                    <input type="number" id="qty-${item.id}" class="quantity-input" value="${item.quantity}" min="1" data-id="${item.id}">
+                                    <button class="remove-button" data-id="${item.id}" title="Remove item">
+                                        <span class="material-symbols-outlined">delete</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="cart-item-total-price">
+                                $${itemTotal.toFixed(2)}
+                            </div>
+                        </div>
+                    `;
+                    itemsContainer.innerHTML += itemHTML;
+                });
+
+                // --- 2. Calculate and Display Totals ---
+                const tax = subtotal * 0.07; // 7% tax
+                const total = subtotal + tax;
+
+                document.getElementById('cart-subtotal').textContent = `$${subtotal.toFixed(2)}`;
+                document.getElementById('cart-tax').textContent = `$${tax.toFixed(2)}`;
+                document.getElementById('cart-total').textContent = `$${total.toFixed(2)}`;
+                
+                // --- 3. Add Event Listeners for new buttons ---
+                addEventListeners();
+            }
+
+            // --- 4. Function to add listeners ---
+            function addEventListeners() {
+                // Remove buttons
+                itemsContainer.querySelectorAll('.remove-button').forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        const productId = e.currentTarget.dataset.id;
+                        window.cartSystem.removeItem(productId);
+                        displayCart(); // Re-render the cart
+                    });
+                });
+
+                // Quantity inputs
+                itemsContainer.querySelectorAll('.quantity-input').forEach(input => {
+                    input.addEventListener('change', (e) => {
+                        const productId = e.target.dataset.id;
+                        const quantity = e.target.value;
+                        window.cartSystem.updateQuantity(productId, quantity);
+                        displayCart(); // Re-render the cart
+                    });
+                });
+            }
+
+            // --- 5. Checkout Button ---
+            checkoutButton.addEventListener('click', () => {
+                const cart = window.cartSystem.getCart();
+                console.log("Proceeding to checkout with:", cart);
+                alert("Checkout functionality is not yet implemented. Check the console (F12) to see your cart data!");
+            });
+
+            // Initial render
+            displayCart();
+        });
+    </script>
+</body>
+</html>

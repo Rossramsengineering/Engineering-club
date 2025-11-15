@@ -327,29 +327,26 @@
 </head>
 
 <body>
+
     <header class="header">
         <div class="logo">
-            <img src="Images/rossRams.png" alt="Logo">
-            <span>Engineering Club</span>
+            <img src="Images/EngineeringClubFull.png" alt="Engineering Club Logo">
+            <div class="header-divider"></div>
+            <div class="page-title"></div>
         </div>
         <nav class="navigation">
-            <a href="index.html" class="nav-link">Home</a>
-            <a href="store.html" class="nav-link">Store</a>
-            <a href="contact.html" class="nav-link active">Contact</a>
-            <button id="theme-toggle" title="Toggle theme" aria-label="Toggle color theme" aria-pressed="false">
-                <span id="theme-toggle-icon" class="material-symbols-outlined" aria-hidden="true">dark_mode</span>
-            </button>
+            <a href="cart.html" class="m3-button outlined" id="cart-button">
+                <span class="material-symbols-outlined">shopping_cart</span>
+                Cart
+            </a>
         </nav>
     </header>
-
     <main class="contact-container">
-        <!-- Page Header -->
         <div class="contact-header">
             <h1>Get in Touch</h1>
             <p>Have questions about our products or services? We'd love to hear from you!</p>
         </div>
 
-        <!-- Alert Messages -->
         <div id="successAlert" class="alert success">
             <span class="material-symbols-outlined">check_circle</span>
             <span>Thank you! Your message has been sent. We'll be in touch soon.</span>
@@ -359,11 +356,8 @@
             <span id="errorMessage">There was an error sending your message. Please try again.</span>
         </div>
 
-        <!-- Contact Content Grid -->
         <div class="contact-content">
-            <!-- Left Column: Contact Info -->
             <div class="contact-info-section">
-                <!-- Email Card -->
                 <div class="contact-info-card">
                     <span class="material-symbols-outlined contact-info-icon">mail</span>
                     <div class="contact-info-content">
@@ -373,7 +367,6 @@
                     </div>
                 </div>
 
-                <!-- Phone Card -->
                 <div class="contact-info-card">
                     <span class="material-symbols-outlined contact-info-icon">phone</span>
                     <div class="contact-info-content">
@@ -383,7 +376,6 @@
                     </div>
                 </div>
 
-                <!-- Location Card -->
                 <div class="contact-info-card">
                     <span class="material-symbols-outlined contact-info-icon">location_on</span>
                     <div class="contact-info-content">
@@ -396,7 +388,6 @@
                     </div>
                 </div>
 
-                <!-- Office Hours -->
                 <div class="office-hours">
                     <h3>Office Hours</h3>
                     <ul class="hours-list">
@@ -416,7 +407,6 @@
                 </div>
             </div>
 
-            <!-- Right Column: Contact Form -->
             <div class="contact-form-section">
                 <h2>Send us a Message</h2>
                 <div id="loadingSpinner"></div>
@@ -449,7 +439,6 @@
             </div>
         </div>
 
-        <!-- FAQ Section -->
         <div class="faq-section">
             <h2>Frequently Asked Questions</h2>
             <div class="faq-container">
@@ -506,13 +495,16 @@
         </div>
     </main>
 
-    <footer style="text-align: center; padding: 2rem; border-top: 1px solid var(--md-sys-color-outline); margin-top: 4rem;">
-        <p>&copy; 2025 Engineering Club. All rights reserved.</p>
+    <footer class="footer">
+        <p class="m3-body-small">Engineering Club 2025</p>
     </footer>
-
-    <script src="components.js"></script>
+<script src="components.js"></script>
     <script src="theme.js"></script>
-    <script>
+    
+    <script src="cart.js"></script>
+    
+    <script src="carousel.js"></script> </body>
+</html>    <script>
         const scriptURL = 'https://script.google.com/macros/s/AKfycbzFoKr8LP43f1MpoTCZucPqrQNWkOK2lWXHZbKe1eFokq39ZOI-bMAz7YYgBD0d1iKJ/exec';
 
         // Handle form submission

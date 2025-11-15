@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom LED Sign — Engineering Club</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="../index.html" rel="canonical">
+    <link href="https://fonts.googleapis.com/css2?family=Anta:wght@400&family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="../style.css">
+    <link rel="icon" type="image/png" href="../Images/rossRams.png">
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="logo">
+            <img src="../Images/rossRams.png" alt="Logo">
+            <span>Engineering Club</span>
+        </div>
+        <nav class="navigation">
+            <a href="../index.html" class="nav-link">Home</a>
+            <a href="../store.html" class="nav-link">Store</a>
+            <a href="../contact.html" class="nav-link">Contact</a>
+            <button id="theme-toggle" title="Toggle theme" aria-label="Toggle color theme" aria-pressed="false">
+                <span id="theme-toggle-icon" class="material-symbols-outlined" aria-hidden="true">dark_mode</span>
+            </button>
+        </nav>
+    </header>
+
+    <main class="content">
+        <section class="product-detail" style="display:flex;gap:2rem;align-items:flex-start;">
+            <div class="product-media" style="flex:0 0 420px;">
+                <div class="product-image-card" style="background:var(--md-sys-color-surface);padding:1rem;border-radius:12px;box-shadow:var(--md-sys-elevation-1);">
+                    <img src="../Images/product/LedSign.png" alt="Custom LED Sign" style="width:100%;height:auto;border-radius:8px;object-fit:cover;">
+                </div>
+            </div>
+
+            <div class="product-meta" style="flex:1;">
+                <p class="m3-body-small" style="color:var(--md-sys-color-on-surface-variant);margin-bottom:0.5rem;">Home / Led Signs / Custom LED Sign</p>
+                <h1 class="m3-display-large">Custom LED Sign</h1>
+                <div style="display:flex;align-items:center;gap:1rem;margin:0.5rem 0 1.5rem 0;">
+                    <div class="product-price m3-title-large" style="color:var(--md-sys-color-primary);font-weight:700;">$20.00</div>
+                    <div style="margin-left:auto;">
+                        <button class="m3-button filled" onclick="goToCheckout()">Order Now</button>
+                    </div>
+                </div>
+
+                <div class="product-description m3-body-large" style="margin-bottom:1.25rem;color:var(--md-sys-color-on-surface-variant);">
+                    Personalize your space with a unique, laser-engraved LED sign! Whether it's your name, favorite logo, or a custom design, we bring your vision to life in stunning detail on high-quality acrylic. The LED base provides a soft glow, perfect for adding ambiance to your desk or room.
+                </div>
+
+                <div class="product-customization" style="background:var(--md-sys-color-surface);padding:1rem;border-radius:12px;">
+                    <h3 class="m3-title-large">Upload Your Design</h3>
+                    <form id="productForm">
+                        <input id="designUpload" type="file" accept="image/*" required style="margin-top:0.75rem;">
+                    </form>
+                    <p class="m3-body-small" style="color:var(--md-sys-color-on-surface-variant);margin-top:0.5rem;">Accepted formats: PNG, JPG. Max 5MB.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p class="m3-body-small">© 2025 Engineering Club. All rights reserved.</p>
+    </footer>
+
+    <script src="../components.js"></script>
+    <script src="../theme.js"></script>
+    <script>
+        function goToCheckout() {
+            const fileInput = document.getElementById('designUpload');
+            const file = fileInput.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (event) {
+                    sessionStorage.setItem('designImage', event.target.result);
+                    window.location.href = '../order.html?item=4';
+                };
+                reader.readAsDataURL(file);
+            } else {
+                alert('Please upload a design image.');
+            }
+        }
+    </script>
+</body>
+
+</html>
