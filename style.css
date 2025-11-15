@@ -7,7 +7,7 @@
  */
 :root {
     /* M3 Light Theme - Maroon & Gold */
-    --md-sys-color-primary: #3B0010;
+    --md-sys-color-primary: #4e0015;
     --md-sys-color-on-primary: #FFFFFF;
     --md-sys-color-primary-container: #3B0010;
     --md-sys-color-on-primary-container: #ffffff;
@@ -130,7 +130,6 @@ body {
     transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-.header,
 .footer,
 .content {
     width: 90%;
@@ -144,7 +143,22 @@ body {
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid var(--md-sys-color-outline);
-    padding: 1rem 1.5rem;
+    padding: 1rem 2rem; /* <-- This provides left/right spacing */
+    width: 100%;
+    background-color: var(--md-sys-color-surface);
+}
+
+@media (max-width: 1024px) {
+    .header {
+        padding: 1rem;
+    }
+}
+
+.header-divider {
+    width: 1px;
+    height: 2rem; /* 24px */
+    background-color: var(--md-sys-color-outline);
+    margin: 0 0.5rem; /* Adds a little space */
 }
 
 .logo {
@@ -280,6 +294,17 @@ body {
     background-color: var(--md-sys-color-hover-subtle);
 }
 
+#cart-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding-left: 1rem; /* Give icon a bit more space */
+}
+
+#cart-button .material-symbols-outlined {
+    font-size: 1.25rem;
+}
+
 /* Card */
 .card {
     background-color: var(--md-sys-color-surface);
@@ -401,18 +426,48 @@ body {
 
 /* Hero Banner Section */
 .hero-banner {
-    background: linear-gradient(135deg, var(--md-sys-color-primary) 0%, var(--md-sys-color-secondary) 100%);
+    position: relative; /* Acts as a container for the video */
     color: white;
     padding: 6rem 2rem;
     border-radius: 12px;
     text-align: center;
     margin-bottom: 3rem;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    overflow: hidden; /* Keeps the video inside the rounded corners */
 }
 
+/* This is the new video style */
+.hero-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centers the video */
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: 1; /* Puts it in the back */
+    object-fit: cover; /* Fills the container */
+}
+
+/* This adds a dark overlay so your white text is readable */
+.hero-banner::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4); /* Adjust opacity (0.4) as needed */
+    z-index: 2;
+}
+
+/* We just need to add z-index to your existing .hero-content rule */
 .hero-content {
     max-width: 600px;
     margin: 0 auto;
+    position: relative; /* Puts content on top of the overlay */
+    z-index: 3; /* Puts it on top of the video and overlay */
 }
 
 .hero-logo {
@@ -787,17 +842,6 @@ body {
     gap: 1rem;
 }
 
-.rail-logo {
-    width: 56px;
-    height: 56px;
-    border-radius: 16px;
-    background: linear-gradient(135deg, var(--md-sys-color-primary) 0%, var(--md-sys-color-secondary) 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-}
-
 .rail-expand-btn {
     width: 56px;
     height: 56px;
@@ -922,53 +966,6 @@ body {
 .rail-theme-toggle .material-symbols-outlined {
     font-size: 1.5rem;
 }
-
-/* --- Start: Swappable Rail Logo CSS --- */
-
-/* By default, hide the full logo */
-.rail-logo .rail-logo-full {
-    display: none;
-}
-
-/* Style the small "regular" logo */
-.rail-logo .rail-logo-regular {
-    width: 40px;
-    height: 40px;
-    object-fit: contain;
-    filter: brightness(0) invert(1);
-    /* This makes it white */
-    display: block;
-}
-
-/* When the rail is expanded... */
-.nav-rail.expanded .rail-logo {
-    /* Make the container wider, just like the nav pills */
-    width: calc(100% - 1.5rem);
-    height: auto;
-    /* Let height adjust to the full logo */
-    padding: 0.5rem 0;
-    /* Add some vertical space */
-}
-
-/* ...hide the small logo */
-.nav-rail.expanded .rail-logo-regular {
-    display: none;
-}
-
-/* ...and show the full logo */
-.nav-rail.expanded .rail-logo-full {
-    display: block;
-    width: 100%;
-    /* Make it fill the container */
-    height: auto;
-    /* Maintain aspect ratio */
-    max-height: 56px;
-    /* Keep it from getting too tall */
-    object-fit: contain;
-    /* We don't filter this one, so it shows in full color */
-}
-
-/* --- End: Swappable Rail Logo CSS --- */
 
 /* Adjust body layout with rail */
 body {

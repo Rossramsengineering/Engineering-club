@@ -18,15 +18,36 @@
 </head>
 
 <body>
-    <main class="content">
-        <section class="hero-banner">
-            <div class="hero-content">
-                <img src="Images/EngineeringClubFull-White.png" alt="Engineering Club" class="hero-logo">
-                <p class="hero-subtitle">Custom designs. Exceptional quality. Brought to life.</p>
-                <a href="#all-products" class="m3-button filled">Explore Products</a>
-            </div>
-        </section>
+    <header class="header">
+        <div class="logo">
+            <img src="Images/EngineeringClubFull.png" alt="Engineering Club Logo">
+            
+            <div class="header-divider"></div>
 
+            <div class="page-title"></div>
+        </div>
+        
+        <nav class="navigation">
+            <a href="cart.html" class="m3-button outlined" id="cart-button">
+                <span class="material-symbols-outlined">shopping_cart</span>
+                Cart
+            </a>
+        </nav>
+    </header>
+    <main class="content">
+<section class="hero-banner">
+
+    <video autoplay loop muted playsinline class="hero-video">
+        <source src="Videos/Background.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <div class="hero-content">
+        <img src="Images/EngineeringClubFull-White.png" alt="Engineering Club" class="hero-logo">
+        <p class="hero-subtitle">Custom designs. Exceptional quality. Brought to life.</p>
+        <a href="#all-products" class="m3-button filled">Explore Products</a>
+    </div>
+</section>
         <section class="carousel-section">
             <div class="carousel-container">
                 <button class="carousel-btn prev" onclick="prevSlide()" aria-label="Previous slide">
