@@ -1,0 +1,66 @@
+[
+  {
+    "id": 1,
+    "name": "Wooden Ornament",
+    "category": "Wood",
+    "price": "$3.00",
+    "image": "Images/product/Christmastree.png",
+    "description": "Festive 3D-printed ornament perfect for holiday decorations."
+  },
+  {
+    "id": 2,
+    "name": "Chopping Board",
+    "category": "Wood",
+    "price": "$20.00",
+    "image": "Images/product/Cuttingboard.png",
+    "description": "Handcrafted laser-engraved chopping board with your custom design."
+  },
+  {
+    "id": 3,
+    "name": "Octopus",
+    "category": "3D Printed",
+    "price": "$3.00",
+    "image": "Images/product/octopus.png",
+    "description": "A cute and colorful 3D-printed fidget octopus in your choice of colors."
+  },
+  {
+    "id": 4,
+    "name": "Fidget Balls",
+    "category": "3D Printed",
+    "price": "$3.00",
+    "image": "Images/product/spiralBall.png",
+    "description": "Stress-relief spiral fidget ball available in multiple color combinations."
+  },
+  {
+    "id": 5,
+    "name": "Custom 3D Print",
+    "category": "3D Printed",
+    "price": "$5.00",
+    "image": "Images/product/custom3dprint.png",
+    "description": "Bring your ideas to life with custom 3D printing services."
+  },
+  {
+    "id": 6,
+    "name": "Custom LED Sign",
+    "category": "Other",
+    "price": "$10.00",
+    "image": "Images/product/LedSign.png",
+    "description": "Personalize your space with a unique, laser-engraved LED sign."
+  },
+  {
+    "id": 7,
+    "name": "Acrylic Keychain",
+    "category": "Other",
+    "price": "$3.00",
+    "image": "",
+    "description": ""
+  },
+  {
+    "id": 8,
+    "name": "Leather Keychain",
+    "category": "Other",
+    "price": "$3.00",
+    "image": "",
+    "description": ""
+  }
+]

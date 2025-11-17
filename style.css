@@ -22,6 +22,10 @@
     --md-sys-color-on-surface-variant: #49454E;
     --md-sys-color-outline: #79747E;
     --md-sys-color-outline-variant: #CAC4D0;
+    --md-sys-elevation-1: 0 1px 3px rgba(0, 0, 0, 0.08);
+    --md-sys-elevation-2: 0 4px 6px rgba(0, 0, 0, 0.12);
+    --md-sys-elevation-3: 0 6px 16px rgba(0, 0, 0, 0.15);
+
 
     /* Hover/Ripple States */
     --md-sys-color-hover-subtle: rgba(0, 0, 0, 0.05);
@@ -49,6 +53,10 @@ body.dark-mode {
     --md-sys-color-on-surface-variant: #CAC4D0;
     --md-sys-color-outline: #938F99;
     --md-sys-color-outline-variant: #49454E;
+    --md-sys-elevation-1: 0 1px 3px rgba(255, 255, 255, 0.05);
+    --md-sys-elevation-2: 0 4px 6px rgba(255, 255, 255, 0.08);
+    --md-sys-elevation-3: 0 6px 16px rgba(255, 255, 255, 0.1);
+
 
     /* Hover/Ripple States */
     --md-sys-color-hover-subtle: rgba(0, 0, 0, 0.05);
@@ -76,10 +84,10 @@ h6,
  * These are the M3 Expressive type styles
  */
 .m3-display-large {
-    font-size: 3.5rem;
+    font-size: 6rem;
     /* 57px */
-    font-weight: 700;
-    line-height: 4rem;
+    font-weight: 550;
+    line-height: 8rem;
 }
 
 .m3-title-large {
@@ -138,17 +146,26 @@ body {
     padding: 1.5rem 0;
 }
 
-.header {
+header.header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid var(--md-sys-color-outline);
     padding: 1rem 2rem;
-    /* <-- This provides left/right spacing */
-    width: 100%;
-    background-color: var(--md-sys-color-surface);
-}
+    height: 64px; /* We'll use this 64px height later */
+    box-sizing: border-box;
 
+    /* 🔻🔻 ADD THESE LINES 🔻🔻 */
+    position: sticky;
+    top: 0;
+    z-index: 1000; /* Keeps it on top of other content */
+    
+    /* This is critical so content doesn't show through */
+    background: var(--md-sys-color-surface); 
+    
+    /* Optional: Adds a subtle shadow when content scrolls under it */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); 
+    /* 🔺🔺 END OF ADDITIONS 🔺🔺 */
+}
 @media (max-width: 1024px) {
     .header {
         padding: 1rem;
@@ -459,6 +476,19 @@ body {
     /* Fills the container */
 }
 
+.hero-image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: 1;
+    object-fit: cover;
+}
+
 /* This adds a dark overlay so your white text is readable */
 .hero-banner::after {
     content: '';
@@ -473,7 +503,7 @@ body {
 
 /* We just need to add z-index to your existing .hero-content rule */
 .hero-content {
-    max-width: 600px;
+    max-width: 1000px;
     margin: 0 auto;
     position: relative;
     /* Puts content on top of the overlay */
@@ -482,7 +512,7 @@ body {
 }
 
 .hero-logo {
-    max-height: 150px;
+    max-height: 200px;
     margin-bottom: 1.5rem;
 }
 
@@ -1356,4 +1386,96 @@ body {
         text-align: left;
         margin-top: 1rem;
     }
+}
+
+main.content,
+.footer {
+    transition: opacity 0.5s ease 0.3s; /* Fade in nicely after a delay */
+}
+
+/*
+ * 8. FULL-SCREEN HERO EFFECT (v2)
+ */
+
+/* By default, hide the main content and footer */
+main.content,
+.footer {
+    transition: opacity 0.5s ease 0.3s;
+}
+
+/* This is the full-screen hero state */
+.hero-banner.is-full {
+    width: 100%;
+    max-width: 100%;
+    border-radius: 0;
+    margin: 0 auto;
+    box-shadow: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 2rem;
+}
+
+/* This adds the "snap" animation */
+.hero-banner {
+    transition: all 0.5s ease-in-out;
+}
+
+/* When scrolled, show the content */
+body.scrolled main.content,
+body.scrolled .footer {
+    opacity: 1;
+}
+
+/* This is the "snapped" container state */
+body.scrolled .hero-banner.is-full {
+    width: 90%;
+    max-width: 1200px;
+    border-radius: 12px;
+    margin: 1.5rem auto 3rem auto;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    padding: 6rem 2rem;
+    min-height: 0;
+}
+
+/*
+ * 9. SOCIAL MEDIA SECTION (Homepage)
+ */
+
+.social-links-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: var(--md-sys-color-surface);
+    border-radius: 12px;
+    text-decoration: none;
+    color: var(--md-sys-color-on-surface);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
+    border: 2px solid transparent;
+}
+
+.social-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border-color: var(--social-color, var(--md-sys-color-primary));
+}
+
+.social-link .material-symbols-outlined {
+    font-size: 2rem;
+    color: var(--social-color, var(--md-sys-color-primary));
+}
+
+.social-link strong {
+    font-family: var(--font-heading);
+    font-size: 1.125rem;
+    color: var(--md-sys-color-on-surface);
 }

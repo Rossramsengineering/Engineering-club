@@ -15,18 +15,19 @@
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
     <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
+    <body class="home at-top"></body>
     <header class="header">
         <div class="logo">
             <img src="Images/EngineeringClubFull.png" alt="Engineering Club Logo">
-            
             <div class="header-divider"></div>
-
             <div class="page-title"></div>
         </div>
-        
         <nav class="navigation">
             <a href="cart.html" class="m3-button outlined" id="cart-button">
                 <span class="material-symbols-outlined">shopping_cart</span>
@@ -34,20 +35,17 @@
             </a>
         </nav>
     </header>
+
+    <section class="hero-banner is-full">
+        <video autoplay loop muted playsinline class="hero-video">
+            <source src="Videos/Background.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="hero-content">
+            <img src="Images/EngineeringClubFull-White.png" alt="Engineering Club" class="hero-logo">
+        </div>
+    </section>
     <main class="content">
-<section class="hero-banner">
-
-    <video autoplay loop muted playsinline class="hero-video">
-        <source src="Videos/Background.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
-
-    <div class="hero-content">
-        <img src="Images/EngineeringClubFull-White.png" alt="Engineering Club" class="hero-logo">
-        <p class="hero-subtitle">Custom designs. Exceptional quality. Brought to life.</p>
-        <a href="#all-products" class="m3-button filled">Explore Products</a>
-    </div>
-</section>
         <section class="carousel-section">
             <div class="carousel-container">
                 <button class="carousel-btn prev" onclick="prevSlide()" aria-label="Previous slide">
@@ -86,58 +84,81 @@
         </section>
 
         <section class="home-section">
-            <h2 class="m3-title-large">Meet the Leadership Team!</h2>
-            <div class="team-grid">
-                <div class="team-card">
-                    <img src="Images/team/placeholder.png" alt="Team Member">
-                    <h3>Jane Doe</h3>
-                    <p>President</p>
-                </div>
-                <div class="team-card">
-                    <img src="Images/team/placeholder.png" alt="Team Member">
-                    <h3>John Smith</h3>
-                    <p>Vice President</p>
-                </div>
-                <div class="team-card">
-                    <img src="Images/team/placeholder.png" alt="Team Member">
-                    <h3>Alex Lee</h3>
-                    <p>Treasurer</p>
-                </div>
-                <div class="team-card">
-                    <img src="Images/team/placeholder.png" alt="Team Member">
-                    <h3>Sarah Chen</h3>
-                    <p>Secretary</p>
-                </div>
-            </div>
-        </section>
+    <h2 class="m3-title-large">Officers</h2>
+    <div class="team-grid">
+        <div class="team-card">
+            <img src="Images/rossRams.png" alt="Team Member">
+            <h3>Keegan Brandon</h3>
+            <p>President</p>
+        </div>
+        <div class="team-card">
+            <img src="Images/rossRams.png" alt="Team Member">
+            <h3>Andrew Garland</h3>
+            <p>Vice President</p>
+        </div>
+        <div class="team-card">
+            <img src="Images/rossRams.png" alt="Team Member">
+            <h3>Rebecca Young</h3>
+            <p>Secretary</p>
+        </div>
+        <div class="team-card">
+            <img src="Images/rossRams.png" alt="Team Member">
+            <h3>Joseph Godbey</h3>
+            <p>Treasurer</p>
+        </div>
+        <div class="team-card">
+            <img src="Images/rossRams.png" alt="Team Member">
+            <h3>Caroline Pate</h3>
+            <p>Social Media Manager</p>
+        </div>
+        </div>
+</section>
 
         <section class="home-section">
-            <h2 class="m3-title-large">Upcoming Meetings</h2>
-            <div class="meetings-list">
-                <div class="meeting-item">
-                    <div class="meeting-date">
-                        <span>NOV</span>
-                        <strong>20</strong>
-                    </div>
-                    <div class="meeting-info">
-                        <h3>General Body Meeting</h3>
-                        <p>5:00 PM - Engineering Room (B105)</p>
-                    </div>
-                </div>
-                <div class="meeting-item">
-                    <div class="meeting-date">
-                        <span>DEC</span>
-                        <strong>04</strong>
-                    </div>
-                    <div class="meeting-info">
-                        <h3>TSA Project Workday</h3>
-                        <p>4:30 PM - 6:00 PM - Workshop</p>
-                    </div>
-                </div>
+    <h2 class="m3-title-large">Upcoming Meetings</h2>
+    <div class="meetings-list">
+        <div class="meeting-item">
+            <div class="meeting-date">
+                <span>NOV</span>
+                <strong>20</strong>
             </div>
-        </section>
+            <div class="meeting-info">
+                <h3>Rambell Meeting</h3>
+                <p>10:10 AM - Engineering Room</p>
+            </div>
+        </div>
+        <div class="meeting-item">
+            <div class="meeting-date">
+                <span>DEC</span>
+                <strong>04</strong>
+            </div>
+            <div class="meeting-info">
+                <h3>Rambell Meeting</h3>
+                <p>10:10 AM - Engineering Room</p>
+            </div>
+        </div>
+        </div>
+</section>
 
-        </main>
+<section class="home-section">
+        <h2 class="m3-title-large">Follow Us</h2>
+        <p style="color: var(--md-sys-color-on-surface-variant); margin-bottom: 1.5rem;">
+            See our latest projects, updates, and photos on social media.
+        </p>
+        <div id="curator-feed-default-feed-layout"><a href="https://curator.io" target="_blank" class="crt-logo crt-tag">Powered by Curator.io</a></div>
+        <div class="social-links-container">
+            <a href="#" class="social-link" style="--social-color: #E1306C;">
+                <span class="material-symbols-outlined">public</span>
+                <strong>Instagram</strong>
+            </a>
+            <a href="#" class="social-link" style="--social-color: #1DA1F2;">
+                <span class="material-symbols-outlined">public</span>
+                <strong>Twitter / X</strong>
+            </a>
+        </div>
+    </section>
+
+    </main>
 
     <footer class="footer">
         <p class="m3-body-small">Engineering Club 2025</p>
@@ -147,6 +168,69 @@
     <script src="theme.js"></script>
     <script src="carousel.js"></script>
     
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // We removed setupHeroAnimation()
+        loadTeam();
+        loadMeetings();
+    });
+
+    // --- NO HERO ANIMATION ---
+    // (All of the old scroll code is gone)
+
+    // --- 2. LOAD TEAM (Unchanged) ---
+    async function loadTeam() {
+        try {
+            const response = await fetch('team.json');
+            const team = await response.json();
+            renderTeam(team);
+        } catch (error) {
+            console.error('Error loading team:', error);
+        }
+    }
+
+    function renderTeam(team) {
+        const teamGrid = document.querySelector('.team-grid');
+        if (!teamGrid) return;
+        
+        teamGrid.innerHTML = team.map(member => `
+            <div class="team-card">
+                <img src="${member.image}" alt="${member.name}">
+                <h3>${member.name}</h3>
+                <p>${member.role}</p>
+            </div>
+        `).join('');
+    }
+
+    // --- 3. LOAD MEETINGS (Unchanged) ---
+    async function loadMeetings() {
+        try {
+            const response = await fetch('meetings.json');
+            const meetings = await response.json();
+            renderMeetings(meetings);
+        } catch (error) {
+            console.error('Error loading meetings:', error);
+        }
+    }
+
+    function renderMeetings(meetings) {
+        const meetingsList = document.querySelector('.meetings-list');
+        if (!meetingsList) return;
+
+        meetingsList.innerHTML = meetings.map(meeting => `
+            <div class="meeting-item">
+                <div class="meeting-date">
+                    <span>${meeting.month}</span>
+                    <strong>${meeting.day}</strong>
+                </div>
+                <div class="meeting-info">
+                    <h3>${meeting.title}</h3>
+                    <p>${meeting.description}</p>
+                </div>
+            </div>
+        `).join('');
+    }
+</script>
 </body>
 
 </html>

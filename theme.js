@@ -53,3 +53,28 @@ document.addEventListener('DOMContentLoaded', () => {
     setInitialTheme();
 
 });
+
+// --- Full-screen Hero Scroll Effect (v2) ---
+document.addEventListener('DOMContentLoaded', () => {
+    const hero = document.querySelector('.hero-banner.is-full');
+    if (hero) {
+        
+        const handleScroll = () => {
+            // If user has scrolled *any* amount, add the class
+            if (window.scrollY > 0) {
+                document.body.classList.add('scrolled');
+            } 
+            // Else, they are at the very top, so remove it
+            else {
+                document.body.classList.remove('scrolled');
+            }
+        };
+
+        // Listen for every scroll event
+        window.addEventListener('scroll', handleScroll);
+
+        // Run once on load, in case the page is reloaded
+        // while already scrolled down
+        handleScroll();
+    }
+});
