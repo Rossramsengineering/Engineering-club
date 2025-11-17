@@ -33,7 +33,7 @@
         .product-image-gallery img {
             width: 100%;
             border-radius: 16px;
-            background: var(--md-sys-color-surface-container);
+            background: var(--md-sys-color-on-primary);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
@@ -87,6 +87,15 @@
             gap: 0.5rem;
             text-align: center;
         }
+        
+        .m3-button.outlined {
+            border: 1px solid var(--md-sys-color-outline);
+            background: transparent;
+            color: var(--md-sys-color-primary);
+        }
+        .m3-button.outlined:hover {
+            background: var(--md-sys-color-surface-variant);
+        }
 
         .m3-button.filled {
             background-color: var(--md-sys-color-primary);
@@ -96,8 +105,37 @@
         .m3-button.filled:hover {
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
+        
+        /* This makes a disabled button look right */
+        .m3-button:disabled {
+            background-color: var(--md-sys-color-primary);
+            color: var(--md-sys-color-on-primary);
+            opacity: 0.5;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
 
-        /* Responsive */
+        .product-custom-upload {
+            background: var(--md-sys-color-surface-container-low);
+            padding: 1rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        #file-chosen {
+            font-style: italic;
+            font-size: 0.9rem;
+            color: var(--md-sys-color-on-surface-variant);
+        }
+        
+        .product-details .m3-button.filled {
+             width: 100%;
+             justify-content: center; /* Center icon/text */
+        }
+
         @media (max-width: 768px) {
             .product-page-container {
                 flex-direction: column;
@@ -139,13 +177,23 @@
                 <div class="product-price">$20.00</div>
                 <p class="product-description">
                     Handcrafted laser-engraved chopping board with your custom design.
-                </T>
+                </p>
                 
-                <button class="m3-button filled add-to-cart-btn" data-product-id="2">
+                <input type="file" id="designUpload" accept="image/*" style="display: none;">
+                
+                <div class="product-custom-upload">
+                    <label for="designUpload" class="m3-button outlined">
+                        <span class="material-symbols-outlined">upload_file</span>
+                        Upload Design
+                    </label>
+                    <span id="file-chosen">No file chosen</span>
+                </div>
+
+                <button class="m3-button filled" id="custom-add-to-cart" disabled>
                     <span class="material-symbols-outlined">add_shopping_cart</span>
                     Add to Cart
                 </button>
-            </div>
+                </div>
 
         </div>
     </main>
@@ -157,6 +205,75 @@
     <script src="../components.js"></script>
     <script src="../theme.js"></script>
     <script src="../cart.js"></script> 
-</body>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const fileInput = document.getElementById('designUpload');
+            const fileChosenText = document.getElementById('file-chosen');
+            const addToCartBtn = document.getElementById('custom-add-to-cart');
+
+            // 1. Listen for a file to be selected
+            fileInput.addEventListener('change', () => {
+                if (fileInput.files.length > 0) {
+                    // A file is selected
+                    fileChosenText.textContent = fileInput.files[0].name;
+                    fileChosenText.style.fontStyle = 'normal';
+                    addToCartBtn.disabled = false; // Enable the button
+                } else {
+                    // No file is selected
+                    fileChosenText.textContent = 'No file chosen';
+                    fileChosenText.style.fontStyle = 'italic';
+                    addToCartBtn.disabled = true; // Disable the button
+                }
+            });
+
+            // 2. Listen for the "Add to Cart" button click
+            addToCartBtn.addEventListener('click', () => {
+                const file = fileInput.files[0];
+
+                // Double-check a file is selected
+                if (!file) {
+                    alert('Please upload a design image.');
+                    return;
+                }
+
+                // This is the product info for the cart
+                const product = {
+                    id: '2', // The product ID
+                    name: 'Chopping Board (Custom)', // Add (Custom) to the name
+                    price: 20.00,
+                    image: '../Images/product/Cuttingboard.png' // The main product image
+                };
+
+                // Use FileReader to read the file
+                const reader = new FileReader();
+                reader.onload = function (event) {
+                    // Store the custom design in sessionStorage, 
+                    // linking it to the product ID
+                    try {
+                        sessionStorage.setItem('customDesign_2', event.target.result);
+                    } catch (e) {
+                        console.error("Could not save design to sessionStorage. File might be too large.", e);
+                        alert("Error: Your design file might be too large to save. Please try a smaller file.");
+                        return;
+                    }
+                    
+                    // Add the item to the cart
+                    window.cartSystem.addItem(product);
+                    
+                    // Reset the form and give feedback
+                    alert('Custom Chopping Board added to cart!');
+                    fileInput.value = ''; // Clear the file input
+                    fileChosenText.textContent = 'No file chosen';
+                    fileChosenText.style.fontStyle = 'italic';
+                    addToCartBtn.disabled = true;
+                };
+                
+                // Read the file as a Data URL (a base64 string)
+                reader.readAsDataURL(file);
+            });
+        });
+    </script>
+    </body>
 
 </html>

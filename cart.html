@@ -14,6 +14,165 @@
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     
     <link rel="stylesheet" href="style.css">
+
+    <style>
+        .cart-page-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        .cart-page-container h1 {
+            margin-bottom: 2rem;
+        }
+
+        .cart-layout {
+            display: flex;
+            gap: 2rem;
+            align-items: flex-start; /* Aligns top edges */
+        }
+
+        .cart-items-column {
+            flex: 1; /* Takes up the available space */
+        }
+        
+        .cart-summary {
+            width: 350px;
+            flex-shrink: 0;
+            background: var(--md-sys-color-surface);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            position: sticky; /* Makes summary box follow you */
+            top: 88px; /* 64px header + 24px margin */
+        }
+        
+        .cart-summary h2 {
+            font-size: 1.25rem;
+            margin: 0 0 1.5rem 0;
+            color: var(--md-sys-color-on-surface);
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            color: var(--md-sys-color-on-surface-variant);
+        }
+        
+        /* This divider is now only used above the total,
+          so we add a top margin.
+        */
+        .summary-divider {
+            border-top: 1px solid var(--md-sys-color-outline-variant);
+            margin: 1.5rem 0;
+        }
+
+        .summary-total {
+            font-size: 1.25rem; /* Made total slightly larger */
+            color: var(--md-sys-color-on-surface);
+        }
+
+        /* All other item/layout styles are unchanged... */
+        .cart-item {
+            display: flex;
+            gap: 1.5rem;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            background: var(--md-sys-color-surface);
+            border: 1px solid var(--md-sys-color-outline-variant);
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .cart-item-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 8px;
+            object-fit: cover;
+            background: var(--md-sys-color-surface-container);
+            flex-shrink: 0;
+        }
+
+        .cart-item-details {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .cart-item-title {
+            margin: 0 0 0.25rem 0;
+            font-size: 1.1rem;
+            color: var(--md-sys-color-on-surface);
+        }
+
+        .cart-item-price {
+            font-size: 0.9rem;
+            color: var(--md-sys-color-on-surface-variant);
+            margin-bottom: 1rem;
+        }
+
+        .cart-item-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .cart-item-actions label {
+            font-size: 0.8rem;
+            color: var(--md-sys-color-on-surface-variant);
+        }
+
+        .quantity-input {
+            width: 50px;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            border: 1px solid var(--md-sys-color-outline);
+        }
+
+        .remove-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--md-sys-color-on-surface-variant);
+            margin-left: auto;
+        }
+        .remove-button:hover {
+            color: var(--md-sys-color-error);
+        }
+        
+        .cart-item-total-price {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--md-sys-color-on-surface);
+            align-self: center;
+        }
+
+        .empty-cart-message {
+            padding: 2rem;
+            text-align: center;
+            background: var(--md-sys-color-surface);
+            border-radius: 12px;
+            color: var(--md-sys-color-on-surface-variant);
+        }
+        .empty-cart-message h3 {
+            margin: 0 0 0.5rem 0;
+        }
+        .empty-cart-message a {
+            margin-top: 1.5rem;
+        }
+
+        @media (max-width: 900px) {
+            .cart-layout {
+                flex-direction: column-reverse;
+            }
+            .cart-summary {
+                width: 100%;
+                position: static;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -49,16 +208,6 @@
             <aside class="cart-summary" id="cart-summary-container">
                 <h2>Order Summary</h2>
                 
-                <div class="summary-row">
-                    <span>Subtotal</span>
-                    <span id="cart-subtotal">$0.00</span>
-                </div>
-                
-                <div class="summary-row">
-                    <span>Taxes (7%)</span>
-                    <span id="cart-tax">$0.00</span>
-                </div>
-
                 <div class="summary-divider"></div>
                 
                 <div class="summary-row summary-total">
@@ -91,36 +240,34 @@
             function displayCart() {
                 const cart = window.cartSystem.getCart();
                 
-                // Clear old content
                 itemsContainer.innerHTML = '';
 
                 if (cart.length === 0) {
-                    // Show empty message and hide summary
                     emptyMessage.style.display = 'block';
                     summaryContainer.style.display = 'none';
                     return;
                 }
 
-                // Show items and summary
                 emptyMessage.style.display = 'none';
                 summaryContainer.style.display = 'block';
 
                 let subtotal = 0;
 
                 cart.forEach(item => {
-                    const itemTotal = item.price * item.quantity;
+                    const safePrice = item.price || 0;
+                    const safeQuantity = item.quantity || 1;
+                    const itemTotal = safePrice * safeQuantity;
                     subtotal += itemTotal;
 
-                    // Create the HTML for one cart item
                     const itemHTML = `
                         <div class="cart-item">
                             <img src="${item.image}" alt="${item.name}" class="cart-item-image">
                             <div class="cart-item-details">
                                 <h3 class="cart-item-title">${item.name}</h3>
-                                <p class="cart-item-price">$${item.price.toFixed(2)}</p>
+                                <p class="cart-item-price">$${safePrice.toFixed(2)}</p>
                                 <div class="cart-item-actions">
                                     <label for="qty-${item.id}">Qty:</label>
-                                    <input type="number" id="qty-${item.id}" class="quantity-input" value="${item.quantity}" min="1" data-id="${item.id}">
+                                    <input type="number" id="qty-${item.id}" class="quantity-input" value="${safeQuantity}" min="1" data-id="${item.id}">
                                     <button class="remove-button" data-id="${item.id}" title="Remove item">
                                         <span class="material-symbols-outlined">delete</span>
                                     </button>
@@ -135,35 +282,30 @@
                 });
 
                 // --- 2. Calculate and Display Totals ---
-                const tax = subtotal * 0.07; // 7% tax
-                const total = subtotal + tax;
+                const total = subtotal;
 
-                document.getElementById('cart-subtotal').textContent = `$${subtotal.toFixed(2)}`;
-                document.getElementById('cart-tax').textContent = `$${tax.toFixed(2)}`;
+                // We removed the lines for subtotal and tax
                 document.getElementById('cart-total').textContent = `$${total.toFixed(2)}`;
                 
-                // --- 3. Add Event Listeners for new buttons ---
                 addEventListeners();
             }
 
             // --- 4. Function to add listeners ---
             function addEventListeners() {
-                // Remove buttons
                 itemsContainer.querySelectorAll('.remove-button').forEach(button => {
                     button.addEventListener('click', (e) => {
                         const productId = e.currentTarget.dataset.id;
                         window.cartSystem.removeItem(productId);
-                        displayCart(); // Re-render the cart
+                        displayCart(); 
                     });
                 });
 
-                // Quantity inputs
                 itemsContainer.querySelectorAll('.quantity-input').forEach(input => {
                     input.addEventListener('change', (e) => {
                         const productId = e.target.dataset.id;
                         const quantity = e.target.value;
                         window.cartSystem.updateQuantity(productId, quantity);
-                        displayCart(); // Re-render the cart
+                        displayCart();
                     });
                 });
             }
