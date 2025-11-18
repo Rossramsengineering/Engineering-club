@@ -1,95 +1,436 @@
-*** Begin Patch
-*** Update File: c:\Users\argar\Engineering-club\product\customOrnament.html
-@@
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Custom Ornament — Engineering Club</title>
+    <title>Wooden Ornament - Engineering Club Store</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Anta:wght@400&family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link href="https://fonts.googleapis.com/css2?family=Anta:wght@400&family=Rubik:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    
     <link rel="stylesheet" href="../style.css">
     <link rel="icon" type="image/png" href="../Images/rossRams.png">
+
+    <style>
+        /* All your existing <style> block CSS is unchanged... */
+        .product-page-container {
+            display: flex;
+            gap: 2.5rem;
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        .product-image-gallery {
+            flex: 1;
+            max-width: 50%;
+        }
+        
+        /* 🔻🔻 NEW STYLE 🔻🔻 
+          This makes the image transition smoothly
+        */
+        .product-image-gallery img {
+            width: 100%;
+            border-radius: 16px;
+            background: var(--md-sys-color-on-primary);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: opacity 0.3s ease; /* Smooth fade */
+        }
+        /* 🔺🔺 END OF NEW STYLE 🔺🔺 */
+
+        .product-details {
+            flex: 1;
+            padding-top: 1rem;
+        }
+        
+        .product-details .product-category {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--md-sys-color-primary);
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-details .product-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            font-family: var(--font-heading);
+            margin: 0 0 1rem 0;
+            color: var(--md-sys-color-on-background);
+        }
+
+        .product-details .product-price {
+            font-size: 2rem;
+            font-weight: 500;
+            color: var(--md-sys-color-primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .product-details .product-description {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--md-sys-color-on-surface-variant);
+            margin-bottom: 2rem;
+        }
+        
+        .m3-button {
+            font-family: var(--font-body);
+            padding: 0.6rem 1.5rem;
+            border-radius: 99px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-align: center;
+        }
+        
+        .m3-button.outlined {
+            border: 1px solid var(--md-sys-color-outline);
+            background: transparent;
+            color: var(--md-sys-color-primary);
+        }
+        .m3-button.outlined:hover {
+            background: var(--md-sys-color-surface-variant);
+        }
+
+        .m3-button.filled {
+            background-color: var(--md-sys-color-primary);
+            color: var(--md-sys-color-on-primary);
+        }
+
+        .m3-button.filled:hover {
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        
+        .m3-button:disabled {
+            background-color: var(--md-sys-color-primary);
+            color: var(--md-sys-color-on-primary);
+            opacity: 0.5;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+        
+        .design-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .design-options input[type="radio"] {
+            display: none;
+        }
+
+        .design-options label {
+            display: block;
+            padding: 1rem;
+            border: 2px solid var(--md-sys-color-outline-variant);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .design-options label:hover {
+            background: var(--md-sys-color-surface-container-low);
+        }
+        
+        .design-options input[type="radio"]:checked + label {
+            border-color: var(--md-sys-color-primary);
+            background: var(--md-sys-color-surface-container-low);
+            box-shadow: 0 0 0 2px var(--md-sys-color-primary);
+        }
+
+        .product-custom-upload {
+            background: var(--md-sys-color-surface-container-low);
+            padding: 1rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        #file-chosen {
+            font-style: italic;
+            font-size: 0.9rem;
+            color: var(--md-sys-color-on-surface-variant);
+        }
+        
+        .product-details .m3-button.filled {
+             width: 100%;
+             justify-content: center;
+        }
+
+        @media (max-width: 768px) {
+            .product-page-container {
+                flex-direction: column;
+            }
+            .product-image-gallery {
+                max-width: 100%;
+            }
+        }
+        
+    </style>
+
 </head>
 
 <body>
-
     <header class="header">
         <div class="logo">
-            <img src="../Images/rossRams.png" alt="Logo">
-            <span>Engineering Club</span>
+            <img src="../Images/EngineeringClubFull.png" alt="Engineering Club Logo">
+            <div class="header-divider"></div>
+            <div class="page-title"></div>
         </div>
         <nav class="navigation">
-            <a href="../index.html" class="nav-link">Home</a>
-            <a href="../store.html" class="nav-link">Store</a>
-            <a href="../contact.html" class="nav-link">Contact</a>
-            <button id="theme-toggle" title="Toggle theme" aria-label="Toggle color theme" aria-pressed="false">
-                <span id="theme-toggle-icon" class="material-symbols-outlined" aria-hidden="true">dark_mode</span>
-            </button>
+            <a href="../cart.html" class="m3-button outlined" id="cart-button">
+                <span class="material-symbols-outlined">shopping_cart</span>
+                Cart
+            </a>
         </nav>
     </header>
 
     <main class="content">
-        <section class="product-detail" style="display:flex;gap:2rem;align-items:flex-start;">
-            <div class="product-media" style="flex:0 0 420px;">
-                <div class="product-image-card" style="background:var(--md-sys-color-surface);padding:1rem;border-radius:12px;box-shadow:var(--md-sys-elevation-1);">
-                    <img src="../Images/product/plainOrnament.png" alt="Custom Ornament" style="width:100%;height:auto;border-radius:8px;object-fit:cover;">
+        <div class="product-page-container">
+            
+            <div class="product-image-gallery">
+                <img src="../Images/product/plainOrnament.png" alt="Wooden Ornament" id="main-product-image">
                 </div>
-            </div>
 
-            <div class="product-meta" style="flex:1;">
-                <p class="m3-body-small" style="color:var(--md-sys-color-on-surface-variant);margin-bottom:0.5rem;">Home / Ornaments / Custom Ornament</p>
-                <h1 class="m3-display-large">Custom Ornament</h1>
-                <div style="display:flex;align-items:center;gap:1rem;margin:0.5rem 0 1.5rem 0;">
-                    <div class="product-price m3-title-large" style="color:var(--md-sys-color-primary);font-weight:700;">$5.00</div>
-                    <div style="margin-left:auto;">
-                        <button class="m3-button filled" onclick="goToCheckout()">Order Now</button>
+            <div class="product-details">
+                <div class="product-category">Wood</div>
+                <h1 class="product-title">Wooden Ornament</h1>
+                <div class="product-price">$3.00</div>
+                <p class="product-description">
+                    Handcrafted laser-engraved ornament. Choose a preset design or upload your own.
+                </p>
+                
+                <div class="design-options">
+                    <div>
+                        <input type="radio" id="preset1" name="designOption" value="preset1">
+                        <label for="preset1">
+                            <strong>Christmas Tree</strong>
+                        </label>
+                    </div>
+                    <div>
+                        <input type="radio" id="preset2" name="designOption" value="preset2">
+                        <label for="preset2">
+                            <strong>Snowflake</strong>
+                        </label>
+                    </div>
+                    <div>
+                        <input type="radio" id="custom" name="designOption" value="custom">
+                        <label for="custom">
+                            <strong>Custom Design</strong>
+                        </label>
                     </div>
                 </div>
 
-                <div class="product-description m3-body-large" style="margin-bottom:1.25rem;color:var(--md-sys-color-on-surface-variant);">
-                    Make your holiday celebrations extra special with a custom ornament! Crafted from high-quality wood or acrylic, this ornament can be engraved with any design, name, or message you choose.
+                <input type="file" id="designUpload" accept="image/*" style="display: none;">
+                
+                <div class="product-custom-upload hidden" id="upload-section">
+                    <label for="designUpload" class="m3-button outlined">
+                        <span class="material-symbols-outlined">upload_file</span>
+                        Upload File
+                    </label>
+                    <span id="file-chosen">No file chosen</span>
                 </div>
 
-                <div class="product-customization" style="background:var(--md-sys-color-surface);padding:1rem;border-radius:12px;">
-                    <h3 class="m3-title-large">Upload Your Design</h3>
-                    <form id="productForm">
-                        <input id="designUpload" type="file" accept="image/*" required style="margin-top:0.75rem;">
-                    </form>
-                </div>
+                <button class="m3-button filled" id="custom-add-to-cart" disabled>
+                    <span class="material-symbols-outlined">add_shopping_cart</span>
+                    Add to Cart
+                </button>
             </div>
-        </section>
+
+        </div>
     </main>
 
     <footer class="footer">
-        <p class="m3-body-small">© 2025 Engineering Club. All rights reserved.</p>
+        <p class="m3-body-small">Engineering Club 2025</p>
     </footer>
 
     <script src="../components.js"></script>
     <script src="../theme.js"></script>
+    <script src="../cart.js"></script> 
+    
     <script>
-        function goToCheckout() {
+        document.addEventListener('DOMContentLoaded', () => {
+            // Get all the elements we need
             const fileInput = document.getElementById('designUpload');
-            const file = fileInput.files[0];
+            const fileChosenText = document.getElementById('file-chosen');
+            const addToCartBtn = document.getElementById('custom-add-to-cart');
+            const uploadSection = document.getElementById('upload-section');
+            const designOptions = document.querySelectorAll('input[name="designOption"]');
+            
+            // --- NEW: Get the main image ---
+            const mainImage = document.getElementById('main-product-image');
+            
+            // --- NEW: Define our image sources ---
+            const originalImageSrc = '../Images/product/plainOrnament.png';
+            const preset1ImageSrc = '../Images/product/Christmastree.png'; // <-- Assumed path
+            const preset2ImageSrc = '../Images/product/snowflakeOrnament.png'; // <-- Assumed path
 
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function (event) {
-                    sessionStorage.setItem('designImage', event.target.result);
-                    window.location.href = '../order.html?item=4';
-                };
-                reader.readAsDataURL(file);
-            } else {
-                alert('Please upload a design image.');
+            // --- 1. Main function to check if Add to Cart should be enabled ---
+            function validateForm() {
+                const selectedOption = document.querySelector('input[name="designOption"]:checked');
+                
+                if (!selectedOption) {
+                    addToCartBtn.disabled = true; 
+                    return;
+                }
+
+                if (selectedOption.value === 'custom') {
+                    addToCartBtn.disabled = fileInput.files.length === 0;
+                } else {
+                    addToCartBtn.disabled = false;
+                }
             }
-        }
+
+            // --- 2. Listen for changes on the radio buttons ---
+            designOptions.forEach(radio => {
+                radio.addEventListener('change', () => {
+                    const selectedValue = radio.value;
+                    
+                    if (selectedValue === 'custom') {
+                        uploadSection.classList.remove('hidden');
+                        // If a file is already selected, show it. Otherwise, show default.
+                        if (fileInput.files.length > 0) {
+                            showUploadedImage();
+                        } else {
+                            mainImage.src = originalImageSrc;
+                        }
+                    } else {
+                        uploadSection.classList.add('hidden');
+                        // Show the corresponding preset image
+                        if (selectedValue === 'preset1') {
+                            mainImage.src = preset1ImageSrc;
+                        } else if (selectedValue === 'preset2') {
+                            mainImage.src = preset2ImageSrc;
+                        }
+                    }
+                    validateForm(); // Check if the form is valid
+                });
+            });
+
+            // --- 3. Listen for changes on the file input ---
+            fileInput.addEventListener('change', () => {
+                if (fileInput.files.length > 0) {
+                    fileChosenText.textContent = fileInput.files[0].name;
+                    fileChosenText.style.fontStyle = 'normal';
+                    showUploadedImage(); // <-- NEW: Show preview
+                } else {
+                    fileChosenText.textContent = 'No file chosen';
+                    fileChosenText.style.fontStyle = 'italic';
+                    mainImage.src = originalImageSrc; // <-- NEW: Revert to default
+                }
+                validateForm(); // Check if the form is valid
+            });
+            
+            // --- NEW: Helper function to show uploaded file ---
+            function showUploadedImage() {
+                if (fileInput.files && fileInput.files[0]) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        mainImage.src = e.target.result;
+                    }
+                    reader.readAsDataURL(fileInput.files[0]);
+                }
+            }
+
+            // --- 4. Listen for the "Add to Cart" button click ---
+            addToCartBtn.addEventListener('click', () => {
+                // (This logic is unchanged from before)
+                const selectedOption = document.querySelector('input[name="designOption"]:checked');
+                if (!selectedOption) return; 
+
+                const baseProduct = {
+                    price: 3.00,
+                    image: '../Images/product/plainOrnament.png' // Default cart image
+                };
+
+                const selectedValue = selectedOption.value;
+
+                if (selectedValue === 'preset1') {
+                    window.cartSystem.addItem({
+                        ...baseProduct,
+                        id: 'ornament-preset1',
+                        name: 'Wooden Ornament (Preset 1)',
+                        image: preset1ImageSrc // Use preset image for cart
+                    });
+                    alert('Ornament (Preset 1) added to cart!');
+
+                } else if (selectedValue === 'preset2') {
+                    window.cartSystem.addItem({
+                        ...baseProduct,
+                        id: 'ornament-preset2',
+                        name: 'Wooden Ornament (Preset 2)',
+                        image: preset2ImageSrc // Use preset image for cart
+                    });
+                    alert('Ornament (Preset 2) added to cart!');
+
+                } else if (selectedValue === 'custom') {
+                    const file = fileInput.files[0];
+                    if (!file) {
+                        alert('Please upload a design image.');
+                        return;
+                    }
+                    
+                    const reader = new FileReader();
+                    reader.onload = function (event) {
+                        const customProductId = 'ornament-custom';
+                        try {
+                            sessionStorage.setItem(`customDesign_${customProductId}`, event.target.result);
+                        } catch (e) {
+                            console.error("Could not save design", e);
+                            alert("Error: Your design file might be too large.");
+                            return;
+                        }
+                        
+                        window.cartSystem.addItem({
+                            ...baseProduct,
+                            id: customProductId,
+                            name: 'Wooden Ornament (Custom)',
+                            // Use default image for cart, design is saved
+                        });
+                        
+                        alert('Custom Ornament added to cart!');
+                        resetForm(); 
+                    };
+                    reader.readAsDataURL(file);
+                }
+
+                if (selectedValue !== 'custom') {
+                    resetForm();
+                }
+            });
+
+            // --- 5. Helper function to reset the form ---
+            function resetForm() {
+                designOptions.forEach(radio => radio.checked = false);
+                uploadSection.classList.add('hidden');
+                fileInput.value = '';
+                fileChosenText.textContent = 'No file chosen';
+                fileChosenText.style.fontStyle = 'italic';
+                addToCartBtn.disabled = true;
+                
+                // --- NEW: Reset main image ---
+                mainImage.src = originalImageSrc;
+            }
+        });
     </script>
-</body>
+    </body>
 
 </html>
-*** End Patch
