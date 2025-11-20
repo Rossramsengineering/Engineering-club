@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Engineering Club</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anta:wght@400&family=Rubik:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .checkout-page-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        .checkout-layout {
+            display: flex;
+            gap: 2rem;
+            align-items: flex-start;
+        }
+
+        .checkout-form-column {
+            flex: 1;
+            background: var(--md-sys-color-surface);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .checkout-form-column h2 {
+            margin: 0 0 1.5rem 0;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--md-sys-color-on-surface-variant);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem;
+            font-size: 1rem;
+            border: 1px solid var(--md-sys-color-outline);
+            border-radius: 8px;
+            background: var(--md-sys-color-surface-container-low);
+        }
+        
+        .form-group input:focus {
+            outline: 2px solid var(--md-sys-color-primary);
+            border-color: var(--md-sys-color-primary);
+        }
+
+        .checkout-summary-column {
+            width: 350px;
+            flex-shrink: 0;
+            background: var(--md-sys-color-surface);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 88px;
+        }
+        
+        .checkout-summary-column h2 {
+            font-size: 1.25rem;
+            margin: 0 0 1.5rem 0;
+        }
+        
+        #summary-items-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 1rem 0;
+        }
+        
+        .summary-item {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--md-sys-color-outline-variant);
+        }
+        
+        .summary-item:last-child {
+            border-bottom: none;
+        }
+        
+        .summary-item img {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+        
+        .summary-item-details {
+            flex: 1;
+        }
+        .summary-item-details h3 {
+            font-size: 0.9rem;
+            margin: 0 0 0.25rem 0;
+        }
+        .summary-item-details p {
+            font-size: 0.8rem;
+            color: var(--md-sys-color-on-surface-variant);
+            margin: 0;
+        }
+
+        .summary-divider {
+            border-top: 1px solid var(--md-sys-color-outline-variant);
+            margin: 1.5rem 0;
+        }
+
+        .summary-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+        
+        @media (max-width: 900px) {
+            .checkout-layout {
+                flex-direction: column-reverse;
+            }
+            .checkout-summary-column {
+                width: 100%;
+                position: static;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div class="logo">
+            <img src="Images/EngineeringClubFull.png" alt="Engineering Club Logo">
+            <div class="header-divider"></div>
+            <div class="page-title"></div> </div>
+        <nav class="navigation">
+            <a href="cart.html" class="m3-button outlined" id="cart-button">
+                <span class="material-symbols-outlined">shopping_cart</span>
+                Cart
+            </a>
+        </nav>
+    </header>
+
+    <main class="content checkout-page-container">
+        <h1 class="m3-display-large">Checkout</h1>
+
+        <div class="checkout-layout">
+            
+            <div class="checkout-form-column">
+                <form id="checkout-form">
+                    <h2>Your Details</h2>
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <button type="submit" class="m3-button filled" id="submit-order-btn">
+                        Submit Order
+                    </button>
+                </form>
+            </div>
+
+            <aside class="checkout-summary-column">
+                <h2>Your Order</h2>
+                <ul id="summary-items-list">
+                    </ul>
+                <div class="summary-divider"></div>
+                <div class="summary-total">
+                    <span>Total</span>
+                    <span id="summary-total">$0.00</span>
+                </div>
+            </aside>
+
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p class="m3-body-small">© 2025 Your Name Here. All rights reserved.</p>
+    </footer>
+
+    <script src="components.js"></script>
+    <script src="theme.js"></script>
+    <script src="cart.js"></script>
+    <script src="checkout.js"></script> 
+</body>
+</html>

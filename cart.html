@@ -215,7 +215,7 @@
                     <strong id="cart-total">$0.00</strong>
                 </div>
 
-                <button class="m3-button filled" id="checkout-button">Place Order</button>
+                <a href="checkout.html" class="m3-button filled" id="checkout-button">Proceed to checkout</a>
             </aside>
 
         </div>
@@ -309,13 +309,6 @@
                     });
                 });
             }
-
-            // --- 5. Checkout Button ---
-            checkoutButton.addEventListener('click', () => {
-                const cart = window.cartSystem.getCart();
-                console.log("Proceeding to checkout with:", cart);
-                alert("Checkout functionality is not yet implemented. Check the console (F12) to see your cart data!");
-            });
 
             // Initial render
             displayCart();
