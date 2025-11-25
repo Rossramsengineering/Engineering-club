@@ -207,7 +207,7 @@
         <div class="product-page-container">
             
             <div class="product-image-gallery">
-                <img src="../Images/product/plainOrnament.png" alt="Wooden Ornament" id="main-product-image">
+                <img src="../Images/product/leatherKeychain.png" alt="leatherKeychain" id="main-product-image">
                 </div>
 
             <div class="product-details">
@@ -222,13 +222,7 @@
                     <div>
                         <input type="radio" id="preset1" name="designOption" value="preset1">
                         <label for="preset1">
-                            <strong>Christmas Tree</strong>
-                        </label>
-                    </div>
-                    <div>
-                        <input type="radio" id="preset2" name="designOption" value="preset2">
-                        <label for="preset2">
-                            <strong>Snowflake</strong>
+                            <strong>Ross Ram</strong>
                         </label>
                     </div>
                     <div>
@@ -279,10 +273,8 @@
             const mainImage = document.getElementById('main-product-image');
             
             // --- NEW: Define our image sources ---
-            const originalImageSrc = '../Images/product/plainOrnament.png';
-            const preset1ImageSrc = '../Images/product/Christmastree.png'; // <-- Assumed path
-            const preset2ImageSrc = '../Images/product/snowflakeOrnament.png'; // <-- Assumed path
-
+            const originalImageSrc = '../Images/product/leatherKeychain.png';
+            const preset1ImageSrc = '../Images/product/leatherKeychain-rossRam.png'; // <-- Assumed path
             // --- 1. Main function to check if Add to Cart should be enabled ---
             function validateForm() {
                 const selectedOption = document.querySelector('input[name="designOption"]:checked');
@@ -358,7 +350,7 @@
 
                 const baseProduct = {
                     price: 3.00,
-                    image: '../Images/product/plainOrnament.png' // Default cart image
+                    image: '../Images/product/leatherKeychain.png' // Default cart image
                 };
 
                 const selectedValue = selectedOption.value;

@@ -9,11 +9,11 @@
   },
   {
     "id": 2,
-    "name": "Chopping Board",
+    "name": "Cutting Board",
     "category": "Wood",
     "price": "$20.00",
     "image": "Images/product/Cuttingboard.png",
-    "description": "Handcrafted laser-engraved chopping board with your custom design."
+    "description": "Handcrafted laser-engraved cutting board with your custom design."
   },
   {
     "id": 3,
@@ -43,7 +43,7 @@
     "id": 6,
     "name": "Custom LED Sign",
     "category": "Other",
-    "price": "$20.00",
+    "price": "$10.00",
     "image": "Images/product/LedSign.png",
     "description": "Personalize your space with a unique, laser-engraved LED sign."
   },
